@@ -19,6 +19,15 @@ a{color:#8A5A55}a:hover{color:#5E3B37}
 .blob2{animation:floaty 12s ease-in-out infinite reverse}
 .line{height:1px;background:#8A5A55;animation:drawLine 1.4s ease .6s forwards;width:0}
 .tile{transition:transform .5s ease}.tile:hover{transform:translateY(-6px)}
+/* スマホ用：文字を少し小さくして、1行に収まりやすくする */
+@media (max-width: 600px){
+.tl-row{gap:14px!important}
+.tl-year{flex-basis:48px!important;font-size:18px!important}
+.tl-text{font-size:13px!important;letter-spacing:0!important}
+.card{padding:40px 20px!important}
+.card-text{font-size:13px!important}
+.ig-text{font-size:13px!important;letter-spacing:0!important}
+}
 </style>
 </head>
 <body>
@@ -46,30 +55,30 @@ a{color:#8A5A55}a:hover{color:#5E3B37}
 </section>
 
 <section id="histoire" style="position: relative; max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
-<div style="flex: 1 1 360px; aspect-ratio: 4 / 5; max-width: 440px; border-radius: 220px 220px 12px 12px; background: #E8DCD6; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.2em; color: #6B5B57">[ さやの写真 ]</div>
+<img src="images/saya.jpg" alt="さやの写真" style="flex: 1 1 360px; width: 100%; aspect-ratio: 4 / 5; max-width: 440px; border-radius: 220px 220px 12px 12px; object-fit: cover; object-position: 52% 50%; background: #E8DCD6">
 <div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 <p style="margin: 0; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #8A5A55">01 — Histoire</p>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(40px, 5vw, 60px); line-height: 1.1">My <span style="font-style: italic">story</span><br><span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 18px; letter-spacing: 0.2em">わたしの歩み</span></h2>
 <div style="display: flex; flex-direction: column; gap: 28px; margin-top: 8px">
-<div style="display: flex; gap: 24px; align-items: baseline">
-<span style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">2007</span>
-<p style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">4人きょうだいの末っ子として</span><span style="display: inline-block">生まれる。</span></p>
+<div class="tl-row" style="display: flex; gap: 24px; align-items: baseline">
+<span class="tl-year" style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">2007</span>
+<p class="tl-text" style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">4人きょうだいの末っ子として</span><span style="display: inline-block">生まれる。</span></p>
 </div>
-<div style="display: flex; gap: 24px; align-items: baseline">
-<span style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">2013</span>
-<p style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">兄の背中を追って、</span><span style="display: inline-block">ボールを蹴りはじめる。</span></p>
+<div class="tl-row" style="display: flex; gap: 24px; align-items: baseline">
+<span class="tl-year" style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">2013</span>
+<p class="tl-text" style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">兄の背中を追って、</span><span style="display: inline-block">ボールを蹴りはじめる。</span></p>
 </div>
-<div style="display: flex; gap: 24px; align-items: center">
-<span style="flex: 0 0 72px; display: flex; flex-direction: column; align-items: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.2; color: #8A5A55">2013<span aria-label="から" style="display: block; transform: rotate(90deg); margin: 6px 0">〜</span>2025</span>
-<p style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">母と美術館に通ううちに、</span><span style="display: inline-block">フランスに惹かれていく。</span><br><span style="display: inline-block">もっと広い世界を、</span><span style="display: inline-block">知りたくなった。</span></p>
+<div class="tl-row" style="display: flex; gap: 24px; align-items: center">
+<span class="tl-year" style="flex: 0 0 72px; display: flex; flex-direction: column; align-items: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.2; color: #8A5A55">2013<span aria-label="から" style="display: block; transform: rotate(90deg); margin: 6px 0">〜</span>2025</span>
+<p class="tl-text" style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">母と美術館に通ううちに、</span><span style="display: inline-block">フランスに惹かれていく。</span><br><span style="display: inline-block">もっと広い世界を、</span><span style="display: inline-block">知りたくなった。</span></p>
 </div>
-<div style="display: flex; gap: 24px; align-items: baseline">
-<span style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">2025</span>
-<p style="margin: 0; font-size: 15px; line-height: 2">サッカーを引退。<br><span style="display: inline-block">憧れのフランスへ。</span><span style="display: inline-block">自由な価値観と空気に、</span><span style="display: inline-block">一目惚れ。</span><br><span style="display: inline-block">関西大学 文学部</span><span style="display: inline-block">（ヨーロッパ文化</span><span style="display: inline-block">フランス語学専修）</span><span style="display: inline-block">に入学。</span></p>
+<div class="tl-row" style="display: flex; gap: 24px; align-items: baseline">
+<span class="tl-year" style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">2025</span>
+<p class="tl-text" style="margin: 0; font-size: 15px; line-height: 2">サッカーを引退。<br>憧れのフランスへ。<br><span style="display: inline-block">自由な価値観と空気に、</span><span style="display: inline-block">一目惚れ。</span><br><span style="display: inline-block">関西大学 文学部</span><span style="display: inline-block">（ヨーロッパ文化</span><span style="display: inline-block">フランス語学専修）</span><span style="display: inline-block">に入学。</span></p>
 </div>
-<div style="display: flex; gap: 24px; align-items: baseline">
-<span style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">Now</span>
-<p style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">一度は離れたサッカーで、</span><span style="display: inline-block">もう一度。</span><br>半年のサッカー留学に挑戦中。</p>
+<div class="tl-row" style="display: flex; gap: 24px; align-items: baseline">
+<span class="tl-year" style="flex: 0 0 72px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #8A5A55">Now</span>
+<p class="tl-text" style="margin: 0; font-size: 15px; line-height: 2"><span style="display: inline-block">一度は離れたサッカーで、</span><span style="display: inline-block">もう一度。</span><br>半年のサッカー留学に挑戦中。</p>
 </div>
 </div>
 </div>
@@ -89,20 +98,20 @@ a{color:#8A5A55}a:hover{color:#5E3B37}
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(40px, 5vw, 60px); line-height: 1.1">Why I <span style="font-style: italic">do this</span><br><span style="font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 18px; letter-spacing: 0.2em">なんのために</span></h2>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px">
-<div class="tile" style="padding: 40px 32px; background: #FBF8F5; border-radius: 160px 160px 16px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
+<div class="tile card" style="padding: 40px 32px; background: #FBF8F5; border-radius: 160px 160px 16px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
 <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 44px; color: #8A5A55">i.</span>
 <h3 style="margin: 0; font-size: 18px; font-weight: 400; letter-spacing: 0.12em">夢</h3>
-<p style="margin: 0; font-size: 14px; line-height: 2"><span style="display: inline-block">フランス25都市を</span><span style="display: inline-block">自らの足で巡り、</span><br><span style="display: inline-block">フランス専門の</span><span style="display: inline-block">旅行会社をつくる。</span></p>
+<p class="card-text" style="margin: 0; font-size: 14px; line-height: 2"><span style="display: inline-block">フランス25都市を</span><span style="display: inline-block">自らの足で巡り、</span><br><span style="display: inline-block">フランス専門の</span><span style="display: inline-block">旅行会社をつくる。</span></p>
 </div>
-<div class="tile" style="padding: 40px 32px; background: #FBF8F5; border-radius: 160px 160px 16px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
+<div class="tile card" style="padding: 40px 32px; background: #FBF8F5; border-radius: 160px 160px 16px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
 <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 44px; color: #8A5A55">ii.</span>
 <h3 style="margin: 0; font-size: 18px; font-weight: 400; letter-spacing: 0.12em">想い</h3>
-<p style="margin: 0; font-size: 14px; line-height: 2"><span style="display: inline-block">海外の自由な魅力を、</span><span style="display: inline-block">もっとたくさんの人へ。</span><br><span style="display: inline-block">大好きなことを、</span><span style="display: inline-block">仕事にしたい。</span></p>
+<p class="card-text" style="margin: 0; font-size: 14px; line-height: 2"><span style="display: inline-block">海外の自由な魅力を、</span><span style="display: inline-block">もっとたくさんの人へ。</span><br><span style="display: inline-block">大好きなことを、</span><span style="display: inline-block">仕事にしたい。</span></p>
 </div>
-<div class="tile" style="padding: 40px 32px; background: #FBF8F5; border-radius: 160px 160px 16px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
+<div class="tile card" style="padding: 40px 32px; background: #FBF8F5; border-radius: 160px 160px 16px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
 <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 44px; color: #8A5A55">iii.</span>
 <h3 style="margin: 0; font-size: 18px; font-weight: 400; letter-spacing: 0.12em">いま</h3>
-<p style="margin: 0; font-size: 14px; line-height: 2"><span style="display: inline-block">自分の会社にも、</span><span style="display: inline-block">可愛いWebサイトとSNSを。</span><br><span style="display: inline-block">そのために、</span><span style="display: inline-block">Web制作・SNS・英語を勉強中。</span></p>
+<p class="card-text" style="margin: 0; font-size: 14px; line-height: 2"><span style="display: inline-block">自分の会社にも、</span><span style="display: inline-block">可愛いWebサイトとSNSを。</span><br><span style="display: inline-block">そのために、</span><span style="display: inline-block">Web制作・SNS・英語を勉強中。</span></p>
 </div>
 </div>
 </section>
@@ -110,12 +119,12 @@ a{color:#8A5A55}a:hover{color:#5E3B37}
 <section id="instagram" style="position: relative; max-width: 1120px; margin: 0 auto; padding: 40px 24px 140px; display: flex; flex-direction: column; gap: 40px; align-items: center; text-align: center">
 <p style="margin: 0; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #8A5A55">04 — Instagram</p>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic; font-size: clamp(40px, 5vw, 60px)">Suivez-moi</h2>
-<p style="margin: -16px 0 0; max-width: 560px; font-size: 15px; line-height: 2.1; letter-spacing: 0.05em">わたしのSNSを見て「一歩踏み出せた」と<br>言ってくれる人が、ひとりでも増えますように。</p>
+<p class="ig-text" style="margin: -16px 0 0; max-width: 560px; font-size: 15px; line-height: 2.1; letter-spacing: 0.05em"><span style="display: inline-block">わたしのSNSを見て</span><span style="display: inline-block">「一歩踏み出せた」と</span><br><span style="display: inline-block">言ってくれる人が、</span><span style="display: inline-block">ひとりでも増えますように。</span></p>
 <div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px">
-<div class="tile" style="aspect-ratio: 1 / 1; background: #E8DCD6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #6B5B57">[ 投稿 ]</div>
-<div class="tile" style="aspect-ratio: 1 / 1; background: #DCE3D6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #5A6354">[ 投稿 ]</div>
-<div class="tile" style="aspect-ratio: 1 / 1; background: #E4DDEA; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #5F5868">[ 投稿 ]</div>
-<div class="tile" style="aspect-ratio: 1 / 1; background: #EFE3D4; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #66594A">[ 投稿 ]</div>
+<a class="tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る" style="text-decoration: none; aspect-ratio: 1 / 1; background: #E8DCD6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #6B5B57">[ 投稿 ]</a>
+<a class="tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る" style="text-decoration: none; aspect-ratio: 1 / 1; background: #DCE3D6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #5A6354">[ 投稿 ]</a>
+<a class="tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る" style="text-decoration: none; aspect-ratio: 1 / 1; background: #E4DDEA; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #5F5868">[ 投稿 ]</a>
+<a class="tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る" style="text-decoration: none; aspect-ratio: 1 / 1; background: #EFE3D4; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: #66594A">[ 投稿 ]</a>
 </div>
 <a href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" style="display: inline-flex; gap: 12px; align-items: center; padding: 16px 36px; background: #3E3A39; color: #F6F1EC; border-radius: 999px; font-family: 'Jost', sans-serif; font-size: 14px; letter-spacing: 0.18em; text-decoration: none">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>
