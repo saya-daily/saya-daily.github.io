@@ -514,78 +514,7 @@ html.lang-en .page [lang="ja"] { display: none; }
 .card-title { margin: 0; font-size: 18px; font-weight: 400; letter-spacing: 0.12em; }
 .card-text { margin: 0; font-size: 14px; line-height: 2; }
 
-/* 【一時的】A〜D 切り替えボタン */
-.pq-switch { display: flex; flex-wrap: wrap; gap: 8px; }
-.pq-switch button {
-  padding: 8px 16px;
-  border: 1px solid var(--text);
-  border-radius: 999px;
-  background: transparent;
-  font: inherit;
-  font-size: 13px;
-  color: var(--text);
-  cursor: pointer;
-}
-.pq-switch button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
-.pq-variant { display: none; }
-.pq-variants[data-show="a"] .pq-a,
-.pq-variants[data-show="b"] .pq-b,
-.pq-variants[data-show="c"] .pq-c,
-.pq-variants[data-show="d"] .pq-d { display: block; }
-
-/* ---- A：タップするとくるっと裏返るカード ---- */
-.flip-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 32px;
-}
-.flip-card {
-  height: 340px;
-  padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  perspective: 1200px; /* 立体的に見せる奥行き */
-}
-.flip-inner {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform .9s cubic-bezier(.4, .2, .2, 1);
-}
-.flip-card[aria-pressed="true"] .flip-inner { transform: rotateY(180deg); }
-.flip-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 24px;
-  border-radius: 160px 160px 16px 16px;
-  background: var(--card);
-  text-align: center;
-  backface-visibility: hidden; /* 裏側は見えないように */
-  -webkit-backface-visibility: hidden;
-}
-.flip-front .card-num { font-size: 72px; line-height: 1; }
-.flip-tap { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--muted); }
-.flip-back { transform: rotateY(180deg); background: var(--bg-soft); }
-.flip-card .card-title { display: block; }
-.flip-card .card-text { display: block; }
-.flip-card [lang="en"] { display: none; }
-html.lang-en .flip-card [lang="en"] { display: block; }
-html.lang-en .flip-card [lang="ja"] { display: none; }
-/* 画面に入ったら、1枚ずつ順番にふわっと */
-.js .flip-card.reveal:nth-child(2) { transition-delay: .15s; }
-.js .flip-card.reveal:nth-child(3) { transition-delay: .3s; }
-
-/* ---- B：いま → 想い → 夢 の道のり ---- */
+/* ---- いま → 想い → 夢 の道のり ---- */
 .road { position: relative; display: flex; flex-direction: column; gap: 72px; padding-left: 48px; }
 .road-line {
   position: absolute;
@@ -611,8 +540,6 @@ html.lang-en .flip-card [lang="ja"] { display: none; }
 .road-label { margin: 0 0 8px; font-family: var(--font-en); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
 .road-title { margin: 0 0 12px; font-family: var(--font-serif); font-weight: 300; font-size: 40px; line-height: 1.1; }
 .road-title[lang="ja"] { font-family: var(--font-ja); font-size: 26px; letter-spacing: 0.15em; }
-.road-step.is-goal .road-title { font-size: 56px; color: var(--accent); }
-.road-step.is-goal .road-title[lang="ja"] { font-size: 36px; }
 .road-text { margin: 0; font-size: 15px; line-height: 2.1; }
 .road-text[lang="en"] { font-family: var(--font-en); }
 /* 動き：線がスーッと伸びて、ステップが順番に出てくる */
@@ -625,13 +552,14 @@ html.lang-en .flip-card [lang="ja"] { display: none; }
 .js .road.is-visible .road-step:nth-of-type(2) { transition-delay: 1s; }
 .js .road.is-visible .road-step:nth-of-type(3) { transition-delay: 1.8s; }
 
-/* ---- C：フランス25都市マップ ---- */
-.map-wrap { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; }
+/* ---- フランス25都市マップ ---- */
+.map-wrap { margin-top: 120px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; }
 .france-map { flex: 1 1 300px; max-width: 460px; width: 100%; height: auto; }
 .france-land { fill: var(--ph-beige); stroke: var(--accent); stroke-width: 1; stroke-linejoin: round; }
 .city { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
 .city.is-visited { fill: var(--accent); }
 .map-info { flex: 1 1 260px; max-width: 420px; }
+.map-info .eyebrow { margin-bottom: 16px; }
 .map-count { margin: 0; font-family: var(--font-serif); font-weight: 300; font-size: 88px; line-height: 1; color: var(--accent); }
 .map-count span { font-style: italic; }
 .map-caption { margin: 8px 0 24px; font-family: var(--font-serif); font-style: italic; font-size: 22px; color: var(--muted); }
@@ -643,7 +571,7 @@ html.lang-en .flip-card [lang="ja"] { display: none; }
 .js .map-wrap.is-visible .city { opacity: 1; transform: none; animation: cityGlow 3s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 120ms + 2.5s); }
 @keyframes cityGlow { 0%, 100% { stroke-width: 1.2; } 50% { stroke-width: 4; stroke-opacity: .5; } }
 
-/* ---- D：写真を背景に、夢を大きく ---- */
+/* ---- ゴール：写真を背景に、夢を大きく ---- */
 .dream-scene {
   position: relative;
   z-index: 0;
@@ -668,6 +596,8 @@ html.lang-en .flip-card [lang="ja"] { display: none; }
 .js .dream-scene .dream-bg { transform: scale(1.12); transition: transform 6s ease-out; }
 .js .dream-scene.is-visible .dream-bg { transform: none; }  /* 写真がゆっくりズームアウト */
 .js .dream-scene .dream-sub { opacity: 0; transition: opacity 1.2s ease 2.6s; }
+/* 道のり全体が見えたときじゃなくて、ゴールの写真が画面に入ってから1文字ずつ出す */
+.js .dream-scene:not(.is-visible) .typewrite .char { opacity: 0; transform: translateY(.3em); filter: blur(6px); }
 .js .dream-scene.is-visible .dream-sub { opacity: 1; }
 
 /* ---------- 04 インスタ ---------- */
@@ -779,7 +709,7 @@ html.lang-en .flip-card [lang="ja"] { display: none; }
   .story-text p { font-size: 15px; letter-spacing: 0; }
   .card-text { font-size: 13px; }
   .road-title { font-size: 32px; }
-  .road-step.is-goal .road-title { font-size: 44px; }
+  .dream-scene { padding: 48px 20px; min-height: 60svh; }
   .ig-text { font-size: 13px; letter-spacing: 0; }
 }
 
@@ -791,7 +721,6 @@ html.lang-en .flip-card [lang="ja"] { display: none; }
   .hero-slides img { animation: none; }
   .js .typewrite .char, .js .message-inner .message-text { opacity: 1; transform: none; filter: none; transition: none; }
   .js .road .road-line, .js .road .road-step, .js .city, .js .dream-scene .dream-bg, .js .dream-scene .dream-sub { opacity: 1; transform: none; transition: none; animation: none; }
-  .flip-inner { transition: none; }
   .js .story-year, .js .story-text, .js .story-bg, .js .story-slide { transform: none; transition: none; }
   .js .story-year, .js .story-text { opacity: 1; }
   .story-hint { animation: none; }
