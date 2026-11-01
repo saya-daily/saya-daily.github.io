@@ -140,6 +140,25 @@ function updateStory() {
   storySlides.forEach((slide, n) => slide.classList.toggle('is-active', n === i));
 }
 
+/* ---------- ⑧ なんのために ---------- */
+// A：カードをタップしたら裏返す
+document.querySelectorAll('.flip-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    card.setAttribute('aria-pressed', card.getAttribute('aria-pressed') !== 'true');
+  });
+});
+// C：地図の点に順番の番号をつける（順番にポツポツ出すため）
+document.querySelectorAll('.city').forEach((dot, i) => dot.style.setProperty('--i', i));
+
+// 【一時的】A〜D 切り替え（決まったら消す）
+const pqVariants = document.querySelector('.pq-variants');
+document.querySelectorAll('.pq-switch button').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    pqVariants.dataset.show = btn.dataset.show;
+    document.querySelectorAll('.pq-switch button').forEach((b) => b.setAttribute('aria-pressed', b === btn));
+  });
+});
+
 /* ---------- スクロールしたときの処理を、まとめて1回だけ ---------- */
 // 画面の更新1回につき1回だけ動かす（何回も重なって走ると、カクカクするから）
 let ticking = false;

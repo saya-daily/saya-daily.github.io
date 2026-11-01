@@ -270,47 +270,110 @@
       <h2 class="section-title">Why I <em>do this</em><span class="ja" lang="ja"><br>なんのために</span></h2>
     </div>
 
-    <div class="cards">
-      <div class="card tile reveal">
-        <span class="card-num">i.</span>
-        <h3 class="card-title" lang="ja">夢</h3>
-        <h3 class="card-title" lang="en">Dream</h3>
-        <p class="card-text" lang="ja">
-          <span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br>
-          <span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span>
-        </p>
-        <p class="card-text" lang="en">
-          Visit 25 French cities on my own two feet,<br>
-          and start a travel company all about France.
-        </p>
+    <!-- 【一時的】A〜D を見比べるボタン（決まったら消す） -->
+    <div class="pq-switch" role="group" aria-label="見せ方">
+      <button type="button" data-show="a" aria-pressed="true">A カード</button>
+      <button type="button" data-show="b" aria-pressed="false">B 道のり</button>
+      <button type="button" data-show="c" aria-pressed="false">C 25都市マップ</button>
+      <button type="button" data-show="d" aria-pressed="false">D 大きい言葉</button>
+    </div>
+
+    <div class="pq-variants" data-show="a">
+      <!-- A：タップするとくるっと裏返るカード -->
+      <div class="pq-variant pq-a">
+        <div class="flip-cards">
+        <button type="button" class="flip-card reveal" aria-pressed="false">
+          <span class="flip-inner">
+            <span class="flip-face flip-front">
+              <span class="card-num">i.</span>
+              <span class="card-title" lang="ja">夢</span><span class="card-title" lang="en">Dream</span>
+              <span class="flip-tap">Tap</span>
+            </span>
+            <span class="flip-face flip-back">
+              <span class="card-title" lang="ja">夢</span><span class="card-title" lang="en">Dream</span>
+              <span class="card-text" lang="ja"><span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></span><span class="card-text" lang="en">Visit 25 French cities on my own two feet,<br>and start a travel company all about France.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip-card reveal" aria-pressed="false">
+          <span class="flip-inner">
+            <span class="flip-face flip-front">
+              <span class="card-num">ii.</span>
+              <span class="card-title" lang="ja">想い</span><span class="card-title" lang="en">Passion</span>
+              <span class="flip-tap">Tap</span>
+            </span>
+            <span class="flip-face flip-back">
+              <span class="card-title" lang="ja">想い</span><span class="card-title" lang="en">Passion</span>
+              <span class="card-text" lang="ja"><span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br><span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span></span><span class="card-text" lang="en">Share the freedom of the world with more people.<br>Turn what I love into my work.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip-card reveal" aria-pressed="false">
+          <span class="flip-inner">
+            <span class="flip-face flip-front">
+              <span class="card-num">iii.</span>
+              <span class="card-title" lang="ja">いま</span><span class="card-title" lang="en">Now</span>
+              <span class="flip-tap">Tap</span>
+            </span>
+            <span class="flip-face flip-back">
+              <span class="card-title" lang="ja">いま</span><span class="card-title" lang="en">Now</span>
+              <span class="card-text" lang="ja"><span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br><span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span></span><span class="card-text" lang="en">A lovely website &amp; social media for my company.<br>So I'm learning web design, social media, and English.</span>
+            </span>
+          </span>
+        </button>
+        </div>
       </div>
 
-      <div class="card tile reveal">
-        <span class="card-num">ii.</span>
-        <h3 class="card-title" lang="ja">想い</h3>
-        <h3 class="card-title" lang="en">Passion</h3>
-        <p class="card-text" lang="ja">
-          <span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br>
-          <span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span>
-        </p>
-        <p class="card-text" lang="en">
-          Share the freedom of the world with more people.<br>
-          Turn what I love into my work.
-        </p>
+      <!-- B：いま → 想い → 夢 を1本の道でつなぐ -->
+      <div class="pq-variant pq-b">
+        <div class="road reveal">
+          <div class="road-line" aria-hidden="true"></div>
+          <div class="road-step">
+            <span class="road-dot" aria-hidden="true"></span>
+            <p class="road-label">Step 01</p>
+            <h3 class="road-title" lang="ja">いま</h3><h3 class="road-title" lang="en">Now</h3>
+            <p class="road-text" lang="ja"><span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br><span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span></p><p class="road-text" lang="en">A lovely website &amp; social media for my company.<br>So I'm learning web design, social media, and English.</p>
+          </div>
+          <div class="road-step">
+            <span class="road-dot" aria-hidden="true"></span>
+            <p class="road-label">Step 02</p>
+            <h3 class="road-title" lang="ja">想い</h3><h3 class="road-title" lang="en">Passion</h3>
+            <p class="road-text" lang="ja"><span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br><span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span></p><p class="road-text" lang="en">Share the freedom of the world with more people.<br>Turn what I love into my work.</p>
+          </div>
+          <div class="road-step is-goal">
+            <span class="road-dot" aria-hidden="true"></span>
+            <p class="road-label">Goal</p>
+            <h3 class="road-title" lang="ja">夢</h3><h3 class="road-title" lang="en">Dream</h3>
+            <p class="road-text" lang="ja"><span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></p><p class="road-text" lang="en">Visit 25 French cities on my own two feet,<br>and start a travel company all about France.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="card tile reveal">
-        <span class="card-num">iii.</span>
-        <h3 class="card-title" lang="ja">いま</h3>
-        <h3 class="card-title" lang="en">Now</h3>
-        <p class="card-text" lang="ja">
-          <span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br>
-          <span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span>
-        </p>
-        <p class="card-text" lang="en">
-          A lovely website &amp; social media for my company.<br>
-          So I'm learning web design, social media, and English.
-        </p>
+      <!-- C：フランス25都市マップ（行った街は class="city is-visited" にすると光る） -->
+      <div class="pq-variant pq-c">
+        <div class="map-wrap reveal">
+          <svg class="france-map" viewBox="0 0 410 420" role="img" aria-label="フランス25都市の地図">
+            <path class="france-land" d="M218.4,19.0 Q208.3,14.0 201.2,16.0 Q194.0,18.0 190.6,23.0 Q187.1,28.0 184.3,40.0 Q181.6,52.0 163.8,64.0 Q145.9,76.0 127.3,79.0 Q108.7,82.0 103.9,76.0 Q99.1,70.0 94.9,69.0 Q90.8,68.0 96.3,89.4 Q101.8,110.8 94.9,110.4 Q88.1,110.0 74.3,107.0 Q60.5,104.0 39.9,108.0 Q19.3,112.0 16.6,124.0 Q13.8,136.0 20.6,140.0 Q27.5,144.0 38.5,146.0 Q49.5,148.0 66.0,156.6 Q82.6,165.2 85.3,174.6 Q88.1,184.0 99.8,197.0 Q111.5,210.0 113.5,221.0 Q115.6,232.0 112.8,251.0 Q110.1,270.0 105.2,293.4 Q100.4,316.8 97.2,319.2 Q94.1,321.6 111.7,331.8 Q129.3,342.0 149.9,347.0 Q170.6,352.0 187.1,355.4 Q203.6,358.8 216.9,358.4 Q230.3,358.0 229.4,345.0 Q228.4,332.0 239.4,324.0 Q250.4,316.0 260.1,318.0 Q269.7,320.0 280.3,322.0 Q290.9,324.0 298.6,328.0 Q306.3,332.0 315.5,330.0 Q324.7,328.0 333.9,318.0 Q343.2,308.0 346.4,306.4 Q349.5,304.8 342.6,296.4 Q335.7,288.0 334.4,270.0 Q333.0,252.0 334.4,236.0 Q335.7,220.0 323.4,214.0 Q311.0,208.0 315.1,202.0 Q319.2,196.0 327.4,176.0 Q335.7,156.0 344.0,154.0 Q352.3,152.0 355.1,132.0 Q357.8,112.0 363.3,104.6 Q368.8,97.2 344.0,87.6 Q319.2,78.0 310.9,76.0 Q302.7,74.0 288.9,63.0 Q275.2,52.0 266.9,55.0 Q258.7,58.0 243.6,41.0 Q228.4,24.0 218.4,19.0Z"/>
+            <path class="france-land" d="M392.9,344.0 Q401.8,336.0 403.9,344.0 Q405.9,352.0 403.9,372.0 Q401.8,392.0 397.6,396.0 Q393.5,400.0 386.6,390.0 Q379.8,380.0 381.9,366.0 Q383.9,352.0 392.9,344.0Z"/>
+            <circle class="city" cx="207.8" cy="101.6" r="4.5"><title>Paris</title></circle><circle class="city" cx="276.3" cy="225.6" r="4.5"><title>Lyon</title></circle><circle class="city" cx="290.9" cy="324.0" r="4.5"><title>Marseille</title></circle><circle class="city" cx="343.2" cy="308.0" r="4.5"><title>Nice</title></circle><circle class="city" cx="127.1" cy="262.4" r="4.5"><title>Bordeaux</title></circle><circle class="city" cx="182.7" cy="312.0" r="4.5"><title>Toulouse</title></circle><circle class="city" cx="356.4" cy="112.8" r="4.5"><title>Strasbourg</title></circle><circle class="city" cx="227.3" cy="30.8" r="4.5"><title>Lille</title></circle><circle class="city" cx="100.4" cy="167.2" r="4.5"><title>Nantes</title></circle><circle class="city" cx="96.9" cy="131.6" r="4.5"><title>Rennes</title></circle><circle class="city" cx="249.9" cy="311.6" r="4.5"><title>Montpellier</title></circle><circle class="city" cx="275.5" cy="298.0" r="4.5"><title>Avignon</title></circle><circle class="city" cx="293.1" cy="314.8" r="4.5"><title>Aix-en-Provence</title></circle><circle class="city" cx="311.8" cy="220.0" r="4.5"><title>Annecy</title></circle><circle class="city" cx="345.7" cy="132.8" r="4.5"><title>Colmar</title></circle><circle class="city" cx="254.0" cy="85.6" r="4.5"><title>Reims</title></circle><circle class="city" cx="173.4" cy="78.4" r="4.5"><title>Rouen</title></circle><circle class="city" cx="101.5" cy="110.4" r="4.5"><title>Mont-Saint-Michel</title></circle><circle class="city" cx="87.2" cy="110.0" r="4.5"><title>Saint-Malo</title></circle><circle class="city" cx="100.2" cy="316.8" r="4.5"><title>Biarritz</title></circle><circle class="city" cx="207.8" cy="327.6" r="4.5"><title>Carcassonne</title></circle><circle class="city" cx="281.8" cy="163.2" r="4.5"><title>Dijon</title></circle><circle class="city" cx="332.2" cy="219.2" r="4.5"><title>Chamonix</title></circle><circle class="city" cx="336.0" cy="314.0" r="4.5"><title>Cannes</title></circle><circle class="city" cx="383.6" cy="379.2" r="4.5"><title>Ajaccio</title></circle>
+          </svg>
+          <div class="map-info">
+            <p class="map-count"><span>0</span> / 25</p>
+            <p class="map-caption">Le voyage commence bientôt</p>
+            <p class="map-text" lang="ja">旅は、もうすぐ始まる。<br><span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></p><p class="map-text" lang="en">The journey begins soon.<br>25 French cities, on my own two feet—<br>and then, a travel company all about France.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- D：写真を背景に、夢を大きく1文字ずつ -->
+      <div class="pq-variant pq-d">
+        <div class="dream-scene reveal">
+          <img class="dream-bg" src="images/france/champs-elysees-soft.jpg" alt="" loading="lazy" decoding="async">
+          <p class="dream-label">Mon rêve</p>
+          <p class="dream-words typewrite" lang="ja"><span class="phrase">いつか、</span><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></p>
+          <p class="dream-words typewrite" lang="en">Someday, a travel company all about France.</p>
+          <p class="dream-sub" lang="ja"><span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span></p><p class="dream-sub" lang="en">To share the freedom of the world with more people.</p>
+        </div>
       </div>
     </div>
   </section>
