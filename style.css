@@ -13,6 +13,9 @@
   --accent-dark: #5E3B37; /* リンクにカーソルを乗せたとき */
   --muted: #6B5B57;       /* うすめの文字 */
   --border: #DDD2CB;      /* 線の色 */
+  --veil-top: rgba(246, 241, 236, 0.62);    /* 写真の上に重ねるベージュ（上） */
+  --veil-mid: rgba(246, 241, 236, 0.8);    /* 写真の上に重ねるベージュ（真ん中） */
+  --veil-soft: rgba(237, 228, 222, 0.88);   /* Messageの写真に重ねるベージュ */
   --blob-pink: #E3C6C1;   /* ふわふわの丸（ピンク） */
   --blob-green: #C9D3C1;  /* ふわふわの丸（グリーン） */
   --blob-lavender: #D9D0E0; /* ふわふわの丸（ラベンダー） */
@@ -36,6 +39,7 @@ a:hover { color: var(--accent-dark); }
   font-weight: 300;
   position: relative;
   overflow: hidden;
+  isolation: isolate; /* 背景の写真を、ふわふわの丸より後ろに置くため */
 }
 
 /* 文のかたまり。途中で改行されないようにする */
@@ -134,6 +138,45 @@ a:hover { color: var(--accent-dark); }
 .nav a { color: var(--text); text-decoration: none; }
 
 /* ---------- トップ ---------- */
+/* 背景のフランスの写真 */
+.hero-wrap { position: relative; }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.hero-slides { inset: 0 0 auto 0; height: 120%; }
+.hero-slides img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  filter: saturate(0.7); /* 色を少しおさえて、くすみ系に */
+  opacity: 0;
+  animation: slideshow 24s ease-in-out infinite both;
+}
+/* 4枚を6秒ずつ、順番に切り替える */
+.hero-slides img:nth-child(2) { animation-delay: 6s; }
+.hero-slides img:nth-child(3) { animation-delay: 12s; }
+.hero-slides img:nth-child(4) { animation-delay: 18s; }
+@keyframes slideshow {
+  0%   { opacity: 0; transform: scale(1.08); }
+  6%   { opacity: 1; }
+  25%  { opacity: 1; }
+  31%  { opacity: 0; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+/* 写真の上にベージュをふんわり重ねて、文字を読みやすくする。下は背景色になじませる */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--veil-top), var(--veil-mid) 65%, var(--bg));
+}
+
 .hero {
   padding: 120px 24px 160px;
   display: flex;
@@ -216,7 +259,14 @@ a:hover { color: var(--accent-dark); }
 .tl-text { margin: 0; font-size: 15px; line-height: 2; }
 
 /* ---------- 02 伝えたいこと ---------- */
-.message { position: relative; background: var(--bg-soft); margin-top: 64px; }
+.message {
+  position: relative;
+  margin-top: 64px;
+  /* オペラ座の写真に、ベージュを重ねてうっすら見せる */
+  background:
+    linear-gradient(var(--veil-soft), var(--veil-soft)),
+    url("images/france/opera.jpg") center / cover;
+}
 .message-inner {
   max-width: 880px;
   margin: 0 auto;
@@ -322,40 +372,36 @@ a:hover { color: var(--accent-dark); }
 
 .ig-head { display: flex; flex-direction: column; gap: 40px; align-items: center; }
 
-/* アカウント2つ（スマホは縦、パソコンは横に並ぶ） */
-.accounts {
+/* アカウントごとのまとまり（スマホは縦、パソコンは横に並ぶ） */
+.ig-accounts {
   width: 100%;
-  max-width: 600px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 56px 32px;
 }
+.ig-account { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+.ig-account-name { margin: 0; font-size: 16px; letter-spacing: 0.2em; }
+.ig-account .ig-grid { grid-template-columns: 1fr 1fr; }
+
+/* アカウントのボタン */
 .account {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  display: inline-flex;
+  gap: 10px;
   align-items: center;
-  padding: 20px 24px;
+  padding: 14px 32px;
   border: 1px solid var(--text);
   border-radius: 999px;
+  font-family: var(--font-en);
+  font-size: 13px;
+  letter-spacing: 0.15em;
   text-decoration: none;
   transition: transform .4s ease;
 }
 .account:hover { transform: translateY(-3px); }
-.account-main { background: var(--text); color: var(--bg); }       /* 発信用：こげ茶 */
-.account-sub  { background: transparent; color: var(--text); }     /* 個人：ふち線だけ */
+.account-main { background: var(--text); color: var(--bg); }       /* 挑戦記録：こげ茶 */
+.account-sub  { background: transparent; color: var(--text); }     /* さやのリアル：ふち線だけ */
 .account-main:hover { color: var(--bg); }
 .account-sub:hover  { color: var(--text); }
-.account-label { font-size: 14px; letter-spacing: 0.15em; }
-.account-id {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  font-family: var(--font-en);
-  font-size: 13px;
-  letter-spacing: 0.15em;
-  opacity: 0.85;
-}
 
 /* ---------- フッター ---------- */
 .footer {
@@ -385,4 +431,6 @@ a:hover { color: var(--accent-dark); }
   .fu { opacity: 1; }
   .line { width: 72px; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-slides img { animation: none; }
+  .hero-slides img:first-child { opacity: 1; }
 }

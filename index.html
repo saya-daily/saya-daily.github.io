@@ -18,6 +18,17 @@
   <div class="parallax parallax-green" data-speed="0.4" aria-hidden="true"><div class="blob blob-green"></div></div>
   <div class="parallax parallax-lavender" data-speed="0.15" aria-hidden="true"><div class="blob blob-lavender"></div></div>
 
+  <!-- 一番上（ヘッダー＋トップ）。背景にフランスの写真が順番に切り替わる -->
+  <div class="hero-wrap">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-slides parallax" data-speed="0.3">
+      <img src="images/france/mont-saint-michel.jpg" alt="">
+      <img src="images/france/louvre.jpg" alt="">
+      <img src="images/france/champs-elysees.jpg" alt="">
+      <img src="images/france/montmartre.jpg" alt="">
+    </div>
+  </div>
+
   <!-- ヘッダー -->
   <header class="container header">
     <a class="logo" href="#top">Saya</a>
@@ -41,6 +52,7 @@
     </p>
     <a class="btn-outline fu d4" href="#histoire">Découvrir</a>
   </section>
+  </div>
 
   <!-- 01 わたしの歩み -->
   <section id="histoire" class="container histoire">
@@ -97,7 +109,7 @@
   <section id="message" class="message">
     <div class="message-inner reveal">
       <p class="eyebrow">02 — Message</p>
-      <p class="quote">“ 好きなように、生きていい。”</p>
+      <p class="quote"><span class="phrase">“ 好きなように、</span><span class="phrase">生きていい。”</span></p>
       <p class="message-text">
         好きな服を、好きなように着る。<br>
         周りの目より、心が踊るほうへ。<br>
@@ -154,24 +166,25 @@
       <span class="phrase">言ってくれる人が、</span><span class="phrase">ひとりでも増えますように。</span>
     </p>
 
-    <!-- 投稿（今は仮の枠。押すとインスタが開く） -->
-    <div class="ig-grid reveal">
-      <a class="ig-post pink tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
-      <a class="ig-post sage tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
-      <a class="ig-post lavender tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
-      <a class="ig-post beige tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
-    </div>
+    <!-- アカウントごとに 投稿2つ＋ボタン（スマホは縦、パソコンは横に並ぶ） -->
+    <div class="ig-accounts">
+      <div class="ig-account reveal">
+        <p class="ig-account-name">挑戦記録</p>
+        <div class="ig-grid">
+          <a class="ig-post pink tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
+          <a class="ig-post sage tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
+        </div>
+        <a class="account account-main" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@0h_3ya</a>
+      </div>
 
-    <!-- アカウント2つ -->
-    <div class="accounts reveal">
-      <a class="account account-main" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener">
-        <span class="account-label">挑戦記録</span>
-        <span class="account-id"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@0h_3ya</span>
-      </a>
-      <a class="account account-sub" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener">
-        <span class="account-label">さやのリアル</span>
-        <span class="account-id"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@_oxsy.7</span>
-      </a>
+      <div class="ig-account reveal">
+        <p class="ig-account-name">さやのリアル</p>
+        <div class="ig-grid">
+          <a class="ig-post lavender tile" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
+          <a class="ig-post beige tile" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
+        </div>
+        <a class="account account-sub" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@_oxsy.7</a>
+      </div>
     </div>
   </section>
 
