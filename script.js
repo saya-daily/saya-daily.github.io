@@ -139,16 +139,21 @@ if (!reduceMotion) {
 }
 
 /* ---------- ⑦ ストーリーのスライド ---------- */
-// スライドが画面の半分以上に入ったら「is-active」をつけて、文字や写真をふわっと出す
-const storySlides = document.querySelectorAll('.story-slide');
+// スクロールした量から「今は何枚目か」を計算して、そのスライドだけ表示する（ふわっと入れ替わる）
+const storyEl = document.querySelector('.story');
+const storySlides = [...document.querySelectorAll('.story-slide')];
+storyEl.style.setProperty('--slides', storySlides.length);
+let activeSlide = -1;
 
-if (reduceMotion || !('IntersectionObserver' in window)) {
-  storySlides.forEach((slide) => slide.classList.add('is-active'));
-} else {
-  const slideObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add('is-active');
-    });
-  }, { threshold: 0.5 });
-  storySlides.forEach((slide) => slideObserver.observe(slide));
+function updateStory() {
+  const scrolled = -storyEl.getBoundingClientRect().top;             // ストーリーの中を何px進んだか
+  const index = Math.floor(scrolled / window.innerHeight + 0.5);    // 1画面ぶん進むごとに次のスライド
+  const i = Math.min(Math.max(index, 0), storySlides.length - 1);
+  if (i === activeSlide) return;
+  activeSlide = i;
+  storySlides.forEach((slide, n) => slide.classList.toggle('is-active', n === i));
 }
+
+window.addEventListener('scroll', () => requestAnimationFrame(updateStory), { passive: true });
+window.addEventListener('resize', updateStory);
+updateStory();

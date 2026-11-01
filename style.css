@@ -20,6 +20,8 @@
   --veil-top: rgba(246, 241, 236, 0.62);    /* 写真の上に重ねるベージュ（上） */
   --veil-mid: rgba(246, 241, 236, 0.8);    /* 写真の上に重ねるベージュ（真ん中） */
   --veil-soft: rgba(237, 228, 222, 0.88);   /* Messageの写真に重ねるベージュ */
+  --story-veil-strong: rgba(246, 241, 236, 0.78); /* ストーリーの写真に重ねるベージュ（文字側） */
+  --story-veil-soft: rgba(246, 241, 236, 0.15);   /* ストーリーの写真に重ねるベージュ（反対側） */
   --blob-pink: #E3C6C1;   /* ふわふわの丸（ピンク） */
   --blob-green: #C9D3C1;  /* ふわふわの丸（グリーン） */
   --blob-lavender: #D9D0E0; /* ふわふわの丸（ラベンダー） */
@@ -311,40 +313,35 @@ html.lang-en .page [lang="ja"] { display: none; }
   gap: 24px;
 }
 
-/* 年ごとのストーリー（縦にスクロールすると、1画面ずつ切り替わる） */
-html { scroll-snap-type: y proximity; } /* スライドの近くで止めると、ピタッと合わせる */
+/* 年ごとのストーリー（スクロールすると、写真と文章がふわっと入れ替わる）
+   .story はスライドの枚数ぶんの高さ。中の .story-stage が画面にくっついて止まり、
+   その上でスライドが重なって、今のスライドだけが見える */
 .story { margin-top: 72px; }
+.js .story { height: calc(var(--slides, 13) * 100svh); }
+.js .story-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .story-slide {
-  position: sticky;   /* 上にくっついて止まる → 次のスライドが下からかぶさってくる */
-  top: 0;
+  position: relative;
   z-index: 0;
-  height: 100vh;
-  height: 100svh;
-  scroll-snap-align: start;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   padding: 0 max(24px, calc((100% - 1120px) / 2 + 24px));
   box-sizing: border-box;
-  background: var(--bg);
   overflow: hidden;
 }
-/* 背景の写真（ふちをぼかして、ふんわり敷く） */
+.js .story-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+.js .story-slide.is-active { opacity: 1; }
+
+/* 背景の写真。上と下は背景色にとけこませて、区切りが見えないようにする */
 .story-bg {
   position: absolute;
   inset: 0;
   z-index: -1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 18%;
-  box-sizing: border-box;
-  font-family: var(--font-en);
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
-  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
 }
-.story-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+.story-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
 /* 横長の写真で、さやが端に写ってるときは、見せる位置を横にずらす（数字は左からの位置％） */
 .story-bg img.pos-28 { object-position: 28% 50%; }
 .story-bg img.pos-32 { object-position: 32% 50%; }
@@ -353,8 +350,13 @@ html { scroll-snap-type: y proximity; } /* スライドの近くで止めると�
 .story-bg img.pos-y30 { object-position: 50% 30%; }
 .story-bg img.pos-y70 { object-position: 50% 70%; }
 .story-bg img.pos-y75 { object-position: 50% 75%; }
-/* 写真の上にベージュをふんわり重ねて、文字を読みやすくする */
-.story-bg:has(img)::after { content: ""; position: absolute; inset: 0; background: var(--veil-top); }
+/* 文字がある左側だけベージュを重ねて、右側は写真がよく見えるようにする */
+.story-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--story-veil-strong), var(--story-veil-soft) 75%);
+}
 
 .story-content { max-width: 560px; }
 /* 大きい年の数字 */
@@ -368,7 +370,7 @@ html { scroll-snap-type: y proximity; } /* スライドの近くで止めると�
   color: var(--accent);
 }
 .story-text { margin-top: 24px; }
-.story-text p { margin: 0; font-size: 16px; line-height: 2.1; }
+.story-text p { margin: 0; font-size: 16px; line-height: 2.1; text-shadow: 0 0 12px var(--bg), 0 0 4px var(--bg); } /* 写真の上でも読めるように、文字のまわりをふんわり明るく */
 .story-text p[lang="en"] { font-family: var(--font-en); }
 .story-note { color: var(--muted); font-size: 0.9em; }
 
@@ -395,10 +397,10 @@ html { scroll-snap-type: y proximity; } /* スライドの近くで止めると�
 /* ---- 画面が切り替わったときの動き ---- */
 .js .story-year { opacity: 0; transform: translateY(40px); transition: opacity .9s ease .1s, transform .9s cubic-bezier(.2, .7, .2, 1) .1s; }
 .js .story-text { opacity: 0; transform: translateY(16px); transition: opacity .9s ease .45s, transform .9s ease .45s; }
-.js .story-bg { opacity: 0; transform: scale(1.06); transition: opacity 1.4s ease, transform 1.8s ease; }
+.js .story-bg { transform: scale(1.06); transition: transform 2.4s ease; }
 .js .story-slide.is-active .story-year,
-.js .story-slide.is-active .story-text,
-.js .story-slide.is-active .story-bg { opacity: 1; transform: none; }
+.js .story-slide.is-active .story-text { opacity: 1; transform: none; }
+.js .story-slide.is-active .story-bg { transform: none; }
 
 /* ---------- シャボン玉 ---------- */
 /* 画面の上に重なる透明な層。押したりしても邪魔にならない */
@@ -635,6 +637,9 @@ html { scroll-snap-type: y proximity; } /* スライドの近くで止めると�
   .lang-switch { order: 2; }
   .nav { order: 3; flex-basis: 100%; margin-left: 0; }
   .story-text p { font-size: 14px; letter-spacing: 0; }
+  /* スマホ：文字は上のほうに置いて、上からベージュを重ねる（写真の真ん中は見えるように） */
+  .story-slide { align-items: flex-start; padding-top: 14svh; }
+  .story-bg::after { background: linear-gradient(to bottom, var(--story-veil-strong) 15%, var(--story-veil-soft) 55%); }
   .card { padding: 40px 20px; }
   .card-text { font-size: 13px; }
   .ig-text { font-size: 13px; letter-spacing: 0; }
@@ -647,7 +652,8 @@ html { scroll-snap-type: y proximity; } /* スライドの近くで止めると�
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-slides img { animation: none; }
   .js .typewrite .char, .js .message-inner .message-text { opacity: 1; transform: none; filter: none; transition: none; }
-  .js .story-year, .js .story-text, .js .story-bg { opacity: 1; transform: none; transition: none; }
+  .js .story-year, .js .story-text, .js .story-bg, .js .story-slide { transform: none; transition: none; }
+  .js .story-year, .js .story-text { opacity: 1; }
   .story-hint { animation: none; }
   .bubbles { display: none; }
   .hero-slides img:first-child { opacity: 1; }
