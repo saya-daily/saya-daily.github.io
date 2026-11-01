@@ -87,3 +87,53 @@ function setLang(lang) {
 
 langButtons.forEach((btn) => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
 setLang(root.classList.contains('lang-en') ? 'en' : 'ja');
+
+/* ---------- ⑤ 「好きなように、生きていい。」を1文字ずつに分ける ---------- */
+// 文字を1つずつ <span class="char"> で包んで、順番の番号（--i）をつける
+document.querySelectorAll('.typewrite').forEach((el) => {
+  let i = 0;
+  const splitText = (node) => {
+    [...node.childNodes].forEach((child) => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const pieces = document.createDocumentFragment();
+        [...child.textContent].forEach((ch) => {
+          if (ch.trim() === '') { pieces.append(ch); return; } // スペースはそのまま
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = ch;
+          span.style.setProperty('--i', i++);
+          pieces.append(span);
+        });
+        child.replaceWith(pieces);
+      } else {
+        splitText(child); // <span class="phrase"> の中も分ける
+      }
+    });
+  };
+  splitText(el);
+});
+
+/* ---------- ⑥ シャボン玉 ---------- */
+const bubbleLayer = document.querySelector('.bubbles');
+
+function makeBubble() {
+  if (document.hidden) return;                       // 別のタブを見てる間は作らない
+  if (bubbleLayer.childElementCount >= 10) return;   // 多すぎないように、最大10個まで
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  const size = 14 + Math.random() * 46;              // 大きさ：14〜60px
+  bubble.style.left = `${Math.random() * 95}%`;      // 横の位置：ランダム
+  bubble.style.setProperty('--size', `${size}px`);
+  bubble.style.setProperty('--duration', `${9 + Math.random() * 7}s`); // 浮かぶ速さ：9〜16秒
+  bubble.append(document.createElement('span'));
+  bubble.addEventListener('animationend', (e) => {
+    if (e.target === bubble) bubble.remove();        // 上まで行ったら消す
+  });
+  bubbleLayer.append(bubble);
+}
+
+if (!reduceMotion) {
+  for (let n = 0; n < 3; n++) setTimeout(makeBubble, n * 700); // 最初に3つ
+  setInterval(makeBubble, 1800);                               // そのあと1.8秒ごとに1つ
+}

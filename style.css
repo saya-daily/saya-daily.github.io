@@ -19,6 +19,11 @@
   --blob-pink: #E3C6C1;   /* ふわふわの丸（ピンク） */
   --blob-green: #C9D3C1;  /* ふわふわの丸（グリーン） */
   --blob-lavender: #D9D0E0; /* ふわふわの丸（ラベンダー） */
+  --bubble-shine: rgba(255, 255, 255, 0.9);   /* シャボン玉の光ってるとこ */
+  --bubble-rim: rgba(255, 255, 255, 0.55);    /* シャボン玉のふち */
+  --bubble-pink: rgba(227, 198, 193, 0.45);   /* シャボン玉の虹色（ピンク） */
+  --bubble-lavender: rgba(217, 208, 224, 0.55); /* シャボン玉の虹色（ラベンダー） */
+  --bubble-green: rgba(201, 211, 193, 0.45);  /* シャボン玉の虹色（グリーン） */
 
   --font-serif: 'Cormorant Garamond', serif;  /* 細くて上品な英字 */
   --font-en: 'Jost', sans-serif;              /* 小さい英字ラベル */
@@ -332,6 +337,44 @@ html.lang-en .page [lang="ja"] { display: none; }
 .tl-block { display: block; }
 .tl-block + .tl-block { margin-top: 14px; }
 
+/* ---------- シャボン玉 ---------- */
+/* 画面の上に重なる透明な層。押したりしても邪魔にならない */
+.bubbles {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* 外側：下から上へ浮かぶ */
+.bubble {
+  position: absolute;
+  bottom: -80px;
+  animation: bubbleRise var(--duration, 12s) linear forwards;
+}
+/* 内側：左右にゆらゆら＋見た目 */
+.bubble span {
+  display: block;
+  width: var(--size, 32px);
+  height: var(--size, 32px);
+  border-radius: 50%;
+  border: 1px solid var(--bubble-rim);
+  background:
+    radial-gradient(circle at 30% 28%, var(--bubble-shine) 0 7%, transparent 9%),
+    radial-gradient(circle, transparent 55%, var(--bubble-pink) 72%, var(--bubble-lavender) 86%, var(--bubble-green) 100%);
+  animation: bubbleSway 3.5s ease-in-out infinite alternate;
+}
+@keyframes bubbleRise {
+  0%   { transform: translateY(0); opacity: 0; }
+  10%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(calc(-100vh - 160px)); opacity: 0; }
+}
+@keyframes bubbleSway {
+  from { transform: translateX(-14px) scale(1); }
+  to   { transform: translateX(14px) scale(1.06); }
+}
+
 /* ---------- 02 伝えたいこと ---------- */
 .message {
   position: relative;
@@ -359,6 +402,20 @@ html.lang-en .page [lang="ja"] { display: none; }
   font-size: clamp(36px, 5vw, 56px);
   line-height: 1.3;
 }
+/* 「好きなように、生きていい。」が1文字ずつ現れる */
+.js .typewrite .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(.3em);
+  filter: blur(6px);
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
+  transition-delay: calc(var(--i) * 90ms + .3s); /* 1文字ずつ、少しずつ遅らせる */
+}
+.js .is-visible .typewrite .char { opacity: 1; transform: none; filter: none; }
+/* 下の3行は、言葉が出終わったあとにふわっと */
+.js .message-inner .message-text { opacity: 0; transition: opacity 1.2s ease 1.8s; }
+.js .message-inner.is-visible .message-text { opacity: 1; }
+
 .message-text {
   margin: 0;
   max-width: 560px;
@@ -513,5 +570,7 @@ html.lang-en .page [lang="ja"] { display: none; }
   .line { width: 72px; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-slides img { animation: none; }
+  .js .typewrite .char, .js .message-inner .message-text { opacity: 1; transform: none; filter: none; transition: none; }
+  .bubbles { display: none; }
   .hero-slides img:first-child { opacity: 1; }
 }
