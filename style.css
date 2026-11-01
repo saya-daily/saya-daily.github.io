@@ -22,6 +22,7 @@
   --veil-soft: rgba(237, 228, 222, 0.88);   /* Messageの写真に重ねるベージュ */
   --story-veil-strong: rgba(246, 241, 236, 0.78); /* ストーリーの写真に重ねるベージュ（文字側） */
   --story-veil-soft: rgba(246, 241, 236, 0.15);   /* ストーリーの写真に重ねるベージュ（反対側） */
+  --story-glass: rgba(246, 241, 236, 0.72);       /* ストーリーの文字の後ろのすりガラス */
   --blob-pink: #E3C6C1;   /* ふわふわの丸（ピンク） */
   --blob-green: #C9D3C1;  /* ふわふわの丸（グリーン） */
   --blob-lavender: #D9D0E0; /* ふわふわの丸（ラベンダー） */
@@ -358,7 +359,15 @@ html.lang-en .page [lang="ja"] { display: none; }
   background: linear-gradient(to right, var(--story-veil-strong), var(--story-veil-soft) 75%);
 }
 
-.story-content { max-width: 560px; }
+/* 文字の後ろに「すりガラス」みたいなパネルを敷いて、写真の上でも読みやすくする */
+.story-content {
+  max-width: 560px;
+  padding: 28px 28px 32px;
+  border-radius: 24px;
+  background: var(--story-glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px); /* うしろの写真をぼかす */
+}
 /* 大きい年の数字 */
 .story-year {
   margin: 0;
@@ -369,8 +378,8 @@ html.lang-en .page [lang="ja"] { display: none; }
   line-height: 1;
   color: var(--accent);
 }
-.story-text { margin-top: 24px; }
-.story-text p { margin: 0; font-size: 16px; line-height: 2.1; text-shadow: 0 0 12px var(--bg), 0 0 4px var(--bg); } /* 写真の上でも読めるように、文字のまわりをふんわり明るく */
+.story-text { margin-top: 16px; }
+.story-text p { margin: 0; font-size: 17px; line-height: 2.1; color: var(--text); }
 .story-text p[lang="en"] { font-family: var(--font-en); }
 .story-note { color: var(--muted); font-size: 0.9em; }
 
@@ -636,9 +645,10 @@ html.lang-en .page [lang="ja"] { display: none; }
   /* ヘッダー：1行目に「Saya」と「JP / EN」、2行目にメニュー */
   .lang-switch { order: 2; }
   .nav { order: 3; flex-basis: 100%; margin-left: 0; }
-  .story-text p { font-size: 14px; letter-spacing: 0; }
+  .story-text p { font-size: 15px; letter-spacing: 0; }
+  .story-content { padding: 22px 20px 24px; }
   /* スマホ：文字は上のほうに置いて、上からベージュを重ねる（写真の真ん中は見えるように） */
-  .story-slide { align-items: flex-start; padding-top: 14svh; }
+  .story-slide { align-items: flex-start; padding-top: 11svh; }
   .story-bg::after { background: linear-gradient(to bottom, var(--story-veil-strong) 15%, var(--story-veil-soft) 55%); }
   .card { padding: 40px 20px; }
   .card-text { font-size: 13px; }
