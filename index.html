@@ -7,13 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@300;400&amp;family=Zen+Kaku+Gothic+New:wght@300;400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- 画面がチラつかないように、最初に「JSが動く」目印をつける -->
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 <div class="page">
 
-  <!-- 背景のふわふわ動く丸 -->
-  <div class="blob blob-pink" aria-hidden="true"></div>
-  <div class="blob blob-green" aria-hidden="true"></div>
+  <!-- 背景のふわふわ動く丸（data-speed：スクロールしたときの動く速さ） -->
+  <div class="parallax parallax-pink" data-speed="0.25" aria-hidden="true"><div class="blob blob-pink"></div></div>
+  <div class="parallax parallax-green" data-speed="0.4" aria-hidden="true"><div class="blob blob-green"></div></div>
+  <div class="parallax parallax-lavender" data-speed="0.15" aria-hidden="true"><div class="blob blob-lavender"></div></div>
 
   <!-- ヘッダー -->
   <header class="container header">
@@ -41,8 +44,8 @@
 
   <!-- 01 わたしの歩み -->
   <section id="histoire" class="container histoire">
-    <img class="photo" src="images/saya.jpg" alt="さやの写真">
-    <div class="histoire-body">
+    <img class="photo reveal" src="images/saya.jpg" alt="さやの写真">
+    <div class="histoire-body reveal">
       <p class="eyebrow">01 — Histoire</p>
       <h2 class="section-title">My <em>story</em><br><span class="ja">わたしの歩み</span></h2>
 
@@ -92,7 +95,7 @@
 
   <!-- 02 伝えたいこと -->
   <section id="message" class="message">
-    <div class="message-inner">
+    <div class="message-inner reveal">
       <p class="eyebrow">02 — Message</p>
       <p class="quote">“ 好きなように、生きていい。”</p>
       <p class="message-text">
@@ -105,13 +108,13 @@
 
   <!-- 03 なんのために -->
   <section id="pourquoi" class="container pourquoi">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">03 — Pourquoi</p>
       <h2 class="section-title">Why I <em>do this</em><br><span class="ja">なんのために</span></h2>
     </div>
 
     <div class="cards">
-      <div class="card tile">
+      <div class="card tile reveal">
         <span class="card-num">i.</span>
         <h3 class="card-title">夢</h3>
         <p class="card-text">
@@ -120,7 +123,7 @@
         </p>
       </div>
 
-      <div class="card tile">
+      <div class="card tile reveal">
         <span class="card-num">ii.</span>
         <h3 class="card-title">想い</h3>
         <p class="card-text">
@@ -129,7 +132,7 @@
         </p>
       </div>
 
-      <div class="card tile">
+      <div class="card tile reveal">
         <span class="card-num">iii.</span>
         <h3 class="card-title">いま</h3>
         <p class="card-text">
@@ -142,25 +145,34 @@
 
   <!-- 04 インスタ -->
   <section id="instagram" class="container instagram">
-    <p class="eyebrow">04 — Instagram</p>
-    <h2 class="ig-title">Suivez-moi</h2>
-    <p class="ig-text">
+    <div class="ig-head reveal">
+      <p class="eyebrow">04 — Instagram</p>
+      <h2 class="ig-title">Suivez-moi</h2>
+    </div>
+    <p class="ig-text reveal">
       <span class="phrase">わたしのSNSを見て</span><span class="phrase">「一歩踏み出せた」と</span><br>
       <span class="phrase">言ってくれる人が、</span><span class="phrase">ひとりでも増えますように。</span>
     </p>
 
     <!-- 投稿（今は仮の枠。押すとインスタが開く） -->
-    <div class="ig-grid">
+    <div class="ig-grid reveal">
       <a class="ig-post pink tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
       <a class="ig-post sage tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
       <a class="ig-post lavender tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
       <a class="ig-post beige tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
     </div>
 
-    <a class="btn-dark" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener">
-      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>
-      @0h_3ya
-    </a>
+    <!-- アカウント2つ -->
+    <div class="accounts reveal">
+      <a class="account account-main" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener">
+        <span class="account-label">挑戦記録</span>
+        <span class="account-id"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@0h_3ya</span>
+      </a>
+      <a class="account account-sub" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener">
+        <span class="account-label">さやのリアル</span>
+        <span class="account-id"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@_oxsy.7</span>
+      </a>
+    </div>
   </section>
 
   <!-- フッター -->
@@ -170,5 +182,6 @@
   </footer>
 
 </div>
+<script src="script.js" defer></script>
 </body>
 </html>
