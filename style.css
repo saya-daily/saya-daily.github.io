@@ -310,12 +310,19 @@ html.lang-en .page [lang="ja"] { display: none; }
   gap: 24px;
 }
 
-/* 年ごとのストーリー（スクロールすると、写真と文章がふわっと入れ替わる）
-   .story はスライドの枚数ぶんの高さ。中の .story-stage が画面にくっついて止まり、
-   その上でスライドが重なって、今のスライドだけが見える */
+/* 年ごとのストーリー（タップすると、写真と文章がふわっと入れ替わる）
+   .story-stage の中でスライドが重なって、今のスライドだけが見える */
 .story { margin-top: 72px; }
-.js .story { height: calc(var(--slides, 13) * 100svh); }
-.js .story-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.js .story-stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* タップしたときの青い枠を出さない */
+  user-select: none;
+  outline: none;
+}
 .story-slide {
   position: relative;
   z-index: 0;
@@ -375,8 +382,8 @@ html.lang-en .page [lang="ja"] { display: none; }
 .story-text p[lang="en"] { font-family: var(--font-en); }
 .story-note { color: var(--muted); font-size: 0.9em; }
 
-/* 「04 / 12」と「Scroll ↓」 */
-.story-count, .story-hint {
+/* 「04 / 13」 */
+.story-count {
   position: absolute;
   margin: 0;
   font-family: var(--font-en);
@@ -384,10 +391,70 @@ html.lang-en .page [lang="ja"] { display: none; }
   letter-spacing: 0.2em;
   color: var(--muted);
 }
-.story-count { top: 32px; right: max(24px, calc((100% - 1120px) / 2 + 24px)); }
+.story-count { top: 40px; right: max(24px, calc((100% - 1120px) / 2 + 24px)); }
 .story-count span { color: var(--text); }
-.story-hint { bottom: 32px; left: 50%; transform: translateX(-50%); font-family: var(--font-serif); font-style: italic; font-size: 15px; letter-spacing: 0.05em; animation: hintBounce 2s ease-in-out infinite; }
-@keyframes hintBounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }
+
+/* 上の細いバー（Instagramのストーリーみたいに、今何枚目かがわかる） */
+.story-bars {
+  position: absolute;
+  top: 20px;
+  left: max(24px, calc((100% - 1120px) / 2 + 24px));
+  right: max(24px, calc((100% - 1120px) / 2 + 24px));
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+}
+.story-bars span { flex: 1; height: 2px; border-radius: 2px; background: var(--border); transition: background .4s ease; }
+.story-bars span.is-done { background: var(--accent); }
+
+/* 「タップしてね」の案内（最初だけ） */
+.story-tap-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  z-index: 3;
+  width: 96px;
+  height: 96px;
+  margin-left: -48px;
+  pointer-events: none;
+  transition: opacity .5s ease, transform .5s ease;
+}
+.story-tap-hint.is-hidden { opacity: 0; transform: scale(.8); }
+.tap-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--bg);
+  animation: tapPress 1.6s ease-in-out infinite;  /* ぷにっと押される */
+}
+.tap-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  animation: tapRipple 1.6s ease-out infinite;    /* 波紋が広がる */
+}
+.tap-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 6px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--text);
+  text-shadow: 0 0 3px var(--bg), 0 0 12px var(--bg);
+}
+.tap-label[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 17px; letter-spacing: 0.05em; }
+html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { display: none; }
+@keyframes tapPress { 0%, 100% { transform: scale(1); } 15% { transform: scale(.75); } 30% { transform: scale(1.05); } 45% { transform: scale(1); } }
+@keyframes tapRipple { 0% { transform: scale(.25); opacity: 0; } 15% { opacity: .9; } 100% { transform: scale(1); opacity: 0; } }
 
 /* 仮の写真枠の色 */
 .ph-pink     { background: var(--ph-pink);     color: var(--ph-pink-text); }
@@ -693,7 +760,7 @@ html.lang-en .page [lang="ja"] { display: none; }
   .js .road .road-line, .js .road .road-step, .js .city { opacity: 1; transform: none; transition: none; animation: none; }
   .js .story-year, .js .story-text, .js .story-bg, .js .story-slide { transform: none; transition: none; }
   .js .story-year, .js .story-text { opacity: 1; }
-  .story-hint { animation: none; }
+  .tap-dot, .tap-ring { animation: none; }
   .bubbles { display: none; }
   .hero-slides img:first-child { opacity: 1; }
 }

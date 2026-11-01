@@ -124,21 +124,45 @@ if (!reduceMotion) {
   setInterval(makeBubble, 4500);  // そのあと4.5秒ごとに1つ
 }
 
-/* ---------- ⑦ ストーリーのスライド ---------- */
-// スクロールした量から「今は何枚目か」を計算して、そのスライドだけ表示する（ふわっと入れ替わる）
-const storyEl = document.querySelector('.story');
+/* ---------- ⑦ ストーリーのスライド（タップで進む） ---------- */
+const stage = document.querySelector('.story-stage');
 const storySlides = [...document.querySelectorAll('.story-slide')];
-storyEl.style.setProperty('--slides', storySlides.length);
-let activeSlide = -1;
+const barsBox = document.querySelector('.story-bars');
+const tapHint = document.querySelector('.story-tap-hint');
+let activeSlide = 0;
 
-function updateStory() {
-  const scrolled = -storyEl.getBoundingClientRect().top;             // ストーリーの中を何px進んだか
-  const index = Math.floor(scrolled / window.innerHeight + 0.5);    // 1画面ぶん進むごとに次のスライド
-  const i = Math.min(Math.max(index, 0), storySlides.length - 1);
-  if (i === activeSlide) return;
-  activeSlide = i;
-  storySlides.forEach((slide, n) => slide.classList.toggle('is-active', n === i));
+// 上の細いバーを、スライドの枚数ぶん作る
+const bars = storySlides.map(() => barsBox.appendChild(document.createElement('span')));
+
+function showSlide(i) {
+  activeSlide = (i + storySlides.length) % storySlides.length; // 最後の次は最初にもどる
+  storySlides.forEach((slide, n) => slide.classList.toggle('is-active', n === activeSlide));
+  bars.forEach((bar, n) => bar.classList.toggle('is-done', n <= activeSlide));
 }
+
+// 「タップしてね」は、1回タップしたら消して、次に来たときはもう出さない
+let hintSeen = false;
+try { hintSeen = localStorage.getItem('storyTapped') === '1'; } catch (e) {}
+if (hintSeen) tapHint.classList.add('is-hidden');
+function hideHint() {
+  tapHint.classList.add('is-hidden');
+  try { localStorage.setItem('storyTapped', '1'); } catch (e) {}
+}
+
+// 画面の左3割をタップしたら前へ、それ以外は次へ
+stage.addEventListener('click', (e) => {
+  const rect = stage.getBoundingClientRect();
+  const goBack = e.clientX - rect.left < rect.width * 0.3;
+  showSlide(activeSlide + (goBack ? -1 : 1));
+  hideHint();
+});
+// キーボードでも動かせるように（← → ／ Enter ／ スペース）
+stage.addEventListener('keydown', (e) => {
+  if (['ArrowRight', 'Enter', ' '].includes(e.key)) { e.preventDefault(); showSlide(activeSlide + 1); hideHint(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); showSlide(activeSlide - 1); hideHint(); }
+});
+
+showSlide(0);
 
 /* ---------- ⑧ なんのために ---------- */
 // 地図の点に順番の番号をつける（順番にポツポツ出すため）
@@ -151,11 +175,9 @@ function onScroll() {
   const y = window.scrollY;
   if (!reduceMotion) moveLayers(y);
   root.classList.toggle('hero-out', y > window.innerHeight); // トップが見えてないか
-  updateStory();
   ticking = false;
 }
 window.addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
 }, { passive: true });
-window.addEventListener('resize', onScroll);
 onScroll();

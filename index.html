@@ -114,7 +114,16 @@
 
     <!-- 年ごとのストーリー。縦にスクロールすると、次の画面が下からかぶさって切り替わる -->
     <div class="story">
-      <div class="story-stage">
+      <!-- タップで1枚ずつ進む（右側：次へ／左側：前へ） -->
+      <div class="story-stage" role="button" tabindex="0" aria-label="My story（タップで次へ）">
+        <div class="story-bars" aria-hidden="true"></div>
+        <!-- 最初に見た人だけに出す「Tap」の案内 -->
+        <div class="story-tap-hint" aria-hidden="true">
+          <span class="tap-ring"></span>
+          <span class="tap-dot"></span>
+          <span class="tap-label" lang="ja">タップしてね</span>
+          <span class="tap-label" lang="en">Tap</span>
+        </div>
         <article class="story-slide">
           <p class="story-count" aria-label="1 / 13"><span>01</span> / 13</p>
           <div class="story-bg"><img src="images/story/2007.jpg" alt="" class="pos-28" loading="lazy" decoding="async"></div>
@@ -125,7 +134,6 @@
               <p lang="en">Born the youngest of four siblings.<br>Born and raised in Osaka.</p>
             </div>
           </div>
-          <p class="story-hint" aria-hidden="true">Scroll ↓</p>
         </article>
         <article class="story-slide">
           <p class="story-count" aria-label="2 / 13"><span>02</span> / 13</p>
