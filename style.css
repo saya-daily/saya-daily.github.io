@@ -310,131 +310,124 @@ html.lang-en .page [lang="ja"] { display: none; }
   gap: 24px;
 }
 
-/* 年ごとのストーリー（スマホ：線は左／パソコン：線は真ん中） */
-.story {
-  padding: 96px 24px 0;
+/* 年ごとのストーリー（横スワイプで1枚ずつ切り替わる） */
+.story { padding: 72px 24px 0; }
+.story-track {
   display: flex;
-  flex-direction: column;
-  gap: 88px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;   /* 1枚ずつピタッと止まる */
+  scroll-behavior: smooth;
+  scrollbar-width: none;           /* スクロールバーを隠す */
+  border-radius: 24px;
+  outline: none;
 }
-/* 縦の線。うすい線の上に、スクロールに合わせて濃い線が伸びる */
-.story-line {
-  position: absolute;
-  top: 96px;
-  bottom: 0;
-  left: 30px;
-  width: 1px;
-  background: var(--border);
-}
-.story-line-fill {
-  height: 100%;
-  background: var(--accent);
-  transform-origin: top;
-  transform: scaleY(var(--progress, 0)); /* --progress は script.js が 0〜1 で入れる */
-}
+.story-track::-webkit-scrollbar { display: none; }
 
-.story-item { position: relative; padding-left: 36px; }
-.story-dot {
-  position: absolute;
-  top: 34px;
-  left: 1px;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px var(--bg); /* 線との間にすき間を作る */
-}
-/* 大きい年の数字 */
-.story-year {
-  margin: 0 0 16px;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(56px, 9vw, 96px);
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.55;
-}
-.story-year.is-range { font-size: clamp(40px, 6vw, 64px); }
-.story-dash { margin: 0 .15em; }
-/* 写真（今は仮の枠） */
-.story-photo {
-  width: 100%;
-  max-width: 360px;
-  aspect-ratio: 4 / 5;
-  border-radius: 180px 180px 12px 12px;
-  overflow: hidden;
+.story-slide {
+  position: relative;
+  z-index: 0;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  min-height: 460px;
+  min-height: 62svh;
   display: flex;
   align-items: center;
+  padding: 48px 28px;
+  box-sizing: border-box;
+}
+/* 背景の写真（ふちをぼかして、ふんわり敷く） */
+.story-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 18%;
+  box-sizing: border-box;
   font-family: var(--font-en);
   font-size: 12px;
   letter-spacing: 0.15em;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 75%);
 }
-.story-photo img { width: 100%; height: 100%; object-fit: cover; }
-.story-text { margin-top: 24px; }
-.story-text p { margin: 0; font-size: 15px; line-height: 2; }
-.story-text p[lang="en"] { font-family: var(--font-en); }
-/* 同じ年の中で、話題ごとに少しすき間をあける */
-.story-block { display: block; }
-.story-block + .story-block { margin-top: 14px; }
+.story-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+/* 写真の上にベージュをふんわり重ねて、文字を読みやすくする */
+.story-bg:has(img)::after { content: ""; position: absolute; inset: 0; background: var(--veil-top); }
 
-/* 仮の枠の色 */
+.story-content { max-width: 560px; }
+/* 大きい年の数字 */
+.story-year {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(64px, 12vw, 120px);
+  line-height: 1;
+  color: var(--accent);
+}
+.story-sub { margin: 8px 0 0; font-size: 13px; letter-spacing: 0.2em; color: var(--muted); }
+.story-sub[lang="en"] { font-family: var(--font-en); }
+.story-text { margin-top: 24px; }
+.story-text p { margin: 0; font-size: 16px; line-height: 2.1; }
+.story-text p[lang="en"] { font-family: var(--font-en); }
+.story-note { color: var(--muted); font-size: 0.9em; }
+
+/* 仮の写真枠の色 */
 .ph-pink     { background: var(--ph-pink);     color: var(--ph-pink-text); }
 .ph-sage     { background: var(--ph-sage);     color: var(--ph-sage-text); }
 .ph-lavender { background: var(--ph-lavender); color: var(--ph-lavender-text); }
 .ph-beige    { background: var(--ph-beige);    color: var(--ph-beige-text); }
 
-/* ---- ストーリーの動き：画面に入ったら順番に ---- */
-.js .story-item.reveal { opacity: 1; transform: none; } /* 全体じゃなくて、中身を1つずつ動かす */
-.js .story-dot { transform: scale(0); transition: transform .5s cubic-bezier(.3, 1.6, .5, 1); } /* ポンッ */
-.js .story-year { opacity: 0; transform: translateX(-40px); transition: opacity .9s ease .15s, transform .9s cubic-bezier(.2, .7, .2, 1) .15s; }
-.js .story-photo { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s cubic-bezier(.6, 0, .2, 1) .3s; } /* 下から開く */
-.js .story-text { opacity: 0; transform: translateY(16px); transition: opacity .9s ease .7s, transform .9s ease .7s; }
-.js .story-item.is-visible .story-dot { transform: scale(1); }
-.js .story-item.is-visible .story-year { opacity: 0.55; transform: none; }
-.js .story-item.is-visible .story-photo { clip-path: inset(0 0 0 0); }
-.js .story-item.is-visible .story-text { opacity: 1; transform: none; }
+/* ---- 画面が切り替わったときの動き ---- */
+.js .story-year { opacity: 0; transform: translateX(48px); transition: opacity .9s ease .1s, transform .9s cubic-bezier(.2, .7, .2, 1) .1s; }
+.js .story-sub,
+.js .story-text { opacity: 0; transform: translateY(16px); transition: opacity .9s ease .45s, transform .9s ease .45s; }
+.js .story-bg { opacity: 0; transform: scale(1.06); transition: opacity 1.4s ease, transform 1.8s ease; }
+.js .story-slide.is-active .story-year,
+.js .story-slide.is-active .story-sub,
+.js .story-slide.is-active .story-text,
+.js .story-slide.is-active .story-bg { opacity: 1; transform: none; }
 
-/* ---- 写真は枠なしで、背景にふんわり敷く ---- */
-.story--bg .story-item { z-index: 0; padding-top: 56px; padding-bottom: 56px; min-height: 280px; }
-.story--bg .story-photo {
-  position: absolute;
-  inset: 0 0 0 36px;
-  z-index: -1;
-  width: auto;
-  max-width: none;
-  aspect-ratio: auto;
-  border-radius: 0;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0 0 22%;
-  box-sizing: border-box;
-  /* ふちをぼかして、背景にとけこませる */
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 75%);
-  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 75%);
+/* 何枚目か・進み具合・矢印 */
+.story-nav {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-en);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
 }
-.story--bg .story-photo img { opacity: 0.5; }
-.story--bg .story-text { margin-top: 8px; }
-/* 写真の動き：ふわっと浮かび上がる */
-.js .story--bg .story-photo { clip-path: none; opacity: 0; transform: scale(1.06); transition: opacity 1.4s ease .2s, transform 1.8s ease .2s; }
-.js .story--bg .story-item.is-visible .story-photo { opacity: 1; transform: none; }
-
-/* パソコン：線を真ん中にして、左右交互に並べる */
-@media (min-width: 900px) {
-  .story-line { left: 50%; }
-  .story-item { width: calc(50% - 64px); padding-left: 0; }
-  .story-item + .story-item { margin-top: -320px; } /* 左右で少しずつずらして重ね、すき間を詰める */
-  .story--bg .story-item + .story-item { margin-top: -120px; }
-  .story--bg .story-photo { inset: 0; }
-  .story-item:nth-of-type(odd)  { align-self: flex-start; text-align: right; }
-  .story-item:nth-of-type(even) { align-self: flex-end; }
-  .story-item:nth-of-type(odd) .story-photo { margin-left: auto; }
-  .story-item:nth-of-type(odd)  .story-dot { left: auto; right: -70px; }
-  .story-item:nth-of-type(even) .story-dot { left: -70px; }
-  /* 左側の年は、右からすべり込む */
-  .js .story-item:nth-of-type(odd) .story-year { transform: translateX(40px); }
-  .js .story-item.is-visible:nth-of-type(odd) .story-year { transform: none; }
+.story-current { color: var(--text); }
+.story-progress { flex: 1; height: 1px; background: var(--border); }
+.story-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+  transition: transform .6s ease;
+}
+.story-arrow {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--text);
+  border-radius: 50%;
+  background: transparent;
+  font: inherit;
+  color: var(--text);
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+.story-arrow:disabled { opacity: 0.25; cursor: default; }
+.story-hint {
+  margin: 12px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  text-align: right;
 }
 
 /* ---------- シャボン玉 ---------- */
@@ -672,6 +665,7 @@ html.lang-en .page [lang="ja"] { display: none; }
   .lang-switch { order: 2; }
   .nav { order: 3; flex-basis: 100%; margin-left: 0; }
   .story-text p { font-size: 14px; letter-spacing: 0; }
+  .story-slide { padding: 40px 16px; }
   .card { padding: 40px 20px; }
   .card-text { font-size: 13px; }
   .ig-text { font-size: 13px; letter-spacing: 0; }
@@ -684,8 +678,8 @@ html.lang-en .page [lang="ja"] { display: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-slides img { animation: none; }
   .js .typewrite .char, .js .message-inner .message-text { opacity: 1; transform: none; filter: none; transition: none; }
-  .js .story-dot, .js .story-year, .js .story-photo, .js .story-text { opacity: 1; transform: none; clip-path: none; transition: none; }
-  .js .story-year { opacity: 0.55; }
+  .js .story-year, .js .story-sub, .js .story-text, .js .story-bg { opacity: 1; transform: none; transition: none; }
+  .story-track { scroll-behavior: auto; }
   .bubbles { display: none; }
   .hero-slides img:first-child { opacity: 1; }
 }
