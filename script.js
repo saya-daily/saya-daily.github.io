@@ -154,3 +154,13 @@ if (reduceMotion) {
   window.addEventListener('scroll', () => requestAnimationFrame(growLine), { passive: true });
   growLine();
 }
+
+/* ---------- 【一時的】写真の見せ方 A / B 切り替え（決まったら消す） ---------- */
+document.querySelectorAll('.story-switch button').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    story.classList.toggle('story--landscape', btn.dataset.pattern === 'landscape');
+    story.classList.toggle('story--bg', btn.dataset.pattern === 'bg');
+    document.querySelectorAll('.story-switch button').forEach((b) => b.setAttribute('aria-pressed', b === btn));
+    growLine();
+  });
+});

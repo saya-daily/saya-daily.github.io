@@ -396,11 +396,66 @@ html.lang-en .page [lang="ja"] { display: none; }
 .js .story-item.is-visible .story-photo { clip-path: inset(0 0 0 0); }
 .js .story-item.is-visible .story-text { opacity: 1; transform: none; }
 
+/* ---- パターンA：横長 4:3 の写真 ---- */
+.story--landscape .story-photo {
+  max-width: 480px;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+}
+
+/* ---- パターンB：枠なしで、写真が背景にふんわり敷かれる ---- */
+.story--bg .story-item { z-index: 0; padding-top: 56px; padding-bottom: 56px; min-height: 280px; }
+.story--bg .story-photo {
+  position: absolute;
+  inset: 0 0 0 36px;
+  z-index: -1;
+  width: auto;
+  max-width: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 22%;
+  box-sizing: border-box;
+  /* ふちをぼかして、背景にとけこませる */
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 75%);
+}
+.story--bg .story-photo img { opacity: 0.5; }
+.story--bg .story-text { margin-top: 8px; }
+/* パターンBの動き：下から開くかわりに、ふわっと浮かび上がる */
+.js .story--bg .story-photo { clip-path: none; opacity: 0; transform: scale(1.06); transition: opacity 1.4s ease .2s, transform 1.8s ease .2s; }
+.js .story--bg .story-item.is-visible .story-photo { opacity: 1; transform: none; }
+
+/* 【一時的】A / B 切り替えボタン */
+.story-switch {
+  margin-top: 56px;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+.story-switch button {
+  padding: 8px 16px;
+  border: 1px solid var(--text);
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+.story-switch button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+
 /* パソコン：線を真ん中にして、左右交互に並べる */
 @media (min-width: 900px) {
   .story-line { left: 50%; }
   .story-item { width: calc(50% - 64px); padding-left: 0; }
   .story-item + .story-item { margin-top: -320px; } /* 左右で少しずつずらして重ね、すき間を詰める */
+  .story--landscape .story-item + .story-item { margin-top: -220px; }
+  .story--bg .story-item + .story-item { margin-top: -120px; }
+  .story--bg .story-photo { inset: 0; }
   .story-item:nth-of-type(odd)  { align-self: flex-start; text-align: right; }
   .story-item:nth-of-type(even) { align-self: flex-end; }
   .story-item:nth-of-type(odd) .story-photo { margin-left: auto; }
