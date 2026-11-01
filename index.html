@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Saya — 自己紹介</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@300;400&amp;family=Zen+Kaku+Gothic+New:wght@300;400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- 画面がチラつかないように、ページが表示される前に準備しておく -->
+<script>
+  (function () {
+    var html = document.documentElement;
+    html.classList.add('js'); // 「JSが動く」目印
+    try {
+      // 前に English を選んでたら、最初から英語で表示
+      if (localStorage.getItem('lang') === 'en') { html.classList.add('lang-en'); html.lang = 'en'; }
+      // オープニングは、最初の1回だけ（「動きを減らす」設定の人には出さない）
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!sessionStorage.getItem('opened') && !reduce) html.classList.add('show-opening', 'is-opening');
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- オープニング（タップでスキップできる） -->
+<div class="opening" aria-hidden="true">
+  <p class="opening-word">Bonjour</p>
+  <div class="opening-line"></div>
+</div>
+
+<!-- シャボン玉が浮かぶ場所（script.js が作る） -->
+<div class="bubbles" aria-hidden="true"></div>
+
+<div class="page">
+
+  <!-- 背景のふわふわ動く丸（data-speed：スクロールしたときの動く速さ） -->
+  <div class="parallax parallax-pink" data-speed="0.25" aria-hidden="true"><div class="blob blob-pink"></div></div>
+  <div class="parallax parallax-green" data-speed="0.4" aria-hidden="true"><div class="blob blob-green"></div></div>
+  <div class="parallax parallax-lavender" data-speed="0.15" aria-hidden="true"><div class="blob blob-lavender"></div></div>
+
+  <!-- 一番上（ヘッダー＋トップ）。背景にフランスの写真が順番に切り替わる -->
+  <div class="hero-wrap">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-slides parallax" data-speed="0.3">
+      <img src="images/france/mont-saint-michel-soft.jpg" alt="" decoding="async">
+      <img src="images/france/louvre-soft.jpg" alt="" decoding="async">
+      <img src="images/france/champs-elysees-soft.jpg" alt="" decoding="async">
+      <img src="images/france/montmartre-soft.jpg" alt="" decoding="async">
+    </div>
+  </div>
+
+  <!-- ヘッダー -->
+  <header class="container header">
+    <a class="logo" href="#top">Saya</a>
+    <nav class="nav" aria-label="メニュー">
+      <a href="#message">Message</a>
+      <a href="#histoire">Histoire</a>
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#instagram">Instagram</a>
+    </nav>
+    <!-- 言語の切り替え -->
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="ja">JP</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <!--
+    ここから下は、日本語（lang="ja"）と英語（lang="en"）を並べて書いてる。
+    選んだ言語のほうだけが表示される。
+  -->
+
+  <!-- トップ -->
+  <section id="top" class="container hero">
+    <h1 class="hero-title fu d1">Je suis<br><em>Saya.</em></h1>
+    <div class="hero-line fu d2" aria-hidden="true"></div>
+    <p class="hero-welcome fu d2" lang="ja">私のサイトへようこそ</p>
+    <p class="hero-welcome fu d2" lang="en">Welcome to my site</p>
+  </section>
+  </div>
+
+  <!-- 01 伝えたいこと -->
+  <section id="message" class="message">
+    <div class="message-inner reveal">
+      <p class="eyebrow">01 — Message</p>
+      <p class="quote typewrite" lang="ja"><span class="phrase">“ 周りの目より、</span><span class="phrase">自分の心に正直に。”</span></p>
+      <p class="quote typewrite" lang="en"><span class="phrase">“ Listen to your heart, </span><span class="phrase">not the crowd. ”</span></p>
+      <p class="message-text" lang="ja">
+        <span class="phrase">周りの「評価」を気にして、</span><span class="phrase">自分の「好き」を</span><span class="phrase">後回しにしている人。</span><br>
+        <span class="phrase">自分らしく、</span><span class="phrase">生きられていない人。</span><br>
+        <span class="phrase">そんな誰かの背中を、</span><span class="phrase">そっと押せる人でありたい。</span>
+      </p>
+      <p class="message-text" lang="en">
+        To those who put what they love on hold,<br>
+        worried about what others think—<br>
+        to those not living as themselves:<br>
+        I want to gently push you forward.
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 わたしの歩み -->
+  <section id="histoire" class="histoire">
+    <div class="container histoire-head">
+      <img class="photo reveal" src="images/saya.jpg" alt="さやの写真">
+      <div class="histoire-body reveal">
+        <p class="eyebrow">02 — Histoire</p>
+        <h2 class="section-title">My <em>story</em><span class="ja" lang="ja"><br>わたしの歩み</span></h2>
+      </div>
+    </div>
+
+    <!-- 年ごとのストーリー。縦にスクロールすると、次の画面が下からかぶさって切り替わる -->
+    <div class="story">
+      <!-- タップで1枚ずつ進む（右側：次へ／左側：前へ） -->
+      <div class="story-stage" role="button" tabindex="0" aria-label="My story（タップで次へ）">
+        <div class="story-bars" aria-hidden="true"></div>
+        <!-- 最初に見た人だけに出す「Tap」の案内 -->
+        <div class="story-tap-hint" aria-hidden="true">
+          <span class="tap-bubble"></span>
+          <span class="tap-label" lang="ja">タップしてね</span>
+          <span class="tap-label" lang="en">Tap</span>
+        </div>
+        <article class="story-slide">
+          <p class="story-count" aria-label="1 / 13"><span>01</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2007.jpg" alt="" class="pos-28" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2007</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">4人兄弟の末っ子として</span><span class="phrase">誕生。</span><br><span class="phrase">大阪生まれ、</span><span class="phrase">大阪育ち。</span></p>
+              <p lang="en">Born the youngest of four siblings.<br>Born and raised in Osaka.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="2 / 13"><span>02</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2013.jpg" alt="" class="pos-32" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2013</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">お兄ちゃんの影響で</span><span class="phrase">サッカーを始める。</span></p>
+              <p lang="en">Started playing soccer, inspired by my older brother.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="3 / 13"><span>03</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2018.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2018</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">大阪府トレセンに</span><span class="phrase">選ばれる。</span></p>
+              <p lang="en">Selected for the Osaka Prefecture training squad.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="4 / 13"><span>04</span> / 13</p>
+          <div class="story-bg"><img src="images/story/monalisa.jpg" alt="" class="pos-y75" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">France</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">母と通った美術館で、</span><span class="phrase">フランスに</span><span class="phrase">興味を持ち始める。</span></p>
+              <p lang="en">Visiting art museums with my mom,<br>I began to fall for France.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="5 / 13"><span>05</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2023.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2023</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">追手門学院高校に入学。</span><br><span class="phrase">全国ベスト8。</span><br><span class="story-note"><span class="phrase">〔ユニフォームは貰うが、</span><span class="phrase">試合には出れず。〕</span></span></p>
+              <p lang="en">Entered Otemon Gakuin High School.<br>Top 8 in Japan.<br><span class="story-note">(I got a uniform, but never played in a match.)</span></p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="6 / 13"><span>06</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2024.jpg" alt="" class="pos-60" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2024</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">7年間選ばれていた</span><span class="phrase">大阪府トレセンに</span><span class="phrase">落ちる。</span><br><span class="phrase">自分の身体能力と技術に</span><span class="phrase">限界を感じる。</span></p>
+              <p lang="en">After seven years, I was cut from the Osaka training squad.<br>I felt I had reached my physical and technical limits.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="7 / 13"><span>07</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2025-retire.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2025</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">全国には行けず、</span><span class="phrase">引退。</span></p>
+              <p lang="en">We didn't make nationals, and I retired.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="8 / 13"><span>08</span> / 13</p>
+          <div class="story-bg"><img src="images/france/mont-saint-michel.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2025</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">卒業旅行で、</span><span class="phrase">夢だったフランスに行く。</span></p>
+              <p lang="en">For my graduation trip, I finally went to France—my dream.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="9 / 13"><span>09</span> / 13</p>
+          <div class="story-bg"><img src="images/france/montmartre.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">France</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">自由な価値観と、</span><span class="phrase">雰囲気に一目惚れ。</span><br><span class="phrase">もっとたくさんの人に</span><span class="phrase">この価値観を</span><span class="phrase">届けたいと思う。</span></p>
+              <p lang="en">I fell in love with its freedom and atmosphere.<br>I wanted to share this way of life with more people.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="10 / 13"><span>10</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2025-kandai.jpg" alt="" class="pos-y70" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2025</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">指定校推薦で</span><span class="phrase">関西大学へ入学。</span><br><span class="phrase">何かしたいと思いながらも、</span><span class="phrase">時間だけが過ぎる日々。</span></p>
+              <p lang="en">Entered Kansai University on a school recommendation.<br>I wanted to do something, but the days just slipped by.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="11 / 13"><span>11</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2025-kimono.jpg" alt="" class="pos-y30" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2025</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">「こう生きるべき」という</span><span class="phrase">日本の価値観に</span><span class="phrase">違和感を覚える。</span></p>
+              <p lang="en">I began to question the Japanese idea<br>of how life "should" be lived.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="12 / 13"><span>12</span> / 13</p>
+          <div class="story-bg"><img src="images/story/2026-usa.jpg" alt="" class="pos-y75" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">2026</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">サッカーの繋がりで、</span><span class="phrase">アメリカサッカー留学に</span><span class="phrase">誘われる。</span><br><span class="phrase">休学にもなる。</span><span class="phrase">卒業も遅れる。</span></p>
+              <p lang="en">Through soccer, I was invited to play in the US.<br>It meant taking a leave from school and graduating late.</p>
+            </div>
+          </div>
+        </article>
+        <article class="story-slide">
+          <p class="story-count" aria-label="13 / 13"><span>13</span> / 13</p>
+          <div class="story-bg"><img src="images/instagram/challenge-1.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="story-content">
+            <p class="story-year">Now</p>
+            <div class="story-text">
+              <p lang="ja"><span class="phrase">一歩踏み出し、</span><span class="phrase">関西大学を休学。</span><br><span class="phrase">アメリカに留学し、</span><span class="phrase">SNS発信を開始。</span></p>
+              <p lang="en">I took the step: a leave from Kansai University,<br>studying in the US, and sharing my journey online.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 なんのために -->
+  <section id="pourquoi" class="container pourquoi">
+    <div class="section-head reveal">
+      <p class="eyebrow">03 — Pourquoi</p>
+      <h2 class="section-title">Why I <em>do this</em><span class="ja" lang="ja"><br>なんのために</span></h2>
+    </div>
+
+    <!-- いま → 想い → 夢（ゴール）を1本の道でつなぐ -->
+    <div class="road reveal">
+      <div class="road-line" aria-hidden="true"></div>
+          <div class="road-step">
+            <span class="road-dot" aria-hidden="true"></span>
+            <p class="road-label">Step 01</p>
+            <h3 class="road-title" lang="ja">いま</h3><h3 class="road-title" lang="en">Now</h3>
+            <p class="road-text" lang="ja"><span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br><span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span></p><p class="road-text" lang="en">A lovely website &amp; social media for my company.<br>So I'm learning web design, social media, and English.</p>
+          </div>
+          <div class="road-step">
+            <span class="road-dot" aria-hidden="true"></span>
+            <p class="road-label">Step 02</p>
+            <h3 class="road-title" lang="ja">想い</h3><h3 class="road-title" lang="en">Passion</h3>
+            <p class="road-text" lang="ja"><span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br><span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span></p><p class="road-text" lang="en">Share the freedom of the world with more people.<br>Turn what I love into my work.</p>
+          </div>
+          <div class="road-step is-goal">
+            <span class="road-dot" aria-hidden="true"></span>
+            <p class="road-label">Goal</p>
+            <h3 class="road-title" lang="ja">夢</h3><h3 class="road-title" lang="en">Dream</h3>
+            <p class="road-text" lang="ja"><span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></p><p class="road-text" lang="en">Visit 25 French cities on my own two feet,<br>and start a travel company all about France.</p>
+          </div>
+    </div>
+
+    <!-- フランス25都市マップ（行った街は class="city is-visited" にすると塗りつぶされる） -->
+    <div class="map-wrap reveal">
+          <svg class="france-map" viewBox="0 0 410 420" role="img" aria-label="フランス25都市の地図">
+            <path class="france-land" d="M218.4,19.0 Q208.3,14.0 201.2,16.0 Q194.0,18.0 190.6,23.0 Q187.1,28.0 184.3,40.0 Q181.6,52.0 163.8,64.0 Q145.9,76.0 127.3,79.0 Q108.7,82.0 103.9,76.0 Q99.1,70.0 94.9,69.0 Q90.8,68.0 96.3,89.4 Q101.8,110.8 94.9,110.4 Q88.1,110.0 74.3,107.0 Q60.5,104.0 39.9,108.0 Q19.3,112.0 16.6,124.0 Q13.8,136.0 20.6,140.0 Q27.5,144.0 38.5,146.0 Q49.5,148.0 66.0,156.6 Q82.6,165.2 85.3,174.6 Q88.1,184.0 99.8,197.0 Q111.5,210.0 113.5,221.0 Q115.6,232.0 112.8,251.0 Q110.1,270.0 105.2,293.4 Q100.4,316.8 97.2,319.2 Q94.1,321.6 111.7,331.8 Q129.3,342.0 149.9,347.0 Q170.6,352.0 187.1,355.4 Q203.6,358.8 216.9,358.4 Q230.3,358.0 229.4,345.0 Q228.4,332.0 239.4,324.0 Q250.4,316.0 260.1,318.0 Q269.7,320.0 280.3,322.0 Q290.9,324.0 298.6,328.0 Q306.3,332.0 315.5,330.0 Q324.7,328.0 333.9,318.0 Q343.2,308.0 346.4,306.4 Q349.5,304.8 342.6,296.4 Q335.7,288.0 334.4,270.0 Q333.0,252.0 334.4,236.0 Q335.7,220.0 323.4,214.0 Q311.0,208.0 315.1,202.0 Q319.2,196.0 327.4,176.0 Q335.7,156.0 344.0,154.0 Q352.3,152.0 355.1,132.0 Q357.8,112.0 363.3,104.6 Q368.8,97.2 344.0,87.6 Q319.2,78.0 310.9,76.0 Q302.7,74.0 288.9,63.0 Q275.2,52.0 266.9,55.0 Q258.7,58.0 243.6,41.0 Q228.4,24.0 218.4,19.0Z"/>
+            <path class="france-land" d="M392.9,344.0 Q401.8,336.0 403.9,344.0 Q405.9,352.0 403.9,372.0 Q401.8,392.0 397.6,396.0 Q393.5,400.0 386.6,390.0 Q379.8,380.0 381.9,366.0 Q383.9,352.0 392.9,344.0Z"/>
+            <circle class="city" cx="207.8" cy="101.6" r="4.5"><title>Paris</title></circle><circle class="city" cx="276.3" cy="225.6" r="4.5"><title>Lyon</title></circle><circle class="city" cx="290.9" cy="324.0" r="4.5"><title>Marseille</title></circle><circle class="city" cx="343.2" cy="308.0" r="4.5"><title>Nice</title></circle><circle class="city" cx="127.1" cy="262.4" r="4.5"><title>Bordeaux</title></circle><circle class="city" cx="182.7" cy="312.0" r="4.5"><title>Toulouse</title></circle><circle class="city" cx="356.4" cy="112.8" r="4.5"><title>Strasbourg</title></circle><circle class="city" cx="227.3" cy="30.8" r="4.5"><title>Lille</title></circle><circle class="city" cx="100.4" cy="167.2" r="4.5"><title>Nantes</title></circle><circle class="city" cx="96.9" cy="131.6" r="4.5"><title>Rennes</title></circle><circle class="city" cx="249.9" cy="311.6" r="4.5"><title>Montpellier</title></circle><circle class="city" cx="275.5" cy="298.0" r="4.5"><title>Avignon</title></circle><circle class="city" cx="293.1" cy="314.8" r="4.5"><title>Aix-en-Provence</title></circle><circle class="city" cx="311.8" cy="220.0" r="4.5"><title>Annecy</title></circle><circle class="city" cx="345.7" cy="132.8" r="4.5"><title>Colmar</title></circle><circle class="city" cx="254.0" cy="85.6" r="4.5"><title>Reims</title></circle><circle class="city" cx="173.4" cy="78.4" r="4.5"><title>Rouen</title></circle><circle class="city" cx="101.5" cy="110.4" r="4.5"><title>Mont-Saint-Michel</title></circle><circle class="city" cx="87.2" cy="110.0" r="4.5"><title>Saint-Malo</title></circle><circle class="city" cx="100.2" cy="316.8" r="4.5"><title>Biarritz</title></circle><circle class="city" cx="207.8" cy="327.6" r="4.5"><title>Carcassonne</title></circle><circle class="city" cx="281.8" cy="163.2" r="4.5"><title>Dijon</title></circle><circle class="city" cx="332.2" cy="219.2" r="4.5"><title>Chamonix</title></circle><circle class="city" cx="336.0" cy="314.0" r="4.5"><title>Cannes</title></circle><circle class="city" cx="383.6" cy="379.2" r="4.5"><title>Ajaccio</title></circle>
+          </svg>
+      <div class="map-info">
+        <p class="eyebrow">Le voyage — 25 villes</p>
+        <p class="map-count"><span>0</span> / 25</p>
+        <p class="map-caption">Le voyage commence bientôt</p>
+        <p class="map-text" lang="ja"><span class="phrase">フランス25都市を、</span><span class="phrase">自らの足で巡る旅。</span><br><span class="phrase">行く度に、</span><span class="phrase">写真と感想を追加し、</span><br><span class="phrase">サイトとSNSも</span><span class="phrase">レベルアップさせていきます。</span></p>
+        <p class="map-text" lang="en">A journey through 25 French cities, on my own two feet.<br>With every city, I'll add photos and my thoughts,<br>and level up this site and my social media, too.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 インスタ -->
+  <section id="instagram" class="container instagram">
+    <div class="ig-head reveal">
+      <p class="eyebrow">04 — Instagram</p>
+      <h2 class="ig-title typewrite">Suivez-moi</h2>
+    </div>
+    <p class="ig-catch reveal" lang="ja">自分らしく生きる関大生。</p>
+    <p class="ig-catch reveal" lang="en">Living true to myself at Kansai University.</p>
+    <p class="ig-text reveal" lang="ja">
+      <span class="phrase">わたしのSNSを見て</span><span class="phrase">「一歩踏み出せた」と</span><br>
+      <span class="phrase">言ってくれる人が、</span><span class="phrase">ひとりでも増えますように。</span>
+    </p>
+    <p class="ig-text reveal" lang="en">
+      I hope more and more people will say<br>
+      my posts helped them take their first step.
+    </p>
+
+    <!-- アカウントごとに 投稿2つ＋ボタン（スマホは縦、パソコンは横に並ぶ） -->
+    <div class="ig-accounts">
+      <div class="ig-account reveal">
+        <p class="ig-account-name" lang="ja">挑戦記録</p>
+        <p class="ig-account-name" lang="en">My Challenges</p>
+        <div class="ig-grid">
+          <a class="ig-post tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="挑戦記録のInstagramを見る"><img src="images/instagram/challenge-1.jpg" alt="背番号8で試合に出るさや" class="focus-top" loading="lazy"></a>
+        </div>
+        <a class="account account-main" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@0h_3ya</a>
+      </div>
+
+      <div class="ig-account reveal">
+        <p class="ig-account-name" lang="ja">さやのリアル</p>
+        <p class="ig-account-name" lang="en">The Real Saya</p>
+        <div class="ig-grid">
+          <a class="ig-post tile" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="さやのリアルのInstagramを見る"><img src="images/instagram/real-1.jpg" alt="ホテルのロビーで" loading="lazy"></a>
+          <a class="ig-post tile" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="さやのリアルのInstagramを見る"><img src="images/instagram/real-2.jpg" alt="FCバイエルンのベンチに座るさや" loading="lazy"></a>
+        </div>
+        <a class="account account-sub" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@_oxsy.7</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <p class="footer-merci">Merci.</p>
+    <p class="footer-copy">© Saya</p>
+  </footer>
+
+</div>
+<script src="script.js" defer></script>
+</body>
+</html>
