@@ -58,6 +58,7 @@ a:hover { color: var(--accent-dark); }
 /* 下からふわっと出てくる（d1〜d4 は出てくる順番） */
 .fu { opacity: 0; animation: fadeUp 1.2s cubic-bezier(.2, .7, .2, 1) forwards; }
 .d1 { animation-delay: .2s; }
+.d2 { animation-delay: .9s; }
 
 /* 背景のふわふわ動く丸
    外側の .parallax がスクロールに合わせて動き（script.js）、
@@ -268,6 +269,15 @@ html.lang-en .page [lang="ja"] { display: none; }
   line-height: 0.95;
   letter-spacing: -0.01em;
 }
+
+/* 「私のサイトへようこそ」 */
+.hero-line { width: 72px; height: 1px; margin: 32px 0 20px; background: var(--accent); }
+.hero-welcome {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.25em;
+}
+.hero-welcome[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 22px; letter-spacing: 0.04em; }
 
 /* ---------- 01 わたしの歩み ---------- */
 .histoire {
