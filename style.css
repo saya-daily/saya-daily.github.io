@@ -707,6 +707,8 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 .ig-account { display: flex; flex-direction: column; gap: 20px; align-items: center; }
 .ig-account-name { margin: 0; font-size: 16px; letter-spacing: 0.2em; }
 .ig-account .ig-grid { grid-template-columns: 1fr 1fr; }
+/* 投稿が1枚だけのときは、半分の大きさで真ん中に置く */
+.ig-account .ig-grid:has(> :only-child) { grid-template-columns: minmax(0, calc(50% - 8px)); justify-content: center; }
 
 /* アカウントのボタン */
 .account {
