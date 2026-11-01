@@ -58,9 +58,6 @@ a:hover { color: var(--accent-dark); }
 /* 下からふわっと出てくる（d1〜d4 は出てくる順番） */
 .fu { opacity: 0; animation: fadeUp 1.2s cubic-bezier(.2, .7, .2, 1) forwards; }
 .d1 { animation-delay: .2s; }
-.d2 { animation-delay: .5s; }
-.d3 { animation-delay: .8s; }
-.d4 { animation-delay: 1.1s; }
 
 /* 背景のふわふわ動く丸
    外側の .parallax がスクロールに合わせて動き（script.js）、
@@ -171,7 +168,7 @@ a:hover { color: var(--accent-dark); }
 html:not(.lang-en) .page [lang="en"] { display: none; }
 html.lang-en .page [lang="ja"] { display: none; }
 /* 英語の文章は、細い英字フォントで */
-.hero-text[lang="en"], .tl-text[lang="en"], .message-text[lang="en"],
+.tl-text[lang="en"], .message-text[lang="en"],
 .card-text[lang="en"], .ig-text[lang="en"], .ig-account-name[lang="en"] { font-family: var(--font-en); }
 .card-title[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 24px; font-weight: 300; }
 
@@ -209,7 +206,7 @@ html.lang-en .page [lang="ja"] { display: none; }
 .opening-line { height: 1px; width: 0; background: var(--accent); animation: drawLine 1s ease 1s forwards; }
 
 /* オープニング中は、トップの動きを一時停止しておく */
-.is-opening .fu, .is-opening .line { animation-play-state: paused; }
+.is-opening .fu { animation-play-state: paused; }
 /* 最初の動きが終わったら、もう動かさない（言語を切り替えたとき、すぐ表示されるように） */
 .intro-done .fu { animation: none; opacity: 1; }
 
@@ -253,11 +250,15 @@ html.lang-en .page [lang="ja"] { display: none; }
   background: linear-gradient(to bottom, var(--veil-top), var(--veil-mid) 65%, var(--bg));
 }
 
+/* トップは画面いっぱいにして、「Je suis Saya.」を真ん中あたりに */
+.hero-wrap { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+.hero-wrap > .container { width: calc(100% - 48px); } /* 横幅いっぱいに広げる（左右の余白24pxずつを引く） */
 .hero {
-  padding: 120px 24px 160px;
+  flex: 1;
+  padding: 40px 24px 120px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  justify-content: center;
 }
 .hero-title {
   margin: 0;
@@ -266,27 +267,6 @@ html.lang-en .page [lang="ja"] { display: none; }
   font-size: clamp(64px, 11vw, 148px);
   line-height: 0.95;
   letter-spacing: -0.01em;
-}
-.line { height: 1px; width: 0; background: var(--accent); animation: drawLine 1.4s ease .6s forwards; }
-.hero-text {
-  margin: 0;
-  max-width: 520px;
-  font-size: 17px;
-  line-height: 2.1;
-  letter-spacing: 0.06em;
-}
-.btn-outline {
-  align-self: flex-start;
-  margin-top: 12px;
-  padding: 14px 32px;
-  border: 1px solid var(--text);
-  border-radius: 999px;
-  font-family: var(--font-en);
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
 }
 
 /* ---------- 01 わたしの歩み ---------- */
@@ -362,7 +342,7 @@ html.lang-en .page [lang="ja"] { display: none; }
   background:
     radial-gradient(circle at 30% 28%, var(--bubble-shine) 0 7%, transparent 9%),
     radial-gradient(circle, transparent 55%, var(--bubble-pink) 72%, var(--bubble-lavender) 86%, var(--bubble-green) 100%);
-  animation: bubbleSway 3.5s ease-in-out infinite alternate;
+  animation: bubbleSway 5s ease-in-out infinite alternate;
 }
 @keyframes bubbleRise {
   0%   { transform: translateY(0); opacity: 0; }
@@ -565,9 +545,8 @@ html.lang-en .page [lang="ja"] { display: none; }
 
 /* ---------- 「動きを減らす」設定の人には、動きを止める ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .blob, .fu, .line { animation: none; }
+  .blob, .fu { animation: none; }
   .fu { opacity: 1; }
-  .line { width: 72px; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-slides img { animation: none; }
   .js .typewrite .char, .js .message-inner .message-text { opacity: 1; transform: none; filter: none; transition: none; }

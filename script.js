@@ -118,14 +118,14 @@ const bubbleLayer = document.querySelector('.bubbles');
 
 function makeBubble() {
   if (document.hidden) return;                       // 別のタブを見てる間は作らない
-  if (bubbleLayer.childElementCount >= 10) return;   // 多すぎないように、最大10個まで
+  if (bubbleLayer.childElementCount >= 5) return;    // 多すぎないように、最大5個まで
 
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   const size = 14 + Math.random() * 46;              // 大きさ：14〜60px
   bubble.style.left = `${Math.random() * 95}%`;      // 横の位置：ランダム
   bubble.style.setProperty('--size', `${size}px`);
-  bubble.style.setProperty('--duration', `${9 + Math.random() * 7}s`); // 浮かぶ速さ：9〜16秒
+  bubble.style.setProperty('--duration', `${18 + Math.random() * 8}s`); // 浮かぶ速さ：18〜26秒（ゆっくり）
   bubble.append(document.createElement('span'));
   bubble.addEventListener('animationend', (e) => {
     if (e.target === bubble) bubble.remove();        // 上まで行ったら消す
@@ -134,6 +134,6 @@ function makeBubble() {
 }
 
 if (!reduceMotion) {
-  for (let n = 0; n < 3; n++) setTimeout(makeBubble, n * 700); // 最初に3つ
-  setInterval(makeBubble, 1800);                               // そのあと1.8秒ごとに1つ
+  setTimeout(makeBubble, 800);    // 最初に1つ
+  setInterval(makeBubble, 4500);  // そのあと4.5秒ごとに1つ
 }
