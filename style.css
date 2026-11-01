@@ -358,9 +358,11 @@ html.lang-en .page [lang="ja"] { display: none; }
 /* ---------- 02 伝えたいこと ---------- */
 .message {
   position: relative;
-  margin-top: 64px;
-  /* オペラ座の写真に、ベージュを重ねてうっすら見せる */
+  z-index: -1; /* ふわふわの丸より後ろに置いて、丸が途中で切れないようにする */
+  /* オペラ座の写真に、ベージュを重ねてうっすら見せる。
+     上と下は背景色にじわっと溶けこませて、写真の境目が見えないようにする */
   background:
+    linear-gradient(to bottom, var(--bg), transparent 180px, transparent calc(100% - 180px), var(--bg)),
     linear-gradient(var(--veil-soft), var(--veil-soft)),
     url("images/france/opera.jpg") center / cover;
 }
