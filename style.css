@@ -452,6 +452,13 @@ html.lang-en .page [lang="ja"] { display: none; }
   font-style: italic;
   font-size: clamp(40px, 5vw, 60px);
 }
+/* 「自分らしく生きる関大生。」 */
+.ig-catch {
+  margin: -8px 0 0;
+  font-size: 18px;
+  letter-spacing: 0.15em;
+}
+.ig-catch[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 22px; letter-spacing: 0.02em; }
 .ig-text {
   margin: -16px 0 0;
   max-width: 560px;
