@@ -9,26 +9,12 @@ document.documentElement.classList.add('js');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- ① スクロールすると背景の丸がゆっくり動く（パララックス） ---------- */
-const layers = document.querySelectorAll('.parallax');
+const layers = [...document.querySelectorAll('.parallax')].map((el) => ({ el, speed: Number(el.dataset.speed) }));
 
-function moveLayers() {
-  const y = window.scrollY;
-  layers.forEach((layer) => {
-    const speed = Number(layer.dataset.speed); // index.html の data-speed の数字
-    layer.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+function moveLayers(y) {
+  layers.forEach(({ el, speed }) => {
+    el.style.transform = `translate3d(0, ${y * speed}px, 0)`;
   });
-}
-
-if (!reduceMotion) {
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    // 動かしすぎて重くならないように、画面の更新1回につき1回だけ動かす
-    if (!ticking) {
-      requestAnimationFrame(() => { moveLayers(); ticking = false; });
-      ticking = true;
-    }
-  }, { passive: true });
-  moveLayers();
 }
 
 /* ---------- ② 画面に入ったら、ふわっと出てくる ---------- */
@@ -154,6 +140,18 @@ function updateStory() {
   storySlides.forEach((slide, n) => slide.classList.toggle('is-active', n === i));
 }
 
-window.addEventListener('scroll', () => requestAnimationFrame(updateStory), { passive: true });
-window.addEventListener('resize', updateStory);
-updateStory();
+/* ---------- スクロールしたときの処理を、まとめて1回だけ ---------- */
+// 画面の更新1回につき1回だけ動かす（何回も重なって走ると、カクカクするから）
+let ticking = false;
+function onScroll() {
+  const y = window.scrollY;
+  if (!reduceMotion) moveLayers(y);
+  root.classList.toggle('hero-out', y > window.innerHeight); // トップが見えてないか
+  updateStory();
+  ticking = false;
+}
+window.addEventListener('scroll', () => {
+  if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+}, { passive: true });
+window.addEventListener('resize', onScroll);
+onScroll();
