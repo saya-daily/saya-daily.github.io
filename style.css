@@ -368,13 +368,20 @@ html.lang-en .page [lang="ja"] { display: none; }
 /* ---------- 02 伝えたいこと ---------- */
 .message {
   position: relative;
-  z-index: -1; /* ふわふわの丸より後ろに置いて、丸が途中で切れないようにする */
-  /* オペラ座の写真に、ベージュを重ねてうっすら見せる。
-     上と下は背景色にじわっと溶けこませて、写真の境目が見えないようにする */
+  z-index: 0; /* ふわふわの丸より手前に置く（文字が薄くならないように） */
+}
+/* オペラ座の写真に、ベージュを重ねてうっすら見せる。
+   上と下はだんだん透明にして、写真の境目や丸の切れ目が見えないようにする */
+.message::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background:
-    linear-gradient(to bottom, var(--bg), transparent 180px, transparent calc(100% - 180px), var(--bg)),
     linear-gradient(var(--veil-soft), var(--veil-soft)),
     url("images/france/opera.jpg") center / cover;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 180px, #000 calc(100% - 180px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 180px, #000 calc(100% - 180px), transparent);
 }
 .message-inner {
   max-width: 880px;
