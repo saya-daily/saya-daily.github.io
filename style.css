@@ -20,9 +20,7 @@
   --veil-top: rgba(246, 241, 236, 0.62);    /* 写真の上に重ねるベージュ（上） */
   --veil-mid: rgba(246, 241, 236, 0.8);    /* 写真の上に重ねるベージュ（真ん中） */
   --veil-soft: rgba(237, 228, 222, 0.88);   /* Messageの写真に重ねるベージュ */
-  --story-veil-strong: rgba(246, 241, 236, 0.78); /* ストーリーの写真に重ねるベージュ（文字側） */
-  --story-veil-soft: rgba(246, 241, 236, 0.15);   /* ストーリーの写真に重ねるベージュ（反対側） */
-  --story-glass: rgba(246, 241, 236, 0.72);       /* ストーリーの文字の後ろのすりガラス */
+  --story-veil-strong: rgba(246, 241, 236, 0.85); /* ストーリーの写真に重ねるベージュ（文字のある上） */
   --blob-pink: #E3C6C1;   /* ふわふわの丸（ピンク） */
   --blob-green: #C9D3C1;  /* ふわふわの丸（グリーン） */
   --blob-lavender: #D9D0E0; /* ふわふわの丸（ラベンダー） */
@@ -326,8 +324,8 @@ html.lang-en .page [lang="ja"] { display: none; }
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
-  align-items: center;
-  padding: 0 max(24px, calc((100% - 1120px) / 2 + 24px));
+  align-items: flex-start;   /* 文字は上のほうに置いて、写真の真ん中（さや）が見えるように */
+  padding: 11svh max(24px, calc((100% - 1120px) / 2 + 24px)) 0;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -351,23 +349,15 @@ html.lang-en .page [lang="ja"] { display: none; }
 .story-bg img.pos-y30 { object-position: 50% 30%; }
 .story-bg img.pos-y70 { object-position: 50% 70%; }
 .story-bg img.pos-y75 { object-position: 50% 75%; }
-/* 文字がある左側だけベージュを重ねて、右側は写真がよく見えるようにする */
+/* 文字がある上のほうだけベージュを重ねる。さやが写る真ん中から下はクリアに */
 .story-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--story-veil-strong), var(--story-veil-soft) 75%);
+  background: linear-gradient(to bottom, var(--story-veil-strong) 22%, transparent 48%);
 }
 
-/* 文字の後ろに「すりガラス」みたいなパネルを敷いて、写真の上でも読みやすくする */
-.story-content {
-  max-width: 560px;
-  padding: 28px 28px 32px;
-  border-radius: 24px;
-  background: var(--story-glass);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px); /* うしろの写真をぼかす */
-}
+.story-content { max-width: 560px; }
 /* 大きい年の数字 */
 .story-year {
   margin: 0;
@@ -380,6 +370,8 @@ html.lang-en .page [lang="ja"] { display: none; }
 }
 .story-text { margin-top: 16px; }
 .story-text p { margin: 0; font-size: 17px; line-height: 2.1; color: var(--text); }
+/* 文字のまわりだけ、ふんわり明るく光らせて読みやすくする（写真はそのまま見える） */
+.story-year, .story-text p { text-shadow: 0 0 2px var(--bg), 0 0 10px var(--bg), 0 0 22px var(--bg); }
 .story-text p[lang="en"] { font-family: var(--font-en); }
 .story-note { color: var(--muted); font-size: 0.9em; }
 
@@ -646,10 +638,6 @@ html.lang-en .page [lang="ja"] { display: none; }
   .lang-switch { order: 2; }
   .nav { order: 3; flex-basis: 100%; margin-left: 0; }
   .story-text p { font-size: 15px; letter-spacing: 0; }
-  .story-content { padding: 22px 20px 24px; }
-  /* スマホ：文字は上のほうに置いて、上からベージュを重ねる（写真の真ん中は見えるように） */
-  .story-slide { align-items: flex-start; padding-top: 11svh; }
-  .story-bg::after { background: linear-gradient(to bottom, var(--story-veil-strong) 15%, var(--story-veil-soft) 55%); }
   .card { padding: 40px 20px; }
   .card-text { font-size: 13px; }
   .ig-text { font-size: 13px; letter-spacing: 0; }
