@@ -257,6 +257,9 @@ a:hover { color: var(--accent-dark); }
 }
 .tl-tilde { display: block; transform: rotate(90deg); margin: 6px 0; }
 .tl-text { margin: 0; font-size: 15px; line-height: 2; }
+/* 同じ年の中で、話題ごとに少しすき間をあける */
+.tl-block { display: block; }
+.tl-block + .tl-block { margin-top: 14px; }
 
 /* ---------- 02 伝えたいこと ---------- */
 .message {
