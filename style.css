@@ -13,6 +13,10 @@
   --accent-dark: #5E3B37; /* リンクにカーソルを乗せたとき */
   --muted: #6B5B57;       /* うすめの文字 */
   --border: #DDD2CB;      /* 線の色 */
+  --ph-pink: #E8DCD6;      --ph-pink-text: #6B5B57;      /* 仮の写真枠（ピンク） */
+  --ph-sage: #DCE3D6;      --ph-sage-text: #5A6354;      /* 仮の写真枠（グリーン） */
+  --ph-lavender: #E4DDEA;  --ph-lavender-text: #5F5868;  /* 仮の写真枠（ラベンダー） */
+  --ph-beige: #EFE3D4;     --ph-beige-text: #66594A;     /* 仮の写真枠（ベージュ） */
   --veil-top: rgba(246, 241, 236, 0.62);    /* 写真の上に重ねるベージュ（上） */
   --veil-mid: rgba(246, 241, 236, 0.8);    /* 写真の上に重ねるベージュ（真ん中） */
   --veil-soft: rgba(237, 228, 222, 0.88);   /* Messageの写真に重ねるベージュ */
@@ -169,7 +173,7 @@ a:hover { color: var(--accent-dark); }
 html:not(.lang-en) .page [lang="en"] { display: none; }
 html.lang-en .page [lang="ja"] { display: none; }
 /* 英語の文章は、細い英字フォントで */
-.tl-text[lang="en"], .message-text[lang="en"],
+.message-text[lang="en"],
 .card-text[lang="en"], .ig-text[lang="en"], .ig-account-name[lang="en"] { font-family: var(--font-en); }
 .card-title[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 24px; font-weight: 300; }
 
@@ -279,9 +283,10 @@ html.lang-en .page [lang="ja"] { display: none; }
 }
 .hero-welcome[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 22px; letter-spacing: 0.04em; }
 
-/* ---------- 01 わたしの歩み ---------- */
-.histoire {
-  padding: 96px 24px;
+/* ---------- 02 わたしの歩み ---------- */
+.histoire { padding: 96px 0; }
+.histoire-head {
+  padding: 0 24px;
   display: flex;
   flex-wrap: wrap;
   gap: 64px;
@@ -304,28 +309,107 @@ html.lang-en .page [lang="ja"] { display: none; }
   flex-direction: column;
   gap: 24px;
 }
-.timeline { display: flex; flex-direction: column; gap: 28px; margin-top: 8px; }
-.tl-row { display: flex; gap: 24px; align-items: baseline; }
-.tl-row.is-range { align-items: center; }
-.tl-year {
-  flex: 0 0 72px;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 22px;
-  color: var(--accent);
-}
-/* 「2013 〜 2025」を縦に並べる */
-.tl-row.is-range .tl-year {
+
+/* 年ごとのストーリー（スマホ：線は左／パソコン：線は真ん中） */
+.story {
+  padding: 96px 24px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  line-height: 1.2;
+  gap: 88px;
 }
-.tl-tilde { display: block; transform: rotate(90deg); margin: 6px 0; }
-.tl-text { margin: 0; font-size: 15px; line-height: 2; }
+/* 縦の線。うすい線の上に、スクロールに合わせて濃い線が伸びる */
+.story-line {
+  position: absolute;
+  top: 96px;
+  bottom: 0;
+  left: 30px;
+  width: 1px;
+  background: var(--border);
+}
+.story-line-fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: top;
+  transform: scaleY(var(--progress, 0)); /* --progress は script.js が 0〜1 で入れる */
+}
+
+.story-item { position: relative; padding-left: 36px; }
+.story-dot {
+  position: absolute;
+  top: 34px;
+  left: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--bg); /* 線との間にすき間を作る */
+}
+/* 大きい年の数字 */
+.story-year {
+  margin: 0 0 16px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(56px, 9vw, 96px);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.55;
+}
+.story-year.is-range { font-size: clamp(40px, 6vw, 64px); }
+.story-dash { margin: 0 .15em; }
+/* 写真（今は仮の枠） */
+.story-photo {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 4 / 5;
+  border-radius: 180px 180px 12px 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+.story-photo img { width: 100%; height: 100%; object-fit: cover; }
+.story-text { margin-top: 24px; }
+.story-text p { margin: 0; font-size: 15px; line-height: 2; }
+.story-text p[lang="en"] { font-family: var(--font-en); }
 /* 同じ年の中で、話題ごとに少しすき間をあける */
-.tl-block { display: block; }
-.tl-block + .tl-block { margin-top: 14px; }
+.story-block { display: block; }
+.story-block + .story-block { margin-top: 14px; }
+
+/* 仮の枠の色 */
+.ph-pink     { background: var(--ph-pink);     color: var(--ph-pink-text); }
+.ph-sage     { background: var(--ph-sage);     color: var(--ph-sage-text); }
+.ph-lavender { background: var(--ph-lavender); color: var(--ph-lavender-text); }
+.ph-beige    { background: var(--ph-beige);    color: var(--ph-beige-text); }
+
+/* ---- ストーリーの動き：画面に入ったら順番に ---- */
+.js .story-item.reveal { opacity: 1; transform: none; } /* 全体じゃなくて、中身を1つずつ動かす */
+.js .story-dot { transform: scale(0); transition: transform .5s cubic-bezier(.3, 1.6, .5, 1); } /* ポンッ */
+.js .story-year { opacity: 0; transform: translateX(-40px); transition: opacity .9s ease .15s, transform .9s cubic-bezier(.2, .7, .2, 1) .15s; }
+.js .story-photo { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s cubic-bezier(.6, 0, .2, 1) .3s; } /* 下から開く */
+.js .story-text { opacity: 0; transform: translateY(16px); transition: opacity .9s ease .7s, transform .9s ease .7s; }
+.js .story-item.is-visible .story-dot { transform: scale(1); }
+.js .story-item.is-visible .story-year { opacity: 0.55; transform: none; }
+.js .story-item.is-visible .story-photo { clip-path: inset(0 0 0 0); }
+.js .story-item.is-visible .story-text { opacity: 1; transform: none; }
+
+/* パソコン：線を真ん中にして、左右交互に並べる */
+@media (min-width: 900px) {
+  .story-line { left: 50%; }
+  .story-item { width: calc(50% - 64px); padding-left: 0; }
+  .story-item + .story-item { margin-top: -320px; } /* 左右で少しずつずらして重ね、すき間を詰める */
+  .story-item:nth-of-type(odd)  { align-self: flex-start; text-align: right; }
+  .story-item:nth-of-type(even) { align-self: flex-end; }
+  .story-item:nth-of-type(odd) .story-photo { margin-left: auto; }
+  .story-item:nth-of-type(odd)  .story-dot { left: auto; right: -70px; }
+  .story-item:nth-of-type(even) .story-dot { left: -70px; }
+  /* 左側の年は、右からすべり込む */
+  .js .story-item:nth-of-type(odd) .story-year { transform: translateX(40px); }
+  .js .story-item.is-visible:nth-of-type(odd) .story-year { transform: none; }
+}
 
 /* ---------- シャボン玉 ---------- */
 /* 画面の上に重なる透明な層。押したりしても邪魔にならない */
@@ -506,10 +590,10 @@ html.lang-en .page [lang="ja"] { display: none; }
 .ig-post { overflow: hidden; }
 .ig-post img { width: 100%; height: 100%; object-fit: cover; }
 .ig-post img.focus-top { object-position: center 30%; } /* 縦長の写真は上のほうを見せる */
-.ig-post.pink     { background: #E8DCD6; color: #6B5B57; }
-.ig-post.sage     { background: #DCE3D6; color: #5A6354; }
-.ig-post.lavender { background: #E4DDEA; color: #5F5868; }
-.ig-post.beige    { background: #EFE3D4; color: #66594A; }
+.ig-post.pink     { background: var(--ph-pink);     color: var(--ph-pink-text); }
+.ig-post.sage     { background: var(--ph-sage);     color: var(--ph-sage-text); }
+.ig-post.lavender { background: var(--ph-lavender); color: var(--ph-lavender-text); }
+.ig-post.beige    { background: var(--ph-beige);    color: var(--ph-beige-text); }
 
 .ig-head { display: flex; flex-direction: column; gap: 40px; align-items: center; }
 
@@ -561,9 +645,7 @@ html.lang-en .page [lang="ja"] { display: none; }
   /* ヘッダー：1行目に「Saya」と「JP / EN」、2行目にメニュー */
   .lang-switch { order: 2; }
   .nav { order: 3; flex-basis: 100%; margin-left: 0; }
-  .tl-row { gap: 14px; }
-  .tl-year { flex-basis: 48px; font-size: 18px; }
-  .tl-text { font-size: 13px; letter-spacing: 0; }
+  .story-text p { font-size: 14px; letter-spacing: 0; }
   .card { padding: 40px 20px; }
   .card-text { font-size: 13px; }
   .ig-text { font-size: 13px; letter-spacing: 0; }
@@ -576,6 +658,8 @@ html.lang-en .page [lang="ja"] { display: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-slides img { animation: none; }
   .js .typewrite .char, .js .message-inner .message-text { opacity: 1; transform: none; filter: none; transition: none; }
+  .js .story-dot, .js .story-year, .js .story-photo, .js .story-text { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .js .story-year { opacity: 0.55; }
   .bubbles { display: none; }
   .hero-slides img:first-child { opacity: 1; }
 }

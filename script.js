@@ -137,3 +137,20 @@ if (!reduceMotion) {
   setTimeout(makeBubble, 800);    // 最初に1つ
   setInterval(makeBubble, 4500);  // そのあと4.5秒ごとに1つ
 }
+
+/* ---------- ⑦ ストーリーの縦の線を、スクロールに合わせて伸ばす ---------- */
+const story = document.querySelector('.story');
+
+function growLine() {
+  const rect = story.getBoundingClientRect();
+  // 画面の6割くらいの高さを「今読んでるところ」として、どこまで進んだかを 0〜1 で計算
+  const progress = (window.innerHeight * 0.6 - rect.top) / rect.height;
+  story.style.setProperty('--progress', Math.min(Math.max(progress, 0), 1));
+}
+
+if (reduceMotion) {
+  story.style.setProperty('--progress', 1);
+} else {
+  window.addEventListener('scroll', () => requestAnimationFrame(growLine), { passive: true });
+  growLine();
+}

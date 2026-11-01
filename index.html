@@ -103,75 +103,63 @@
   </section>
 
   <!-- 02 わたしの歩み -->
-  <section id="histoire" class="container histoire">
-    <img class="photo reveal" src="images/saya.jpg" alt="さやの写真">
-    <div class="histoire-body reveal">
-      <p class="eyebrow">02 — Histoire</p>
-      <h2 class="section-title">My <em>story</em><span class="ja" lang="ja"><br>わたしの歩み</span></h2>
-
-      <div class="timeline">
-        <div class="tl-row">
-          <span class="tl-year">2007</span>
-          <p class="tl-text" lang="ja">
-            <span class="phrase">4人きょうだいの末っ子として</span><span class="phrase">生まれる。</span>
-          </p>
-          <p class="tl-text" lang="en">Born the youngest of four siblings.</p>
-        </div>
-
-        <div class="tl-row">
-          <span class="tl-year">2013</span>
-          <p class="tl-text" lang="ja">
-            <span class="phrase">兄の背中を追って、</span><span class="phrase">ボールを蹴りはじめる。</span>
-          </p>
-          <p class="tl-text" lang="en">Started kicking a ball, following my brother.</p>
-        </div>
-
-        <div class="tl-row is-range">
-          <span class="tl-year">2013<span class="tl-tilde" aria-label="から">〜</span>2025</span>
-          <p class="tl-text" lang="ja">
-            <span class="phrase">母と美術館に通ううちに、</span><span class="phrase">フランスに惹かれていく。</span><br>
-            <span class="phrase">もっと広い世界を、</span><span class="phrase">知りたくなった。</span>
-          </p>
-          <p class="tl-text" lang="en">
-            Visiting art museums with my mom, I fell for France.<br>
-            I wanted to see more of the world.
-          </p>
-        </div>
-
-        <div class="tl-row">
-          <span class="tl-year">2025</span>
-          <p class="tl-text" lang="ja">
-            <span class="tl-block">サッカーを引退。</span>
-            <span class="tl-block">
-              憧れのフランスへ。<br>
-              <span class="phrase">自由な価値観と空気に、</span><span class="phrase">一目惚れ。</span><br>
-              <span class="phrase">もっとたくさんの人に、</span><span class="phrase">海外へ行ってほしいと</span><span class="phrase">思うようになった。</span>
-            </span>
-            <span class="tl-block"><span class="phrase">関西大学 フランス語学専修に入学。</span></span>
-          </p>
-          <p class="tl-text" lang="en">
-            <span class="tl-block">Retired from soccer.</span>
-            <span class="tl-block">
-              Went to France, the place I'd always dreamed of.<br>
-              Fell in love with its freedom and atmosphere.<br>
-              I began to wish more people could go abroad.
-            </span>
-            <span class="tl-block">Entered Kansai University, majoring in French.</span>
-          </p>
-        </div>
-
-        <div class="tl-row">
-          <span class="tl-year">Now</span>
-          <p class="tl-text" lang="ja">
-            <span class="phrase">一度は離れたサッカーで、</span><span class="phrase">もう一度。</span><br>
-            半年のサッカー留学に挑戦中。
-          </p>
-          <p class="tl-text" lang="en">
-            Back to the sport I once left.<br>
-            Now on a six-month soccer study abroad.
-          </p>
-        </div>
+  <section id="histoire" class="histoire">
+    <div class="container histoire-head">
+      <img class="photo reveal" src="images/saya.jpg" alt="さやの写真">
+      <div class="histoire-body reveal">
+        <p class="eyebrow">02 — Histoire</p>
+        <h2 class="section-title">My <em>story</em><span class="ja" lang="ja"><br>わたしの歩み</span></h2>
       </div>
+    </div>
+
+    <!-- 年ごとのストーリー。スクロールすると縦の線が伸びて、1つずつ現れる -->
+    <div class="container story">
+      <div class="story-line" aria-hidden="true"><div class="story-line-fill"></div></div>
+        <article class="story-item reveal">
+          <span class="story-dot" aria-hidden="true"></span>
+          <p class="story-year">2007</p>
+          <div class="story-photo ph-pink"><span>[ 2007の写真 ]</span></div>
+          <div class="story-text">
+            <p lang="ja"><span class="phrase">大阪で、</span><span class="phrase">4人きょうだいの</span><span class="phrase">末っ子として生まれる。</span></p>
+            <p lang="en">Born in Osaka, the youngest of four siblings.</p>
+          </div>
+        </article>
+        <article class="story-item reveal">
+          <span class="story-dot" aria-hidden="true"></span>
+          <p class="story-year">2013</p>
+          <div class="story-photo ph-sage"><span>[ 2013の写真 ]</span></div>
+          <div class="story-text">
+            <p lang="ja"><span class="phrase">兄の背中を追って、</span><span class="phrase">ボールを蹴りはじめる。</span></p>
+            <p lang="en">Started kicking a ball, following my brother.</p>
+          </div>
+        </article>
+        <article class="story-item reveal">
+          <span class="story-dot" aria-hidden="true"></span>
+          <p class="story-year is-range">2013<span class="story-dash">—</span>2025</p>
+          <div class="story-photo ph-lavender"><span>[ 美術館の写真 ]</span></div>
+          <div class="story-text">
+            <p lang="ja"><span class="phrase">母と美術館に通ううちに、</span><span class="phrase">フランスに惹かれていく。</span><br><span class="phrase">もっと広い世界を、</span><span class="phrase">知りたくなった。</span></p>
+            <p lang="en">Visiting art museums with my mom, I fell for France.<br>I wanted to see more of the world.</p>
+          </div>
+        </article>
+        <article class="story-item reveal">
+          <span class="story-dot" aria-hidden="true"></span>
+          <p class="story-year">2025</p>
+          <div class="story-photo ph-beige"><span>[ フランスの写真 ]</span></div>
+          <div class="story-text">
+            <p lang="ja"><span class="story-block">サッカーを引退。</span><span class="story-block">憧れのフランスへ。<br><span class="phrase">自由な価値観と空気に、</span><span class="phrase">一目惚れ。</span><br><span class="phrase">もっとたくさんの人に、</span><span class="phrase">海外へ行ってほしいと</span><span class="phrase">思うようになった。</span></span><span class="story-block"><span class="phrase">関西大学 フランス語学専修に入学。</span></span></p>
+            <p lang="en"><span class="story-block">Retired from soccer.</span><span class="story-block">Went to France, the place I'd always dreamed of.<br>Fell in love with its freedom and atmosphere.<br>I began to wish more people could go abroad.</span><span class="story-block">Entered Kansai University, majoring in French.</span></p>
+          </div>
+        </article>
+        <article class="story-item reveal">
+          <span class="story-dot" aria-hidden="true"></span>
+          <p class="story-year">Now</p>
+          <div class="story-photo ph-pink"><span>[ 今の写真 ]</span></div>
+          <div class="story-text">
+            <p lang="ja"><span class="phrase">一度は離れたサッカーで、</span><span class="phrase">もう一度。</span><br><span class="phrase">半年のサッカー留学に挑戦中。</span></p>
+            <p lang="en">Back to the sport I once left.<br>Now on a six-month soccer study abroad.</p>
+          </div>
+        </article>
     </div>
   </section>
 
