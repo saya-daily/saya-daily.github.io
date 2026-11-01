@@ -349,6 +349,10 @@ html { scroll-snap-type: y proximity; } /* スライドの近くで止めると�
 .story-bg img.pos-28 { object-position: 28% 50%; }
 .story-bg img.pos-32 { object-position: 32% 50%; }
 .story-bg img.pos-60 { object-position: 60% 50%; }
+/* 縦長の写真は、見せる高さをずらす（数字は上からの位置％） */
+.story-bg img.pos-y30 { object-position: 50% 30%; }
+.story-bg img.pos-y70 { object-position: 50% 70%; }
+.story-bg img.pos-y75 { object-position: 50% 75%; }
 /* 写真の上にベージュをふんわり重ねて、文字を読みやすくする */
 .story-bg:has(img)::after { content: ""; position: absolute; inset: 0; background: var(--veil-top); }
 
