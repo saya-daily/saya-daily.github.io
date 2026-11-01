@@ -365,6 +365,9 @@ a:hover { color: var(--accent-dark); }
   letter-spacing: 0.15em;
   text-decoration: none;
 }
+/* 投稿の写真（四角に合わせて切り抜く） */
+.ig-post { overflow: hidden; }
+.ig-post img { width: 100%; height: 100%; object-fit: cover; }
 .ig-post.pink     { background: #E8DCD6; color: #6B5B57; }
 .ig-post.sage     { background: #DCE3D6; color: #5A6354; }
 .ig-post.lavender { background: #E4DDEA; color: #5F5868; }
