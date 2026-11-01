@@ -136,6 +136,77 @@ a:hover { color: var(--accent-dark); }
   text-transform: uppercase;
 }
 .nav a { color: var(--text); text-decoration: none; }
+.nav { margin-left: auto; } /* メニューと言語ボタンを右に寄せる */
+
+/* 言語の切り替えボタン（JP / EN） */
+.lang-switch {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+.lang-switch button {
+  padding: 4px 2px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.lang-switch button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--text); }
+
+/* ---------- 日本語 / English ---------- */
+/* 選んでない言語のほうを隠す */
+html:not(.lang-en) .page [lang="en"] { display: none; }
+html.lang-en .page [lang="ja"] { display: none; }
+/* 英語の文章は、細い英字フォントで */
+.hero-text[lang="en"], .tl-text[lang="en"], .message-text[lang="en"],
+.card-text[lang="en"], .ig-text[lang="en"], .ig-account-name[lang="en"] { font-family: var(--font-en); }
+.card-title[lang="en"] { font-family: var(--font-serif); font-style: italic; font-size: 24px; font-weight: 300; }
+
+/* ---------- オープニング ---------- */
+.opening {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: transform .9s cubic-bezier(.7, 0, .2, 1); /* カーテンみたいに上に開く */
+}
+.show-opening .opening { display: flex; }
+.show-opening body { overflow: hidden; } /* オープニング中はスクロールさせない */
+.opening.is-leaving { transform: translateY(-100%); }
+
+/* 「Bonjour」が左から右へ、手書きみたいに現れる */
+.opening-word {
+  margin: 0;
+  padding: 0 .15em;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(56px, 14vw, 120px);
+  color: var(--text);
+  clip-path: inset(0 100% 0 0);
+  animation: write 1.4s cubic-bezier(.6, 0, .3, 1) .2s forwards;
+}
+@keyframes write { to { clip-path: inset(0 0 0 0); } }
+.opening-line { height: 1px; width: 0; background: var(--accent); animation: drawLine 1s ease 1s forwards; }
+
+/* オープニング中は、トップの動きを一時停止しておく */
+.is-opening .fu, .is-opening .line { animation-play-state: paused; }
+/* 最初の動きが終わったら、もう動かさない（言語を切り替えたとき、すぐ表示されるように） */
+.intro-done .fu { animation: none; opacity: 1; }
 
 /* ---------- トップ ---------- */
 /* 背景のフランスの写真 */
@@ -424,6 +495,9 @@ a:hover { color: var(--accent-dark); }
 
 /* ---------- スマホ用：文字を少し小さくして、1行に収まりやすくする ---------- */
 @media (max-width: 600px) {
+  /* ヘッダー：1行目に「Saya」と「JP / EN」、2行目にメニュー */
+  .lang-switch { order: 2; }
+  .nav { order: 3; flex-basis: 100%; margin-left: 0; }
   .tl-row { gap: 14px; }
   .tl-year { flex-basis: 48px; font-size: 18px; }
   .tl-text { font-size: 13px; letter-spacing: 0; }

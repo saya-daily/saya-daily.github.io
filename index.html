@@ -7,10 +7,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@300;400&amp;family=Zen+Kaku+Gothic+New:wght@300;400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<!-- 画面がチラつかないように、最初に「JSが動く」目印をつける -->
-<script>document.documentElement.classList.add('js');</script>
+<!-- 画面がチラつかないように、ページが表示される前に準備しておく -->
+<script>
+  (function () {
+    var html = document.documentElement;
+    html.classList.add('js'); // 「JSが動く」目印
+    try {
+      // 前に English を選んでたら、最初から英語で表示
+      if (localStorage.getItem('lang') === 'en') { html.classList.add('lang-en'); html.lang = 'en'; }
+      // オープニングは、最初の1回だけ（「動きを減らす」設定の人には出さない）
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!sessionStorage.getItem('opened') && !reduce) html.classList.add('show-opening', 'is-opening');
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
+
+<!-- オープニング（タップでスキップできる） -->
+<div class="opening" aria-hidden="true">
+  <p class="opening-word">Bonjour</p>
+  <div class="opening-line"></div>
+</div>
+
 <div class="page">
 
   <!-- 背景のふわふわ動く丸（data-speed：スクロールしたときの動く速さ） -->
@@ -38,17 +57,33 @@
       <a href="#pourquoi">Pourquoi</a>
       <a href="#instagram">Instagram</a>
     </nav>
+    <!-- 言語の切り替え -->
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="ja">JP</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" data-lang="en">EN</button>
+    </div>
   </header>
+
+  <!--
+    ここから下は、日本語（lang="ja"）と英語（lang="en"）を並べて書いてる。
+    選んだ言語のほうだけが表示される。
+  -->
 
   <!-- トップ -->
   <section id="top" class="container hero">
     <p class="eyebrow fu d1">Bonjour, enchantée</p>
     <h1 class="hero-title fu d2">Je suis<br><em>Saya.</em></h1>
     <div class="line" aria-hidden="true"></div>
-    <p class="hero-text fu d3">
+    <p class="hero-text fu d3" lang="ja">
       こんにちは、さやです。<br>
       サッカーとフランスに恋をして、<br>
       いま、半年のサッカー留学に挑戦中。
+    </p>
+    <p class="hero-text fu d3" lang="en">
+      Hi, I'm Saya.<br>
+      In love with soccer and France,<br>
+      now on a six-month soccer study abroad.
     </p>
     <a class="btn-outline fu d4" href="#histoire">Découvrir</a>
   </section>
@@ -59,34 +94,40 @@
     <img class="photo reveal" src="images/saya.jpg" alt="さやの写真">
     <div class="histoire-body reveal">
       <p class="eyebrow">01 — Histoire</p>
-      <h2 class="section-title">My <em>story</em><br><span class="ja">わたしの歩み</span></h2>
+      <h2 class="section-title">My <em>story</em><span class="ja" lang="ja"><br>わたしの歩み</span></h2>
 
       <div class="timeline">
         <div class="tl-row">
           <span class="tl-year">2007</span>
-          <p class="tl-text">
+          <p class="tl-text" lang="ja">
             <span class="phrase">4人きょうだいの末っ子として</span><span class="phrase">生まれる。</span>
           </p>
+          <p class="tl-text" lang="en">Born the youngest of four siblings.</p>
         </div>
 
         <div class="tl-row">
           <span class="tl-year">2013</span>
-          <p class="tl-text">
+          <p class="tl-text" lang="ja">
             <span class="phrase">兄の背中を追って、</span><span class="phrase">ボールを蹴りはじめる。</span>
           </p>
+          <p class="tl-text" lang="en">Started kicking a ball, following my brother.</p>
         </div>
 
         <div class="tl-row is-range">
           <span class="tl-year">2013<span class="tl-tilde" aria-label="から">〜</span>2025</span>
-          <p class="tl-text">
+          <p class="tl-text" lang="ja">
             <span class="phrase">母と美術館に通ううちに、</span><span class="phrase">フランスに惹かれていく。</span><br>
             <span class="phrase">もっと広い世界を、</span><span class="phrase">知りたくなった。</span>
+          </p>
+          <p class="tl-text" lang="en">
+            Visiting art museums with my mom, I fell for France.<br>
+            I wanted to see more of the world.
           </p>
         </div>
 
         <div class="tl-row">
           <span class="tl-year">2025</span>
-          <p class="tl-text">
+          <p class="tl-text" lang="ja">
             <span class="tl-block">サッカーを引退。</span>
             <span class="tl-block">
               憧れのフランスへ。<br>
@@ -95,13 +136,26 @@
             </span>
             <span class="tl-block"><span class="phrase">関西大学 フランス語学専修に入学。</span></span>
           </p>
+          <p class="tl-text" lang="en">
+            <span class="tl-block">Retired from soccer.</span>
+            <span class="tl-block">
+              Went to France, the place I'd always dreamed of.<br>
+              Fell in love with its freedom and atmosphere.<br>
+              I began to wish more people could go abroad.
+            </span>
+            <span class="tl-block">Entered Kansai University, majoring in French.</span>
+          </p>
         </div>
 
         <div class="tl-row">
           <span class="tl-year">Now</span>
-          <p class="tl-text">
+          <p class="tl-text" lang="ja">
             <span class="phrase">一度は離れたサッカーで、</span><span class="phrase">もう一度。</span><br>
             半年のサッカー留学に挑戦中。
+          </p>
+          <p class="tl-text" lang="en">
+            Back to the sport I once left.<br>
+            Now on a six-month soccer study abroad.
           </p>
         </div>
       </div>
@@ -112,11 +166,17 @@
   <section id="message" class="message">
     <div class="message-inner reveal">
       <p class="eyebrow">02 — Message</p>
-      <p class="quote"><span class="phrase">“ 好きなように、</span><span class="phrase">生きていい。”</span></p>
-      <p class="message-text">
+      <p class="quote" lang="ja"><span class="phrase">“ 好きなように、</span><span class="phrase">生きていい。”</span></p>
+      <p class="quote" lang="en">“ Live the way you love. ”</p>
+      <p class="message-text" lang="ja">
         好きな服を、好きなように着る。<br>
         周りの目より、心が踊るほうへ。<br>
         大きな夢は、盛大に語ろう。
+      </p>
+      <p class="message-text" lang="en">
+        Wear what you love, the way you love.<br>
+        Follow your heart, not other people's eyes.<br>
+        Dream big, and say it out loud.
       </p>
     </div>
   </section>
@@ -125,34 +185,49 @@
   <section id="pourquoi" class="container pourquoi">
     <div class="section-head reveal">
       <p class="eyebrow">03 — Pourquoi</p>
-      <h2 class="section-title">Why I <em>do this</em><br><span class="ja">なんのために</span></h2>
+      <h2 class="section-title">Why I <em>do this</em><span class="ja" lang="ja"><br>なんのために</span></h2>
     </div>
 
     <div class="cards">
       <div class="card tile reveal">
         <span class="card-num">i.</span>
-        <h3 class="card-title">夢</h3>
-        <p class="card-text">
+        <h3 class="card-title" lang="ja">夢</h3>
+        <h3 class="card-title" lang="en">Dream</h3>
+        <p class="card-text" lang="ja">
           <span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br>
           <span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span>
+        </p>
+        <p class="card-text" lang="en">
+          Visit 25 French cities on my own two feet,<br>
+          and start a travel company all about France.
         </p>
       </div>
 
       <div class="card tile reveal">
         <span class="card-num">ii.</span>
-        <h3 class="card-title">想い</h3>
-        <p class="card-text">
+        <h3 class="card-title" lang="ja">想い</h3>
+        <h3 class="card-title" lang="en">Passion</h3>
+        <p class="card-text" lang="ja">
           <span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br>
           <span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span>
+        </p>
+        <p class="card-text" lang="en">
+          Share the freedom of the world with more people.<br>
+          Turn what I love into my work.
         </p>
       </div>
 
       <div class="card tile reveal">
         <span class="card-num">iii.</span>
-        <h3 class="card-title">いま</h3>
-        <p class="card-text">
+        <h3 class="card-title" lang="ja">いま</h3>
+        <h3 class="card-title" lang="en">Now</h3>
+        <p class="card-text" lang="ja">
           <span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br>
           <span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span>
+        </p>
+        <p class="card-text" lang="en">
+          A lovely website &amp; social media for my company.<br>
+          So I'm learning web design, social media, and English.
         </p>
       </div>
     </div>
@@ -164,15 +239,20 @@
       <p class="eyebrow">04 — Instagram</p>
       <h2 class="ig-title">Suivez-moi</h2>
     </div>
-    <p class="ig-text reveal">
+    <p class="ig-text reveal" lang="ja">
       <span class="phrase">わたしのSNSを見て</span><span class="phrase">「一歩踏み出せた」と</span><br>
       <span class="phrase">言ってくれる人が、</span><span class="phrase">ひとりでも増えますように。</span>
+    </p>
+    <p class="ig-text reveal" lang="en">
+      I hope more and more people will say<br>
+      my posts helped them take their first step.
     </p>
 
     <!-- アカウントごとに 投稿2つ＋ボタン（スマホは縦、パソコンは横に並ぶ） -->
     <div class="ig-accounts">
       <div class="ig-account reveal">
-        <p class="ig-account-name">挑戦記録</p>
+        <p class="ig-account-name" lang="ja">挑戦記録</p>
+        <p class="ig-account-name" lang="en">My Challenges</p>
         <div class="ig-grid">
           <a class="ig-post tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="挑戦記録のInstagramを見る"><img src="images/instagram/challenge-1.jpg" alt="背番号8で試合に出るさや" class="focus-top" loading="lazy"></a>
           <a class="ig-post sage tile" href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="Instagramを見る">[ 投稿 ]</a>
@@ -181,7 +261,8 @@
       </div>
 
       <div class="ig-account reveal">
-        <p class="ig-account-name">さやのリアル</p>
+        <p class="ig-account-name" lang="ja">さやのリアル</p>
+        <p class="ig-account-name" lang="en">The Real Saya</p>
         <div class="ig-grid">
           <a class="ig-post tile" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="さやのリアルのInstagramを見る"><img src="images/instagram/real-1.jpg" alt="ホテルのロビーで" loading="lazy"></a>
           <a class="ig-post tile" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="さやのリアルのInstagramを見る"><img src="images/instagram/real-2.jpg" alt="FCバイエルンのベンチに座るさや" loading="lazy"></a>
