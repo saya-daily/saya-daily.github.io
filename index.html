@@ -112,10 +112,10 @@
       </div>
     </div>
 
-    <!-- 年ごとのストーリー。横にスワイプすると、1枚ずつ画面が切り替わる -->
-    <div class="container story">
-      <div class="story-track" tabindex="0" aria-label="My story（横にスワイプ）">
-        <article class="story-slide" aria-label="1 / 12">
+    <!-- 年ごとのストーリー。縦にスクロールすると、次の画面が下からかぶさって切り替わる -->
+    <div class="story">
+        <article class="story-slide">
+          <p class="story-count" aria-label="1 / 12"><span>01</span> / 12</p>
           <div class="story-bg ph-pink"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2007</p>
@@ -124,8 +124,10 @@
               <p lang="en">Born the youngest of four siblings.<br>Born and raised in Osaka.</p>
             </div>
           </div>
+          <p class="story-hint" aria-hidden="true">Scroll ↓</p>
         </article>
-        <article class="story-slide" aria-label="2 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="2 / 12"><span>02</span> / 12</p>
           <div class="story-bg ph-sage"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2013</p>
@@ -135,7 +137,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="3 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="3 / 12"><span>03</span> / 12</p>
           <div class="story-bg ph-beige"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2018</p>
@@ -145,19 +148,18 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="4 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="4 / 12"><span>04</span> / 12</p>
           <div class="story-bg"><img src="images/france/louvre-ceiling.jpg" alt="" loading="lazy"></div>
           <div class="story-content">
-            <p class="story-year">Collège</p>
-            <p class="story-sub" lang="ja">中学生のころ</p>
-            <p class="story-sub" lang="en">Junior high</p>
             <div class="story-text">
               <p lang="ja"><span class="phrase">母と通った美術館で、</span><span class="phrase">フランスに</span><span class="phrase">興味を持ち始める。</span></p>
               <p lang="en">Visiting art museums with my mom,<br>I began to fall for France.</p>
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="5 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="5 / 12"><span>05</span> / 12</p>
           <div class="story-bg ph-lavender"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2023</p>
@@ -167,7 +169,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="6 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="6 / 12"><span>06</span> / 12</p>
           <div class="story-bg ph-pink"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2024</p>
@@ -177,7 +180,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="7 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="7 / 12"><span>07</span> / 12</p>
           <div class="story-bg"><img src="images/france/mont-saint-michel.jpg" alt="" loading="lazy"></div>
           <div class="story-content">
             <p class="story-year">2025</p>
@@ -187,7 +191,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="8 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="8 / 12"><span>08</span> / 12</p>
           <div class="story-bg"><img src="images/france/montmartre.jpg" alt="" loading="lazy"></div>
           <div class="story-content">
             <p class="story-year">France</p>
@@ -197,7 +202,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="9 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="9 / 12"><span>09</span> / 12</p>
           <div class="story-bg ph-sage"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2025</p>
@@ -207,7 +213,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="10 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="10 / 12"><span>10</span> / 12</p>
           <div class="story-bg ph-lavender"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2025</p>
@@ -217,7 +224,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="11 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="11 / 12"><span>11</span> / 12</p>
           <div class="story-bg ph-beige"><span>[ 写真 ]</span></div>
           <div class="story-content">
             <p class="story-year">2026</p>
@@ -227,7 +235,8 @@
             </div>
           </div>
         </article>
-        <article class="story-slide" aria-label="12 / 12">
+        <article class="story-slide">
+          <p class="story-count" aria-label="12 / 12"><span>12</span> / 12</p>
           <div class="story-bg"><img src="images/instagram/challenge-1.jpg" alt="" loading="lazy"></div>
           <div class="story-content">
             <p class="story-year">Now</p>
@@ -237,16 +246,6 @@
             </div>
           </div>
         </article>
-      </div>
-
-      <!-- 何枚目か・進み具合・矢印ボタン -->
-      <div class="story-nav">
-        <button type="button" class="story-arrow story-prev" aria-label="前へ">←</button>
-        <span class="story-count"><span class="story-current">01</span> / 12</span>
-        <div class="story-progress" aria-hidden="true"><div class="story-progress-fill"></div></div>
-        <button type="button" class="story-arrow story-next" aria-label="次へ">→</button>
-      </div>
-      <p class="story-hint" aria-hidden="true">Swipe →</p>
     </div>
   </section>
 

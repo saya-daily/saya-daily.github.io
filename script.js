@@ -139,42 +139,16 @@ if (!reduceMotion) {
 }
 
 /* ---------- ⑦ ストーリーのスライド ---------- */
-const track = document.querySelector('.story-track');
-const slides = [...track.querySelectorAll('.story-slide')];
-const prevBtn = document.querySelector('.story-prev');
-const nextBtn = document.querySelector('.story-next');
-const currentNum = document.querySelector('.story-current');
-const progress = document.querySelector('.story-progress-fill');
-let current = 0;
+// スライドが画面の半分以上に入ったら「is-active」をつけて、文字や写真をふわっと出す
+const storySlides = document.querySelectorAll('.story-slide');
 
-// 今見えているスライドに「is-active」をつけて、番号と進み具合バーを更新
-function showSlide(index) {
-  current = index;
-  slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
-  currentNum.textContent = String(index + 1).padStart(2, '0');
-  progress.style.setProperty('--progress', (index + 1) / slides.length);
-  prevBtn.disabled = index === 0;
-  nextBtn.disabled = index === slides.length - 1;
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  storySlides.forEach((slide) => slide.classList.add('is-active'));
+} else {
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('is-active');
+    });
+  }, { threshold: 0.5 });
+  storySlides.forEach((slide) => slideObserver.observe(slide));
 }
-
-// スワイプして、スライドが半分以上見えたら「今のスライド」にする
-const slideObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) showSlide(slides.indexOf(entry.target));
-  });
-}, { root: track, threshold: 0.6 });
-slides.forEach((slide) => slideObserver.observe(slide));
-
-// 矢印ボタン・キーボードの ← → で動かす
-const goTo = (index) => {
-  const i = Math.min(Math.max(index, 0), slides.length - 1);
-  track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft });
-};
-prevBtn.addEventListener('click', () => goTo(current - 1));
-nextBtn.addEventListener('click', () => goTo(current + 1));
-track.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
-});
-
-showSlide(0);
