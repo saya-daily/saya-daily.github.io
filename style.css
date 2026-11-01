@@ -378,6 +378,17 @@ html.lang-en .page [lang="ja"] { display: none; }
   line-height: 1;
   color: var(--accent);
 }
+/* 年のよこに小さく年齢 */
+.story-age {
+  margin-left: .5em;
+  font-family: var(--font-ja);
+  font-style: normal;
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  vertical-align: .9em;
+  color: var(--muted);
+}
+.story-age[lang="en"] { font-family: var(--font-en); font-size: 13px; }
 .story-text { margin-top: 16px; }
 .story-text p { margin: 0; font-size: 17px; line-height: 2.1; color: var(--text); }
 /* 文字のまわりだけ、ふんわり明るく光らせて読みやすくする（写真はそのまま見える） */
