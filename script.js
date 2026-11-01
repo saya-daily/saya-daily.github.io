@@ -140,13 +140,14 @@ function showSlide(i) {
   bars.forEach((bar, n) => bar.classList.toggle('is-done', n <= activeSlide));
 }
 
-// 「タップしてね」は、1回タップしたら消して、次に来たときはもう出さない
+// 「タップしてね」は、サイトを開くたびに出して、1回タップしたら消す
+// （同じタブでページを開き直したときは、もう出さない）
 let hintSeen = false;
-try { hintSeen = localStorage.getItem('storyTapped') === '1'; } catch (e) {}
+try { hintSeen = sessionStorage.getItem('storyTapped') === '1'; } catch (e) {}
 if (hintSeen) tapHint.classList.add('is-hidden');
 function hideHint() {
   tapHint.classList.add('is-hidden');
-  try { localStorage.setItem('storyTapped', '1'); } catch (e) {}
+  try { sessionStorage.setItem('storyTapped', '1'); } catch (e) {}
 }
 
 // 画面の左3割をタップしたら前へ、それ以外は次へ
