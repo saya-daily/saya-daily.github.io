@@ -252,6 +252,17 @@ document.querySelectorAll('.city-name').forEach((label) => {
 });
 // 画面の大きさが変わったら、線を引き直す
 window.addEventListener('resize', () => { if (selectedCity) drawLink(selectedCity, false); });
+// 旅のボタンを押したら、その旅の5都市だけ地図で光らせる（もう一回押すと元にもどる）
+const franceMap = document.querySelector('.france-map');
+const tripBtns = document.querySelectorAll('.trip-btn');
+tripBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const on = btn.getAttribute('aria-pressed') !== 'true';
+    tripBtns.forEach((b) => b.setAttribute('aria-pressed', on && b === btn));
+    if (on) franceMap.dataset.showTrip = btn.dataset.trip; else delete franceMap.dataset.showTrip;
+    franceMap.querySelectorAll('[data-trip]').forEach((el) => el.classList.toggle('is-in-trip', on && el.dataset.trip === btn.dataset.trip));
+  });
+});
 // 言語を切り替えたら、カードの中身も切り替える
 langButtons.forEach((btn) => btn.addEventListener('click', () => { if (selectedCity) showCity(selectedCity); }));
 

@@ -24,7 +24,12 @@
   --hint-shadow: rgba(0, 0, 0, 0.35);    /* 「タップしてね」のふんわり影 */
   --story-veil-strong: rgba(44, 53, 80, 0.72);
   --road-veil-strong: rgba(44, 53, 80, 0.82); /* いま・想い・夢の写真に重ねるネイビー（文字側） */
-  --road-veil-soft: rgba(44, 53, 80, 0.35);   /* いま・想い・夢の写真に重ねるネイビー（反対側） */ /* ストーリーの写真に重ねるネイビー（文字のある上） */
+  --road-veil-soft: rgba(44, 53, 80, 0.35);   /* いま・想い・夢の写真に重ねるネイビー（反対側） */
+  --trip-1: #D4B98C;  /* 旅1 アルザス・シャンパーニュ（ゴールド） */
+  --trip-2: #9CC9E6;  /* 旅2 ノルマンディー・ブルターニュ（水色） */
+  --trip-3: #A9C9A4;  /* 旅3 アルプス・ローヌ（セージ） */
+  --trip-4: #E3A9A6;  /* 旅4 南仏・コルシカ島（ローズ） */
+  --trip-5: #B7A8E0;  /* 旅5 西・南西フランス（ラベンダー） */ /* ストーリーの写真に重ねるネイビー（文字のある上） */
   --blob-pink: #6B5470;   /* ふわふわの丸（ピンク） */
   --blob-green: #3F5560;  /* ふわふわの丸（グリーン） */
   --blob-lavender: #55508A; /* ふわふわの丸（ラベンダー） */
@@ -661,7 +666,54 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 .city-hit { fill: transparent; }
 .city-spot { cursor: pointer; outline: none; }
 .city-spot:hover .city, .city-spot:focus-visible .city { stroke-width: 3; }
-.city-spot.is-selected .city { fill: var(--blob-pink); stroke-width: 3; }
+.city-spot.is-selected .city { fill: var(--trip-color, var(--accent)); stroke-width: 3; }
+/* 旅ごとに点の色を分ける */
+[data-trip="1"] { --trip-color: var(--trip-1); }
+[data-trip="2"] { --trip-color: var(--trip-2); }
+[data-trip="3"] { --trip-color: var(--trip-3); }
+[data-trip="4"] { --trip-color: var(--trip-4); }
+[data-trip="5"] { --trip-color: var(--trip-5); }
+.city-spot .city { stroke: var(--trip-color, var(--accent)); }
+.city-spot, .city-name { transition: opacity .5s ease; }
+/* 旅を選んだら、ほかの旅の街はうすく */
+.france-map[data-show-trip] .city-spot:not(.is-in-trip),
+.france-map[data-show-trip] .city-name:not(.is-in-trip) { opacity: .2; }
+.city-spot.is-in-trip .city { fill: var(--trip-color); }
+
+/* 5つの旅のボタン */
+.trips { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.trip-btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: transparent;
+  font: inherit;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: background .4s ease, border-color .4s ease;
+}
+.trip-btn[aria-pressed="true"] { background: var(--card); border-color: var(--trip-color); }
+.trip-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--trip-color); }
+.trip-num { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--trip-color); }
+.trip-name { font-size: 13px; letter-spacing: 0.08em; }
+.trip-name[lang="en"] { font-family: var(--font-en); }
+html:not(.lang-en) .trip-name[lang="en"], html.lang-en .trip-name[lang="ja"] { display: none; }
+/* 次の旅のマーク */
+.trip-next {
+  margin-left: auto;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--trip-color);
+  color: var(--bg);
+  font-family: var(--font-en);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
 
 /* 街の紹介カード */
 /* 最初は文字だけ。タップしたら、線がのびたあとに白い背景がふわっと出る */
