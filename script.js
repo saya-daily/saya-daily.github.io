@@ -272,3 +272,11 @@ window.addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
 }, { passive: true });
 onScroll();
+
+/* ---------- 【一時的】色のパターン切り替え（決まったら消す） ---------- */
+document.querySelectorAll('.palette-switch button').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.p === 'navy') delete root.dataset.palette; else root.dataset.palette = btn.dataset.p;
+    document.querySelectorAll('.palette-switch button').forEach((b) => b.setAttribute('aria-pressed', b === btn));
+  });
+});

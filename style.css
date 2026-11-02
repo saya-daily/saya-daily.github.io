@@ -931,3 +931,156 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   .bubbles { display: none; }
   .hero-slides img:first-child { opacity: 1; }
 }
+
+/* 【一時的】色のパターンを見比べる（決まったら消す） */
+html[data-palette="ciel"] {
+  --bg: #EEF4F8;
+  --bg-soft: #E2ECF3;
+  --card: #F7FAFC;
+  --photo-bg: #DCE7EF;
+  --text: #1E2A3A;
+  --accent: #3D6A96;
+  --accent-dark: #2A4E73;
+  --muted: #55657A;
+  --border: #CBD8E3;
+  --ph-pink: #DCE7EF;
+  --ph-pink-text: #55657A;
+  --ph-sage: #DDE8E4;
+  --ph-sage-text: #55657A;
+  --ph-lavender: #E0E2F0;
+  --ph-lavender-text: #55657A;
+  --ph-beige: #E6EDF2;
+  --ph-beige-text: #55657A;
+  --veil-top: rgba(238, 244, 248, 0.62);
+  --veil-mid: rgba(238, 244, 248, 0.8);
+  --veil-soft: rgba(226, 236, 243, 0.88);
+  --hint-bg: rgba(255, 255, 255, 0.78);
+  --hint-shadow: rgba(61, 106, 150, 0.18);
+  --story-veil-strong: rgba(238, 244, 248, 0.85);
+  --blob-pink: #BFD7EA;
+  --blob-green: #CFE3DA;
+  --blob-lavender: #D3D3EC;
+  --shine: rgba(255, 255, 255, 0.25);
+  --bubble-rim: rgba(255, 255, 255, 0.6);
+  --bubble-pink: rgba(191, 215, 234, 0.5);
+}
+html[data-palette="nuit"] {
+  --bg: #18243A;
+  --bg-soft: #1F2D46;
+  --card: #24344F;
+  --photo-bg: #24344F;
+  --text: #EEF3F7;
+  --accent: #9CC9E6;
+  --accent-dark: #C3E0F2;
+  --muted: #A3B2C2;
+  --border: #33445F;
+  --ph-pink: #2B3A55;
+  --ph-pink-text: #A3B2C2;
+  --ph-sage: #2A3F4A;
+  --ph-sage-text: #A3B2C2;
+  --ph-lavender: #2E3460;
+  --ph-lavender-text: #A3B2C2;
+  --ph-beige: #2C3B52;
+  --ph-beige-text: #A3B2C2;
+  --veil-top: rgba(24, 36, 58, 0.62);
+  --veil-mid: rgba(24, 36, 58, 0.8);
+  --veil-soft: rgba(31, 45, 70, 0.88);
+  --hint-bg: rgba(31, 45, 70, 0.85);
+  --hint-shadow: rgba(0, 0, 0, 0.35);
+  --story-veil-strong: rgba(24, 36, 58, 0.82);
+  --blob-pink: #3B5C80;
+  --blob-green: #3A5A5E;
+  --blob-lavender: #4B4F86;
+  --shine: rgba(255, 255, 255, 0.12);
+  --bubble-rim: rgba(255, 255, 255, 0.35);
+  --bubble-pink: rgba(156, 201, 230, 0.35);
+}
+html[data-palette="bistrot"] {
+  --bg: #F5EFE6;
+  --bg-soft: #ECE3D6;
+  --card: #FBF7F1;
+  --photo-bg: #E6DCCD;
+  --text: #1F2A44;
+  --accent: #A63D40;
+  --accent-dark: #7E2A2D;
+  --muted: #5A6275;
+  --border: #D9CDBB;
+  --ph-pink: #EADBD6;
+  --ph-pink-text: #5A6275;
+  --ph-sage: #DDE3EA;
+  --ph-sage-text: #5A6275;
+  --ph-lavender: #E2E0EC;
+  --ph-lavender-text: #5A6275;
+  --ph-beige: #ECE2D2;
+  --ph-beige-text: #5A6275;
+  --veil-top: rgba(245, 239, 230, 0.62);
+  --veil-mid: rgba(245, 239, 230, 0.8);
+  --veil-soft: rgba(236, 227, 214, 0.88);
+  --hint-bg: rgba(255, 255, 255, 0.78);
+  --hint-shadow: rgba(166, 61, 64, 0.18);
+  --story-veil-strong: rgba(245, 239, 230, 0.85);
+  --blob-pink: #C9D6E6;
+  --blob-green: #E8C9C5;
+  --blob-lavender: #E9DEC8;
+  --shine: rgba(255, 255, 255, 0.25);
+  --bubble-rim: rgba(255, 255, 255, 0.6);
+  --bubble-pink: rgba(201, 214, 230, 0.5);
+}
+html[data-palette="lavande"] {
+  --bg: #F1EEF6;
+  --bg-soft: #E7E2F0;
+  --card: #F9F7FC;
+  --photo-bg: #E2DCEC;
+  --text: #2D2840;
+  --accent: #6B5B9A;
+  --accent-dark: #4E4176;
+  --muted: #5E5872;
+  --border: #D8D1E5;
+  --ph-pink: #E6DCEA;
+  --ph-pink-text: #5E5872;
+  --ph-sage: #DCE6E8;
+  --ph-sage-text: #5E5872;
+  --ph-lavender: #E2DCF0;
+  --ph-lavender-text: #5E5872;
+  --ph-beige: #ECE6EE;
+  --ph-beige-text: #5E5872;
+  --veil-top: rgba(241, 238, 246, 0.62);
+  --veil-mid: rgba(241, 238, 246, 0.8);
+  --veil-soft: rgba(231, 226, 240, 0.88);
+  --hint-bg: rgba(255, 255, 255, 0.78);
+  --hint-shadow: rgba(107, 91, 154, 0.18);
+  --story-veil-strong: rgba(241, 238, 246, 0.85);
+  --blob-pink: #D3C8EA;
+  --blob-green: #C9DCE6;
+  --blob-lavender: #E6CFE0;
+  --shine: rgba(255, 255, 255, 0.25);
+  --bubble-rim: rgba(255, 255, 255, 0.6);
+  --bubble-pink: rgba(211, 200, 234, 0.5);
+}
+.palette-switch {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 70;
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+.palette-switch button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  font: 600 12px var(--font-en);
+  color: #fff;
+  cursor: pointer;
+}
+.palette-switch button[aria-pressed="true"] { border-color: #222; }
+.palette-switch [data-p="navy"]    { background: linear-gradient(135deg, #1F2433 50%, #D4B98C 50%); }
+.palette-switch [data-p="ciel"]    { background: linear-gradient(135deg, #EEF4F8 50%, #3D6A96 50%); }
+.palette-switch [data-p="nuit"]    { background: linear-gradient(135deg, #18243A 50%, #9CC9E6 50%); }
+.palette-switch [data-p="bistrot"] { background: linear-gradient(135deg, #F5EFE6 50%, #A63D40 50%); }
+.palette-switch [data-p="lavande"] { background: linear-gradient(135deg, #F1EEF6 50%, #6B5B9A 50%); }
