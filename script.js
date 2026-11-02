@@ -205,6 +205,27 @@ const cityName = cityCard.querySelector('.city-card-name');
 const cityText = cityCard.querySelector('.city-card-text');
 const citySpots = document.querySelectorAll('.city-spot');
 let selectedCity = null;
+const mapCol = document.querySelector('.map-col');
+const linkSvg = document.querySelector('.city-link');
+const linkPath = linkSvg.querySelector('path');
+
+// タップした点から、カードの上のふちまで、ゆるやかなカーブの線を引く
+function drawLink(spot, animate) {
+  const base = mapCol.getBoundingClientRect();
+  const dot = spot.querySelector('.city').getBoundingClientRect();
+  const card = cityCard.getBoundingClientRect();
+  const x1 = dot.left + dot.width / 2 - base.left;
+  const y1 = dot.top + dot.height / 2 - base.top;
+  const x2 = Math.min(Math.max(x1, card.left - base.left + 32), card.right - base.left - 32);
+  const y2 = card.top - base.top;
+  const mid = (y1 + y2) / 2;
+  linkPath.setAttribute('d', `M${x1},${y1} C${x1},${mid} ${x2},${mid} ${x2},${y2}`);
+  const len = linkPath.getTotalLength();
+  linkSvg.style.setProperty('--len', len);
+  linkSvg.classList.remove('is-drawing');
+  if (animate) { void linkSvg.getBoundingClientRect(); linkSvg.classList.add('is-drawing'); }
+  else linkSvg.classList.add('is-drawing');
+}
 
 function showCity(spot) {
   selectedCity = spot;
@@ -219,6 +240,7 @@ function showCity(spot) {
   cardBody.hidden = false;
   cardBody.style.animation = 'none'; void cardBody.offsetWidth; cardBody.style.animation = ''; // ふわっとをもう一回
   cityCard.classList.add('has-city');
+  drawLink(spot, true);
 }
 citySpots.forEach((spot) => {
   spot.addEventListener('click', () => showCity(spot));
@@ -228,6 +250,8 @@ citySpots.forEach((spot) => {
 document.querySelectorAll('.city-name').forEach((label) => {
   label.addEventListener('click', () => showCity(document.querySelector(`.city-spot[data-city="${label.dataset.city}"]`)));
 });
+// 画面の大きさが変わったら、線を引き直す
+window.addEventListener('resize', () => { if (selectedCity) drawLink(selectedCity, false); });
 // 言語を切り替えたら、カードの中身も切り替える
 langButtons.forEach((btn) => btn.addEventListener('click', () => { if (selectedCity) showCity(selectedCity); }));
 

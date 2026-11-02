@@ -620,7 +620,17 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 
 /* ---- フランス25都市マップ ---- */
 .map-wrap { margin-top: 120px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; }
-.map-col { flex: 1 1 300px; max-width: 460px; width: 100%; }
+.map-col { position: relative; flex: 1 1 300px; max-width: 460px; width: 100%; }
+/* タップした点からカードへのびる線 */
+.city-link { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.city-link path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: var(--len, 0);
+  stroke-dashoffset: var(--len, 0);   /* 最初は見えない */
+}
+.city-link.is-drawing path { stroke-dashoffset: 0; transition: stroke-dashoffset .6s ease; } /* スーッとのびる */
 .france-map { display: block; width: 100%; height: auto; }
 .france-land { fill: var(--ph-beige); stroke: var(--accent); stroke-width: 1; stroke-linejoin: round; }
 .city { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
@@ -632,13 +642,17 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 .city-spot.is-selected .city { fill: var(--blob-pink); stroke-width: 3; }
 
 /* 街の紹介カード */
+/* 最初は文字だけ。タップしたら、線がのびたあとに白い背景がふわっと出る */
 .city-card {
+  position: relative;
+  z-index: 2;
   margin-top: 12px;
   padding: 20px 22px;
   border-radius: 20px;
-  background: var(--card);
-  min-height: 72px;
+  background: transparent;
+  transition: background .5s ease .5s, box-shadow .5s ease .5s;
 }
+.city-card.has-city { background: var(--card); box-shadow: 0 6px 24px var(--hint-shadow); }
 .city-card-hint { margin: 0; font-size: 13px; line-height: 1.9; color: var(--muted); }
 .city-card-hint[lang="en"] { font-family: var(--font-en); }
 html:not(.lang-en) .city-card-hint[lang="en"], html.lang-en .city-card-hint[lang="ja"] { display: none; }
@@ -648,7 +662,7 @@ html:not(.lang-en) .city-card-hint[lang="en"], html.lang-en .city-card-hint[lang
 .city-card-name small { margin-left: .4em; font-family: var(--font-ja); font-size: 14px; letter-spacing: 0.15em; color: var(--muted); }
 .city-card-text { margin: 0; font-size: 14px; line-height: 2; }
 html.lang-en .city-card-text { font-family: var(--font-en); }
-.city-card-body:not([hidden]) { animation: cardIn .6s ease; }
+.city-card-body:not([hidden]) { animation: cardIn .6s ease .5s both; }
 @keyframes cardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 /* 都市の名前 */
 .city-name { font-family: var(--font-ja); font-weight: 300; font-size: 10px; letter-spacing: 0; fill: var(--text); paint-order: stroke; stroke: var(--ph-beige); stroke-width: 3px; stroke-linejoin: round; }
@@ -888,6 +902,7 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   .js .story-year, .js .story-text { opacity: 1; }
   .story-tap-hint, .tap-bubble, .to-top-arrow { animation: none; }
   .city-card-body:not([hidden]) { animation: none; }
+  .city-card, .city-link.is-drawing path { transition: none; }
   .js .ig-account .ig-post, .js .ig-account .account { opacity: 1; transform: none; transition: none; }
   .account-main::after { animation: none; }
   .bubbles { display: none; }
