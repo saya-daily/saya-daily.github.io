@@ -4,32 +4,32 @@
 
 /* ---------- 色とフォント（ここを変えるとサイト全体が変わる） ---------- */
 :root {
-  --bg: #F6F1EC;          /* 背景のベージュ */
-  --bg-soft: #EDE4DE;     /* Messageの背景 */
-  --card: #FBF8F5;        /* カードの白っぽい色 */
-  --photo-bg: #E8DCD6;    /* 写真が出るまでの色 */
-  --text: #3E3A39;        /* 文字の色 */
-  --accent: #8A5A55;      /* くすみローズ（小見出しなど） */
-  --accent-dark: #5E3B37; /* リンクにカーソルを乗せたとき */
-  --muted: #6B5B57;       /* うすめの文字 */
-  --border: #DDD2CB;      /* 線の色 */
-  --ph-pink: #E8DCD6;      --ph-pink-text: #6B5B57;      /* 仮の写真枠（ピンク） */
-  --ph-sage: #DCE3D6;      --ph-sage-text: #5A6354;      /* 仮の写真枠（グリーン） */
-  --ph-lavender: #E4DDEA;  --ph-lavender-text: #5F5868;  /* 仮の写真枠（ラベンダー） */
-  --ph-beige: #EFE3D4;     --ph-beige-text: #66594A;     /* 仮の写真枠（ベージュ） */
-  --veil-top: rgba(246, 241, 236, 0.62);    /* 写真の上に重ねるベージュ（上） */
-  --veil-mid: rgba(246, 241, 236, 0.8);    /* 写真の上に重ねるベージュ（真ん中） */
-  --veil-soft: rgba(237, 228, 222, 0.88);   /* Messageの写真に重ねるベージュ */
-  --hint-bg: rgba(251, 248, 245, 0.82);      /* 「タップしてね」の背景 */
-  --hint-shadow: rgba(138, 90, 85, 0.15);    /* 「タップしてね」のふんわり影 */
-  --story-veil-strong: rgba(246, 241, 236, 0.85); /* ストーリーの写真に重ねるベージュ（文字のある上） */
-  --blob-pink: #E3C6C1;   /* ふわふわの丸（ピンク） */
-  --blob-green: #C9D3C1;  /* ふわふわの丸（グリーン） */
-  --blob-lavender: #D9D0E0; /* ふわふわの丸（ラベンダー） */
+  --bg: #1F2433;          /* 背景のくすみネイビー */
+  --bg-soft: #262C3D;     /* Messageの背景 */
+  --card: #2B3142;        /* カードの白っぽい色 */
+  --photo-bg: #2B3142;    /* 写真が出るまでの色 */
+  --text: #EDE6DC;        /* 文字の色（アイボリー） */
+  --accent: #D4B98C;      /* シャンパンゴールド（小見出しなど） */
+  --accent-dark: #E8D3AA; /* リンクにカーソルを乗せたとき */
+  --muted: #A9A3A0;       /* うすめの文字 */
+  --border: #3A4152;      /* 線の色 */
+  --ph-pink: #3A3444;      --ph-pink-text: #CDBFC4;      /* 仮の写真枠（ピンク） */
+  --ph-sage: #323D3F;      --ph-sage-text: #BCC8BE;      /* 仮の写真枠（グリーン） */
+  --ph-lavender: #363450;  --ph-lavender-text: #C6C0DA;  /* 仮の写真枠（ラベンダー） */
+  --ph-beige: #343A4A;     --ph-beige-text: #D6CBBB;     /* 仮の写真枠（ベージュ） */
+  --veil-top: rgba(31, 36, 51, 0.62);    /* 写真の上に重ねるネイビー（上） */
+  --veil-mid: rgba(31, 36, 51, 0.8);    /* 写真の上に重ねるネイビー（真ん中） */
+  --veil-soft: rgba(38, 44, 61, 0.88);   /* Messageの写真に重ねるネイビー */
+  --hint-bg: rgba(43, 49, 66, 0.85);      /* 「タップしてね」の背景 */
+  --hint-shadow: rgba(0, 0, 0, 0.35);    /* 「タップしてね」のふんわり影 */
+  --story-veil-strong: rgba(31, 36, 51, 0.82); /* ストーリーの写真に重ねるネイビー（文字のある上） */
+  --blob-pink: #6B5470;   /* ふわふわの丸（ピンク） */
+  --blob-green: #3F5560;  /* ふわふわの丸（グリーン） */
+  --blob-lavender: #55508A; /* ふわふわの丸（ラベンダー） */
   --bubble-shine: rgba(255, 255, 255, 0.9);   /* シャボン玉の光ってるとこ */
-  --shine: rgba(255, 255, 255, 0.22);         /* ボタンを通る光 */
-  --bubble-rim: rgba(255, 255, 255, 0.55);    /* シャボン玉のふち */
-  --bubble-pink: rgba(227, 198, 193, 0.45);   /* シャボン玉の虹色（ピンク） */
+  --shine: rgba(255, 255, 255, 0.12);         /* ボタンを通る光 */
+  --bubble-rim: rgba(255, 255, 255, 0.35);    /* シャボン玉のふち */
+  --bubble-pink: rgba(212, 185, 140, 0.35);   /* シャボン玉の虹色（ゴールド） */
   --bubble-lavender: rgba(217, 208, 224, 0.55); /* シャボン玉の虹色（ラベンダー） */
   --bubble-green: rgba(201, 211, 193, 0.45);  /* シャボン玉の虹色（グリーン） */
 
@@ -38,36 +38,6 @@
   --font-ja: 'Zen Kaku Gothic New', sans-serif; /* 日本語 */
 }
 
-/* ---------- 夜の色（17:00〜4:59。script.js が html に is-night をつける） ---------- */
-html.is-night {
-  --bg: #1F2433;          /* くすみネイビー */
-  --bg-soft: #262C3D;
-  --card: #2B3142;
-  --photo-bg: #2B3142;
-  --text: #EDE6DC;        /* アイボリー */
-  --accent: #D4B98C;      /* シャンパンゴールド */
-  --accent-dark: #E8D3AA;
-  --muted: #A9A3A0;
-  --border: #3A4152;
-  --ph-pink: #3A3444;      --ph-pink-text: #CDBFC4;
-  --ph-sage: #323D3F;      --ph-sage-text: #BCC8BE;
-  --ph-lavender: #363450;  --ph-lavender-text: #C6C0DA;
-  --ph-beige: #343A4A;     --ph-beige-text: #D6CBBB;
-  --veil-top: rgba(31, 36, 51, 0.62);
-  --veil-mid: rgba(31, 36, 51, 0.8);
-  --veil-soft: rgba(38, 44, 61, 0.88);
-  --hint-bg: rgba(43, 49, 66, 0.85);
-  --hint-shadow: rgba(0, 0, 0, 0.35);
-  --story-veil-strong: rgba(31, 36, 51, 0.82);
-  --blob-pink: #6B5470;   /* 夜のふわふわは、うっすら光る色に */
-  --blob-green: #3F5560;
-  --blob-lavender: #55508A;
-  --shine: rgba(255, 255, 255, 0.12);
-  --bubble-rim: rgba(255, 255, 255, 0.35);
-  --bubble-pink: rgba(212, 185, 140, 0.35); /* シャボン玉は、ゴールドに光る */
-}
-/* 昼 ⇄ 夜 が切り替わるときは、ふわっと */
-body, .page { transition: background-color 1.5s ease, color 1.5s ease; }
 
 /* ---------- 全体 ---------- */
 html { scroll-behavior: smooth; }
@@ -954,7 +924,6 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   .js .story-year, .js .story-text, .js .story-bg, .js .story-slide { transform: none; transition: none; }
   .js .story-year, .js .story-text { opacity: 1; }
   .story-tap-hint, .tap-bubble, .to-top-arrow, .cheer-heart { animation: none; }
-  body, .page { transition: none; }
   .city-card-body:not([hidden]) { animation: none; }
   .city-card, .city-link.is-drawing path { transition: none; }
   .js .ig-account .ig-post, .js .ig-account .account { opacity: 1; transform: none; transition: none; }
