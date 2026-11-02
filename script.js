@@ -65,8 +65,7 @@ if (root.classList.contains('show-opening')) {
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 function updateDayNight() {
   const hour = new Date().getHours();
-  const force = /[?&]night\b/.test(location.search) ? true : /[?&]day\b/.test(location.search) ? false : null;
-  const night = force ?? (hour < 5 || hour >= 17); // ?night / ?day がついてたら、そっちを優先
+  const night = hour < 5 || hour >= 17;
   root.classList.toggle('is-night', night);
   themeMeta.setAttribute('content', night ? '#1F2433' : '#F6F1EC'); // スマホの上のバーの色
 }
