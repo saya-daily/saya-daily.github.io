@@ -710,10 +710,11 @@ html:not(.lang-en) .trip-name[lang="en"], html.lang-en .trip-name[lang="ja"] { d
   border-radius: 999px;
   background: var(--trip-color);
   color: var(--bg);
-  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.12em;
 }
+.trip-next[lang="en"] { font-family: var(--font-en); }
+html:not(.lang-en) .trip-next[lang="en"], html.lang-en .trip-next[lang="ja"] { display: none; }
 
 /* 街の紹介カード */
 /* 最初は文字だけ。タップしたら、線がのびたあとに白い背景がふわっと出る */
