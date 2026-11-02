@@ -272,3 +272,4 @@ window.addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
 }, { passive: true });
 onScroll();
+
