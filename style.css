@@ -795,8 +795,8 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   text-align: center;
 }
 .footer-merci { margin: 0; font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 56px; line-height: 1; }
-.footer-phrase { margin: 8px 0 0; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--accent); }
-.footer-phrase-ja { margin: 0; font-size: 13px; letter-spacing: 0.15em; color: var(--muted); }
+.footer-phrase { margin: 4px 0 0; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--accent); }
+.footer-phrase-ja { margin: 8px 0 0; font-size: 14px; letter-spacing: 0.15em; color: var(--muted); }
 .footer-phrase-ja[lang="en"] { font-family: var(--font-en); }
 .footer-nav {
   margin-top: 24px;
