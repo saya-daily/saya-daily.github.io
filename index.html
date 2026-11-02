@@ -28,8 +28,10 @@
     var html = document.documentElement;
     html.classList.add('js'); // 「JSが動く」目印
     // 5:00〜16:59 は昼、それ以外は夜の色にする（見てる人のスマホの時計で）
+    // URLの最後に ?night をつけると夜、?day をつけると昼で見られる（確認用）
     var hour = new Date().getHours();
-    if (hour < 5 || hour >= 17) html.classList.add('is-night');
+    var force = /[?&]night\b/.test(location.search) ? true : /[?&]day\b/.test(location.search) ? false : null;
+    if (force === true || (force === null && (hour < 5 || hour >= 17))) html.classList.add('is-night');
     try {
       // 前に English を選んでたら、最初から英語で表示
       if (localStorage.getItem('lang') === 'en') { html.classList.add('lang-en'); html.lang = 'en'; }
