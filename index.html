@@ -4,6 +4,21 @@
 <meta charset="utf-8">
 <title>Saya — 自己紹介</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="サッカーとフランスに恋をした関大生、さやの自己紹介サイト。周りの目より、自分の心に正直に。">
+<!-- LINEやインスタでシェアしたときに出るカード -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://saya-daily.github.io/">
+<meta property="og:title" content="Je suis Saya. — 私のサイトへようこそ">
+<meta property="og:description" content="サッカーとフランスに恋をした関大生、さやの自己紹介サイト。周りの目より、自分の心に正直に。">
+<meta property="og:image" content="https://saya-daily.github.io/images/ogp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- タブやホーム画面に出るアイコン -->
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F6F1EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@300;400&amp;family=Zen+Kaku+Gothic+New:wght@300;400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -32,6 +47,9 @@
 
 <!-- シャボン玉が浮かぶ場所（script.js が作る） -->
 <div class="bubbles" aria-hidden="true"></div>
+
+<!-- どこまで読んだかの細い線 -->
+<div class="read-progress" aria-hidden="true"></div>
 
 <div class="page">
 
@@ -305,7 +323,7 @@
           <svg class="france-map" viewBox="0 0 410 420" role="img" aria-label="フランス25都市の地図">
             <path class="france-land" d="M218.4,19.0 Q208.3,14.0 201.2,16.0 Q194.0,18.0 190.6,23.0 Q187.1,28.0 184.3,40.0 Q181.6,52.0 163.8,64.0 Q145.9,76.0 127.3,79.0 Q108.7,82.0 103.9,76.0 Q99.1,70.0 94.9,69.0 Q90.8,68.0 96.3,89.4 Q101.8,110.8 94.9,110.4 Q88.1,110.0 74.3,107.0 Q60.5,104.0 39.9,108.0 Q19.3,112.0 16.6,124.0 Q13.8,136.0 20.6,140.0 Q27.5,144.0 38.5,146.0 Q49.5,148.0 66.0,156.6 Q82.6,165.2 85.3,174.6 Q88.1,184.0 99.8,197.0 Q111.5,210.0 113.5,221.0 Q115.6,232.0 112.8,251.0 Q110.1,270.0 105.2,293.4 Q100.4,316.8 97.2,319.2 Q94.1,321.6 111.7,331.8 Q129.3,342.0 149.9,347.0 Q170.6,352.0 187.1,355.4 Q203.6,358.8 216.9,358.4 Q230.3,358.0 229.4,345.0 Q228.4,332.0 239.4,324.0 Q250.4,316.0 260.1,318.0 Q269.7,320.0 280.3,322.0 Q290.9,324.0 298.6,328.0 Q306.3,332.0 315.5,330.0 Q324.7,328.0 333.9,318.0 Q343.2,308.0 346.4,306.4 Q349.5,304.8 342.6,296.4 Q335.7,288.0 334.4,270.0 Q333.0,252.0 334.4,236.0 Q335.7,220.0 323.4,214.0 Q311.0,208.0 315.1,202.0 Q319.2,196.0 327.4,176.0 Q335.7,156.0 344.0,154.0 Q352.3,152.0 355.1,132.0 Q357.8,112.0 363.3,104.6 Q368.8,97.2 344.0,87.6 Q319.2,78.0 310.9,76.0 Q302.7,74.0 288.9,63.0 Q275.2,52.0 266.9,55.0 Q258.7,58.0 243.6,41.0 Q228.4,24.0 218.4,19.0Z"/>
             <path class="france-land" d="M392.9,344.0 Q401.8,336.0 403.9,344.0 Q405.9,352.0 403.9,372.0 Q401.8,392.0 397.6,396.0 Q393.5,400.0 386.6,390.0 Q379.8,380.0 381.9,366.0 Q383.9,352.0 392.9,344.0Z"/>
-            <circle class="city" cx="207.8" cy="101.6" r="4.5"><title>Paris</title></circle><circle class="city" cx="276.3" cy="225.6" r="4.5"><title>Lyon</title></circle><circle class="city" cx="290.9" cy="324.0" r="4.5"><title>Marseille</title></circle><circle class="city" cx="343.2" cy="308.0" r="4.5"><title>Nice</title></circle><circle class="city" cx="127.1" cy="262.4" r="4.5"><title>Bordeaux</title></circle><circle class="city" cx="182.7" cy="312.0" r="4.5"><title>Toulouse</title></circle><circle class="city" cx="356.4" cy="112.8" r="4.5"><title>Strasbourg</title></circle><circle class="city" cx="227.3" cy="30.8" r="4.5"><title>Lille</title></circle><circle class="city" cx="100.4" cy="167.2" r="4.5"><title>Nantes</title></circle><circle class="city" cx="96.9" cy="131.6" r="4.5"><title>Rennes</title></circle><circle class="city" cx="249.9" cy="311.6" r="4.5"><title>Montpellier</title></circle><circle class="city" cx="275.5" cy="298.0" r="4.5"><title>Avignon</title></circle><circle class="city" cx="293.1" cy="314.8" r="4.5"><title>Aix-en-Provence</title></circle><circle class="city" cx="311.8" cy="220.0" r="4.5"><title>Annecy</title></circle><circle class="city" cx="345.7" cy="132.8" r="4.5"><title>Colmar</title></circle><circle class="city" cx="254.0" cy="85.6" r="4.5"><title>Reims</title></circle><circle class="city" cx="173.4" cy="78.4" r="4.5"><title>Rouen</title></circle><circle class="city" cx="101.5" cy="110.4" r="4.5"><title>Mont-Saint-Michel</title></circle><circle class="city" cx="87.2" cy="110.0" r="4.5"><title>Saint-Malo</title></circle><circle class="city" cx="100.2" cy="316.8" r="4.5"><title>Biarritz</title></circle><circle class="city" cx="207.8" cy="327.6" r="4.5"><title>Carcassonne</title></circle><circle class="city" cx="281.8" cy="163.2" r="4.5"><title>Dijon</title></circle><circle class="city" cx="332.2" cy="219.2" r="4.5"><title>Chamonix</title></circle><circle class="city" cx="336.0" cy="314.0" r="4.5"><title>Cannes</title></circle><circle class="city" cx="383.6" cy="379.2" r="4.5"><title>Ajaccio</title></circle>
+            <g class="city-spot" data-city="Paris" tabindex="0" role="button" aria-label="Paris"><circle class="city-hit" cx="207.8" cy="101.6" r="14"/><circle class="city" cx="207.8" cy="101.6" r="4.5"/></g><g class="city-spot" data-city="Lyon" tabindex="0" role="button" aria-label="Lyon"><circle class="city-hit" cx="276.3" cy="225.6" r="14"/><circle class="city" cx="276.3" cy="225.6" r="4.5"/></g><g class="city-spot" data-city="Marseille" tabindex="0" role="button" aria-label="Marseille"><circle class="city-hit" cx="290.9" cy="324.0" r="14"/><circle class="city" cx="290.9" cy="324.0" r="4.5"/></g><g class="city-spot" data-city="Nice" tabindex="0" role="button" aria-label="Nice"><circle class="city-hit" cx="343.2" cy="308.0" r="14"/><circle class="city" cx="343.2" cy="308.0" r="4.5"/></g><g class="city-spot" data-city="Bordeaux" tabindex="0" role="button" aria-label="Bordeaux"><circle class="city-hit" cx="127.1" cy="262.4" r="14"/><circle class="city" cx="127.1" cy="262.4" r="4.5"/></g><g class="city-spot" data-city="Toulouse" tabindex="0" role="button" aria-label="Toulouse"><circle class="city-hit" cx="182.7" cy="312.0" r="14"/><circle class="city" cx="182.7" cy="312.0" r="4.5"/></g><g class="city-spot" data-city="Strasbourg" tabindex="0" role="button" aria-label="Strasbourg"><circle class="city-hit" cx="356.4" cy="112.8" r="14"/><circle class="city" cx="356.4" cy="112.8" r="4.5"/></g><g class="city-spot" data-city="Lille" tabindex="0" role="button" aria-label="Lille"><circle class="city-hit" cx="227.3" cy="30.8" r="14"/><circle class="city" cx="227.3" cy="30.8" r="4.5"/></g><g class="city-spot" data-city="Nantes" tabindex="0" role="button" aria-label="Nantes"><circle class="city-hit" cx="100.4" cy="167.2" r="14"/><circle class="city" cx="100.4" cy="167.2" r="4.5"/></g><g class="city-spot" data-city="Rennes" tabindex="0" role="button" aria-label="Rennes"><circle class="city-hit" cx="96.9" cy="131.6" r="14"/><circle class="city" cx="96.9" cy="131.6" r="4.5"/></g><g class="city-spot" data-city="Montpellier" tabindex="0" role="button" aria-label="Montpellier"><circle class="city-hit" cx="249.9" cy="311.6" r="14"/><circle class="city" cx="249.9" cy="311.6" r="4.5"/></g><g class="city-spot" data-city="Avignon" tabindex="0" role="button" aria-label="Avignon"><circle class="city-hit" cx="275.5" cy="298.0" r="14"/><circle class="city" cx="275.5" cy="298.0" r="4.5"/></g><g class="city-spot" data-city="Aix-en-Provence" tabindex="0" role="button" aria-label="Aix-en-Provence"><circle class="city-hit" cx="293.1" cy="314.8" r="14"/><circle class="city" cx="293.1" cy="314.8" r="4.5"/></g><g class="city-spot" data-city="Annecy" tabindex="0" role="button" aria-label="Annecy"><circle class="city-hit" cx="311.8" cy="220.0" r="14"/><circle class="city" cx="311.8" cy="220.0" r="4.5"/></g><g class="city-spot" data-city="Colmar" tabindex="0" role="button" aria-label="Colmar"><circle class="city-hit" cx="345.7" cy="132.8" r="14"/><circle class="city" cx="345.7" cy="132.8" r="4.5"/></g><g class="city-spot" data-city="Reims" tabindex="0" role="button" aria-label="Reims"><circle class="city-hit" cx="254.0" cy="85.6" r="14"/><circle class="city" cx="254.0" cy="85.6" r="4.5"/></g><g class="city-spot" data-city="Rouen" tabindex="0" role="button" aria-label="Rouen"><circle class="city-hit" cx="173.4" cy="78.4" r="14"/><circle class="city" cx="173.4" cy="78.4" r="4.5"/></g><g class="city-spot" data-city="Mont-Saint-Michel" tabindex="0" role="button" aria-label="Mont-Saint-Michel"><circle class="city-hit" cx="101.5" cy="110.4" r="14"/><circle class="city" cx="101.5" cy="110.4" r="4.5"/></g><g class="city-spot" data-city="Saint-Malo" tabindex="0" role="button" aria-label="Saint-Malo"><circle class="city-hit" cx="87.2" cy="110.0" r="14"/><circle class="city" cx="87.2" cy="110.0" r="4.5"/></g><g class="city-spot" data-city="Biarritz" tabindex="0" role="button" aria-label="Biarritz"><circle class="city-hit" cx="100.2" cy="316.8" r="14"/><circle class="city" cx="100.2" cy="316.8" r="4.5"/></g><g class="city-spot" data-city="Carcassonne" tabindex="0" role="button" aria-label="Carcassonne"><circle class="city-hit" cx="207.8" cy="327.6" r="14"/><circle class="city" cx="207.8" cy="327.6" r="4.5"/></g><g class="city-spot" data-city="Dijon" tabindex="0" role="button" aria-label="Dijon"><circle class="city-hit" cx="281.8" cy="163.2" r="14"/><circle class="city" cx="281.8" cy="163.2" r="4.5"/></g><g class="city-spot" data-city="Chamonix" tabindex="0" role="button" aria-label="Chamonix"><circle class="city-hit" cx="332.2" cy="219.2" r="14"/><circle class="city" cx="332.2" cy="219.2" r="4.5"/></g><g class="city-spot" data-city="Cannes" tabindex="0" role="button" aria-label="Cannes"><circle class="city-hit" cx="336.0" cy="314.0" r="14"/><circle class="city" cx="336.0" cy="314.0" r="4.5"/></g><g class="city-spot" data-city="Ajaccio" tabindex="0" role="button" aria-label="Ajaccio"><circle class="city-hit" cx="383.6" cy="379.2" r="14"/><circle class="city" cx="383.6" cy="379.2" r="4.5"/></g>
                       <g class="city-names"><text class="city-name" x="215.8" y="105.6"><tspan lang="ja">パリ</tspan><tspan lang="en">Paris</tspan></text><text class="city-name" x="268.3" y="229.6" text-anchor="end"><tspan lang="ja">リヨン</tspan><tspan lang="en">Lyon</tspan></text><text class="city-name" x="290.9" y="341.0" text-anchor="middle"><tspan lang="ja">マルセイユ</tspan><tspan lang="en">Marseille</tspan></text><text class="city-name" x="349.2" y="302.0"><tspan lang="ja">ニース</tspan><tspan lang="en">Nice</tspan></text><text class="city-name" x="119.1" y="266.4" text-anchor="end"><tspan lang="ja">ボルドー</tspan><tspan lang="en">Bordeaux</tspan></text><text class="city-name" x="174.7" y="316.0" text-anchor="end"><tspan lang="ja">トゥールーズ</tspan><tspan lang="en">Toulouse</tspan></text><text class="city-name" x="356.4" y="102.8" text-anchor="middle"><tspan lang="ja">ストラスブール</tspan><tspan lang="en">Strasbourg</tspan></text><text class="city-name" x="235.3" y="34.8"><tspan lang="ja">リール</tspan><tspan lang="en">Lille</tspan></text><text class="city-name" x="92.4" y="171.2" text-anchor="end"><tspan lang="ja">ナント</tspan><tspan lang="en">Nantes</tspan></text><text class="city-name" x="104.9" y="136.6"><tspan lang="ja">レンヌ</tspan><tspan lang="en">Rennes</tspan></text><text class="city-name" x="241.9" y="315.6" text-anchor="end"><tspan lang="ja">モンペリエ</tspan><tspan lang="en">Montpellier</tspan></text><text class="city-name" x="275.5" y="288.0" text-anchor="middle"><tspan lang="ja">アヴィニヨン</tspan><tspan lang="en">Avignon</tspan></text><text class="city-name" x="299.1" y="308.8"><tspan lang="ja">エクス</tspan><tspan lang="en">Aix</tspan></text><text class="city-name" x="311.8" y="210.0" text-anchor="middle"><tspan lang="ja">アヌシー</tspan><tspan lang="en">Annecy</tspan></text><text class="city-name" x="337.7" y="136.8" text-anchor="end"><tspan lang="ja">コルマール</tspan><tspan lang="en">Colmar</tspan></text><text class="city-name" x="262.0" y="89.6"><tspan lang="ja">ランス</tspan><tspan lang="en">Reims</tspan></text><text class="city-name" x="173.4" y="68.4" text-anchor="middle"><tspan lang="ja">ルーアン</tspan><tspan lang="en">Rouen</tspan></text><text class="city-name" x="106.5" y="102.4"><tspan lang="ja">モンサンミッシェル</tspan><tspan lang="en">Mont-St-Michel</tspan></text><text class="city-name" x="81.2" y="104.0" text-anchor="end"><tspan lang="ja">サン・マロ</tspan><tspan lang="en">Saint-Malo</tspan></text><text class="city-name" x="92.2" y="320.8" text-anchor="end"><tspan lang="ja">ビアリッツ</tspan><tspan lang="en">Biarritz</tspan></text><text class="city-name" x="207.8" y="343.6" text-anchor="middle"><tspan lang="ja">カルカソンヌ</tspan><tspan lang="en">Carcassonne</tspan></text><text class="city-name" x="273.8" y="167.2" text-anchor="end"><tspan lang="ja">ディジョン</tspan><tspan lang="en">Dijon</tspan></text><text class="city-name" x="340.2" y="223.2"><tspan lang="ja">シャモニー</tspan><tspan lang="en">Chamonix</tspan></text><text class="city-name" x="336.0" y="330.0" text-anchor="middle"><tspan lang="ja">カンヌ</tspan><tspan lang="en">Cannes</tspan></text><text class="city-name" x="375.6" y="383.2" text-anchor="end"><tspan lang="ja">アジャクシオ</tspan><tspan lang="en">Ajaccio</tspan></text></g>
           </svg>
       <div class="map-info">
@@ -314,6 +332,16 @@
         <p class="map-caption">Le voyage commence bientôt</p>
         <p class="map-text" lang="ja"><span class="phrase">フランス25都市を、</span><span class="phrase">自らの足で巡る旅。</span><br><span class="phrase">行く度に、</span><span class="phrase">写真と感想を追加し、</span><br><span class="phrase">サイトとSNSも</span><span class="phrase">レベルアップさせていきます。</span></p>
         <p class="map-text" lang="en">A journey through 25 French cities, on my own two feet.<br>With every city, I'll add photos and my thoughts,<br>and level up this site and my social media, too.</p>
+        <!-- 地図の点をタップすると、ここに街の紹介が出る -->
+        <div class="city-card" aria-live="polite">
+          <p class="city-card-hint" lang="ja">地図の点をタップすると、街の紹介が見れるで</p>
+          <p class="city-card-hint" lang="en">Tap a dot on the map to learn about the city</p>
+          <div class="city-card-body" hidden>
+            <p class="city-card-status"></p>
+            <h3 class="city-card-name"></h3>
+            <p class="city-card-text"></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -361,7 +389,24 @@
   <!-- フッター -->
   <footer class="footer">
     <p class="footer-merci">Merci.</p>
-    <p class="footer-copy">© Saya</p>
+    <p class="footer-phrase">À bientôt, quelque part en France.</p>
+    <p class="footer-phrase-ja" lang="ja">また、フランスのどこかで会おうね。</p>
+    <p class="footer-phrase-ja" lang="en">See you soon, somewhere in France.</p>
+    <nav class="footer-nav" aria-label="フッターメニュー">
+      <a href="#message">Message</a>
+      <a href="#histoire">Histoire</a>
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#instagram">Instagram</a>
+    </nav>
+    <div class="footer-sns">
+      <a href="https://www.instagram.com/0h_3ya/" target="_blank" rel="noopener" aria-label="挑戦記録のInstagram"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+      <a href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener" aria-label="さやのリアルのInstagram"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+    </div>
+    <a class="to-top" href="#top">
+      <span class="to-top-arrow" aria-hidden="true">↑</span>
+      <span>Haut de page</span>
+    </a>
+    <p class="footer-copy">© 2026 Saya</p>
   </footer>
 
 </div>

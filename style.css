@@ -624,6 +624,31 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 .france-land { fill: var(--ph-beige); stroke: var(--accent); stroke-width: 1; stroke-linejoin: round; }
 .city { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
 .city.is-visited { fill: var(--accent); }
+/* 点をタップしやすいように、まわりに見えない大きめの丸を置いてる */
+.city-hit { fill: transparent; }
+.city-spot { cursor: pointer; outline: none; }
+.city-spot:hover .city, .city-spot:focus-visible .city { stroke-width: 3; }
+.city-spot.is-selected .city { fill: var(--blob-pink); stroke-width: 3; }
+
+/* 街の紹介カード */
+.city-card {
+  margin-top: 28px;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: var(--card);
+  min-height: 72px;
+}
+.city-card-hint { margin: 0; font-size: 13px; line-height: 1.9; color: var(--muted); }
+.city-card-hint[lang="en"] { font-family: var(--font-en); }
+html:not(.lang-en) .city-card-hint[lang="en"], html.lang-en .city-card-hint[lang="ja"] { display: none; }
+.city-card.has-city .city-card-hint { display: none; }
+.city-card-status { margin: 0; font-family: var(--font-en); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); }
+.city-card-name { margin: 4px 0 8px; font-family: var(--font-serif); font-weight: 300; font-size: 30px; line-height: 1.2; }
+.city-card-name small { margin-left: .4em; font-family: var(--font-ja); font-size: 14px; letter-spacing: 0.15em; color: var(--muted); }
+.city-card-text { margin: 0; font-size: 14px; line-height: 2; }
+html.lang-en .city-card-text { font-family: var(--font-en); }
+.city-card-body:not([hidden]) { animation: cardIn .6s ease; }
+@keyframes cardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 /* 都市の名前 */
 .city-name { font-family: var(--font-ja); font-weight: 300; font-size: 10px; letter-spacing: 0; fill: var(--text); paint-order: stroke; stroke: var(--ph-beige); stroke-width: 3px; stroke-linejoin: round; }
 .city-name [lang="en"] { font-family: var(--font-en); }
@@ -760,15 +785,83 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
 
 /* ---------- フッター ---------- */
 .footer {
+  position: relative;
   border-top: 1px solid var(--border);
-  padding: 48px 24px;
+  padding: 72px 24px 40px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
+  text-align: center;
 }
-.footer-merci { margin: 0; font-family: var(--font-serif); font-style: italic; font-size: 32px; }
-.footer-copy { margin: 0; font-family: var(--font-en); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); }
+.footer-merci { margin: 0; font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 56px; line-height: 1; }
+.footer-phrase { margin: 8px 0 0; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--accent); }
+.footer-phrase-ja { margin: 0; font-size: 13px; letter-spacing: 0.15em; color: var(--muted); }
+.footer-phrase-ja[lang="en"] { font-family: var(--font-en); }
+.footer-nav {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 28px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.footer-nav a { color: var(--text); text-decoration: none; }
+.footer-sns { display: flex; gap: 16px; }
+.footer-sns a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text);
+  transition: background .4s ease;
+}
+.footer-sns a:hover { background: var(--card); }
+/* 上にもどるボタン（ふわふわ浮かぶ） */
+.to-top {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.to-top-arrow {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--hint-bg);
+  box-shadow: 0 6px 20px var(--hint-shadow);
+  font-style: normal;
+  animation: hintFloat 3.2s ease-in-out infinite;
+}
+.footer-copy { margin: 16px 0 0; font-family: var(--font-en); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); }
+
+/* ---------- どこまで読んだかの細い線（画面のいちばん上） ---------- */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, var(--blob-pink), var(--accent));
+  transform-origin: left;
+  transform: scaleX(var(--read, 0));
+}
 
 /* ---------- スマホ用：文字を少し小さくして、1行に収まりやすくする ---------- */
 @media (max-width: 600px) {
@@ -791,7 +884,8 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   .js .road .road-line, .js .road .road-step, .js .city, .js .city-names { opacity: 1; transform: none; transition: none; animation: none; }
   .js .story-year, .js .story-text, .js .story-bg, .js .story-slide { transform: none; transition: none; }
   .js .story-year, .js .story-text { opacity: 1; }
-  .story-tap-hint, .tap-bubble { animation: none; }
+  .story-tap-hint, .tap-bubble, .to-top-arrow { animation: none; }
+  .city-card-body:not([hidden]) { animation: none; }
   .js .ig-account .ig-post, .js .ig-account .account { opacity: 1; transform: none; transition: none; }
   .account-main::after { animation: none; }
   .bubbles { display: none; }
