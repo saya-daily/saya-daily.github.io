@@ -38,6 +38,37 @@
   --font-ja: 'Zen Kaku Gothic New', sans-serif; /* 日本語 */
 }
 
+/* ---------- 夜の色（17:00〜4:59。script.js が html に is-night をつける） ---------- */
+html.is-night {
+  --bg: #1F2433;          /* くすみネイビー */
+  --bg-soft: #262C3D;
+  --card: #2B3142;
+  --photo-bg: #2B3142;
+  --text: #EDE6DC;        /* アイボリー */
+  --accent: #D4B98C;      /* シャンパンゴールド */
+  --accent-dark: #E8D3AA;
+  --muted: #A9A3A0;
+  --border: #3A4152;
+  --ph-pink: #3A3444;      --ph-pink-text: #CDBFC4;
+  --ph-sage: #323D3F;      --ph-sage-text: #BCC8BE;
+  --ph-lavender: #363450;  --ph-lavender-text: #C6C0DA;
+  --ph-beige: #343A4A;     --ph-beige-text: #D6CBBB;
+  --veil-top: rgba(31, 36, 51, 0.62);
+  --veil-mid: rgba(31, 36, 51, 0.8);
+  --veil-soft: rgba(38, 44, 61, 0.88);
+  --hint-bg: rgba(43, 49, 66, 0.85);
+  --hint-shadow: rgba(0, 0, 0, 0.35);
+  --story-veil-strong: rgba(31, 36, 51, 0.82);
+  --blob-pink: #6B5470;   /* 夜のふわふわは、うっすら光る色に */
+  --blob-green: #3F5560;
+  --blob-lavender: #55508A;
+  --shine: rgba(255, 255, 255, 0.12);
+  --bubble-rim: rgba(255, 255, 255, 0.35);
+  --bubble-pink: rgba(212, 185, 140, 0.35); /* シャボン玉は、ゴールドに光る */
+}
+/* 昼 ⇄ 夜 が切り替わるときは、ふわっと */
+body, .page { transition: background-color 1.5s ease, color 1.5s ease; }
+
 /* ---------- 全体 ---------- */
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); }
@@ -799,6 +830,28 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
 .account-main:hover { color: var(--bg); }
 .account-sub:hover  { color: var(--text); }
 
+/* 応援メッセージ（インスタのDMが開く） */
+.cheer { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.cheer-text { margin: 0; font-size: 14px; line-height: 2; letter-spacing: 0.08em; color: var(--muted); }
+.cheer-text[lang="en"] { font-family: var(--font-en); }
+.cheer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  background: var(--hint-bg);
+  box-shadow: 0 6px 24px var(--hint-shadow);
+  color: var(--text);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition: transform .4s ease;
+}
+.cheer-btn:hover { color: var(--text); transform: translateY(-3px); }
+.cheer-btn [lang="en"] { font-family: var(--font-en); }
+.cheer-heart { color: var(--accent); animation: hintBreath 2.4s ease-in-out infinite; }
+
 /* ---------- フッター ---------- */
 .footer {
   position: relative;
@@ -900,7 +953,8 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   .js .road .road-line, .js .road .road-step, .js .city, .js .city-names { opacity: 1; transform: none; transition: none; animation: none; }
   .js .story-year, .js .story-text, .js .story-bg, .js .story-slide { transform: none; transition: none; }
   .js .story-year, .js .story-text { opacity: 1; }
-  .story-tap-hint, .tap-bubble, .to-top-arrow { animation: none; }
+  .story-tap-hint, .tap-bubble, .to-top-arrow, .cheer-heart { animation: none; }
+  body, .page { transition: none; }
   .city-card-body:not([hidden]) { animation: none; }
   .city-card, .city-link.is-drawing path { transition: none; }
   .js .ig-account .ig-post, .js .ig-account .account { opacity: 1; transform: none; transition: none; }

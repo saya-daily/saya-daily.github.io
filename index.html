@@ -27,6 +27,9 @@
   (function () {
     var html = document.documentElement;
     html.classList.add('js'); // 「JSが動く」目印
+    // 5:00〜16:59 は昼、それ以外は夜の色にする（見てる人のスマホの時計で）
+    var hour = new Date().getHours();
+    if (hour < 5 || hour >= 17) html.classList.add('is-night');
     try {
       // 前に English を選んでたら、最初から英語で表示
       if (localStorage.getItem('lang') === 'en') { html.classList.add('lang-en'); html.lang = 'en'; }
@@ -387,6 +390,16 @@
         </div>
         <a class="account account-sub" href="https://www.instagram.com/_oxsy.7/" target="_blank" rel="noopener"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@_oxsy.7</a>
       </div>
+    </div>
+
+    <!-- 応援メッセージ（インスタのDMが開く） -->
+    <div class="cheer reveal">
+      <p class="cheer-text" lang="ja">感想や応援メッセージ、いつでも待っています。</p>
+      <p class="cheer-text" lang="en">I'd love to hear from you—anytime.</p>
+      <a class="cheer-btn" href="https://ig.me/m/0h_3ya" target="_blank" rel="noopener">
+        <span class="cheer-heart" aria-hidden="true">♡</span>
+        <span lang="ja">メッセージを送る</span><span lang="en">Send a message</span>
+      </a>
     </div>
   </section>
 

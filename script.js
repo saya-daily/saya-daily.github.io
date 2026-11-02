@@ -61,6 +61,17 @@ if (root.classList.contains('show-opening')) {
   markIntroDone();
 }
 
+/* ---------- 昼 / 夜 の切り替え（5:00〜16:59 は昼） ---------- */
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+function updateDayNight() {
+  const hour = new Date().getHours();
+  const night = hour < 5 || hour >= 17;
+  root.classList.toggle('is-night', night);
+  themeMeta.setAttribute('content', night ? '#1F2433' : '#F6F1EC'); // スマホの上のバーの色
+}
+updateDayNight();
+setInterval(updateDayNight, 60 * 1000); // 1分ごとに時計を見て、5時・17時になったら切り替える
+
 /* ---------- ④ 日本語 / English の切り替え ---------- */
 const langButtons = document.querySelectorAll('.lang-switch button');
 
