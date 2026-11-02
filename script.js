@@ -224,6 +224,10 @@ citySpots.forEach((spot) => {
   spot.addEventListener('click', () => showCity(spot));
   spot.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showCity(spot); } });
 });
+// 名前をタップしても、その街を選べるように（点が小さくて押しにくいとき用）
+document.querySelectorAll('.city-name').forEach((label) => {
+  label.addEventListener('click', () => showCity(document.querySelector(`.city-spot[data-city="${label.dataset.city}"]`)));
+});
 // 言語を切り替えたら、カードの中身も切り替える
 langButtons.forEach((btn) => btn.addEventListener('click', () => { if (selectedCity) showCity(selectedCity); }));
 
