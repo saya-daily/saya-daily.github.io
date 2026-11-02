@@ -18,7 +18,7 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#F6F1EC">
+<meta name="theme-color" content="#1F2433">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@300;400&amp;family=Zen+Kaku+Gothic+New:wght@300;400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -27,9 +27,6 @@
   (function () {
     var html = document.documentElement;
     html.classList.add('js'); // 「JSが動く」目印
-    // 5:00〜16:59 は昼、それ以外は夜の色にする（見てる人のスマホの時計で）
-    var hour = new Date().getHours();
-    if (hour < 5 || hour >= 17) html.classList.add('is-night');
     try {
       // 前に English を選んでたら、最初から英語で表示
       if (localStorage.getItem('lang') === 'en') { html.classList.add('lang-en'); html.lang = 'en'; }
