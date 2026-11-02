@@ -18,7 +18,7 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#1F2433">
+<meta name="theme-color" content="#2C3550">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@300;400&amp;family=Zen+Kaku+Gothic+New:wght@300;400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -47,15 +47,6 @@
 
 <!-- シャボン玉が浮かぶ場所（script.js が作る） -->
 <div class="bubbles" aria-hidden="true"></div>
-
-<!-- 【一時的】色のパターン切り替え（決まったら消す） -->
-<div class="palette-switch" role="group" aria-label="色のパターン">
-  <button type="button" data-p="navy" aria-pressed="true" aria-label="A ネイビー×ゴールド">A</button>
-  <button type="button" data-p="ciel" aria-pressed="false" aria-label="B 水色">B</button>
-  <button type="button" data-p="nuit" aria-pressed="false" aria-label="C 夜空×水色">C</button>
-  <button type="button" data-p="bistrot" aria-pressed="false" aria-label="D ビストロ">D</button>
-  <button type="button" data-p="lavande" aria-pressed="false" aria-label="E ラベンダー">E</button>
-</div>
 
 <!-- どこまで読んだかの細い線 -->
 <div class="read-progress" aria-hidden="true"></div>
@@ -309,21 +300,30 @@
       <div class="road-line" aria-hidden="true"></div>
           <div class="road-step">
             <span class="road-dot" aria-hidden="true"></span>
-            <p class="road-label">Step 01</p>
-            <h3 class="road-title" lang="ja">いま</h3><h3 class="road-title" lang="en">Now</h3>
-            <p class="road-text" lang="ja"><span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br><span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span></p><p class="road-text" lang="en">A lovely website &amp; social media for my company.<br>So I'm learning web design, social media, and English.</p>
+            <div class="road-card">
+              <img class="road-card-bg" src="images/france/now-louvre-ceiling.jpg" alt="" loading="lazy" decoding="async">
+              <p class="road-label">Step 01</p>
+              <h3 class="road-title" lang="ja">いま</h3><h3 class="road-title" lang="en">Now</h3>
+              <p class="road-text" lang="ja"><span class="phrase">自分の会社にも、</span><span class="phrase">可愛いWebサイトとSNSを。</span><br><span class="phrase">そのために、</span><span class="phrase">Web制作・SNS・英語を勉強中。</span></p><p class="road-text" lang="en">A lovely website &amp; social media for my company.<br>So I'm learning web design, social media, and English.</p>
+            </div>
           </div>
           <div class="road-step">
             <span class="road-dot" aria-hidden="true"></span>
-            <p class="road-label">Step 02</p>
-            <h3 class="road-title" lang="ja">想い</h3><h3 class="road-title" lang="en">Passion</h3>
-            <p class="road-text" lang="ja"><span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br><span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span></p><p class="road-text" lang="en">Share the freedom of the world with more people.<br>Turn what I love into my work.</p>
+            <div class="road-card">
+              <img class="road-card-bg" src="images/france/champs-elysees-soft.jpg" alt="" loading="lazy" decoding="async">
+              <p class="road-label">Step 02</p>
+              <h3 class="road-title" lang="ja">想い</h3><h3 class="road-title" lang="en">Passion</h3>
+              <p class="road-text" lang="ja"><span class="phrase">海外の自由な魅力を、</span><span class="phrase">もっとたくさんの人へ。</span><br><span class="phrase">大好きなことを、</span><span class="phrase">仕事にしたい。</span></p><p class="road-text" lang="en">Share the freedom of the world with more people.<br>Turn what I love into my work.</p>
+            </div>
           </div>
           <div class="road-step is-goal">
             <span class="road-dot" aria-hidden="true"></span>
-            <p class="road-label">Goal</p>
-            <h3 class="road-title" lang="ja">夢</h3><h3 class="road-title" lang="en">Dream</h3>
-            <p class="road-text" lang="ja"><span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></p><p class="road-text" lang="en">Visit 25 French cities on my own two feet,<br>and start a travel company all about France.</p>
+            <div class="road-card">
+              <img class="road-card-bg pos-top" src="images/france/dream-opera-hall.jpg" alt="" loading="lazy" decoding="async">
+              <p class="road-label">Goal</p>
+              <h3 class="road-title" lang="ja">夢</h3><h3 class="road-title" lang="en">Dream</h3>
+              <p class="road-text" lang="ja"><span class="phrase">フランス25都市を</span><span class="phrase">自らの足で巡り、</span><br><span class="phrase">フランス専門の</span><span class="phrase">旅行会社をつくる。</span></p><p class="road-text" lang="en">Visit 25 French cities on my own two feet,<br>and start a travel company all about France.</p>
+            </div>
           </div>
     </div>
 
