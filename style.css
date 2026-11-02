@@ -629,7 +629,7 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 .city-name [lang="en"] { font-family: var(--font-en); }
 html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] { display: none; }
 /* 名前は、点が全部出たあとにふわっと */
-.js .city-names { opacity: 0; transition: opacity 1.2s ease 2.4s; }
+.js .city-names { opacity: 0; transition: opacity 1.2s ease 1.5s; }
 .js .map-wrap.is-visible .city-names { opacity: 1; }
 .map-info { flex: 1 1 260px; max-width: 420px; }
 .map-info .eyebrow { margin-bottom: 16px; }
@@ -640,8 +640,8 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
 .map-text[lang="en"] { font-family: var(--font-en); }
 /* 動き：点がポツポツ順番に出てきて、ゆっくり光る */
 .js .map-wrap.reveal { opacity: 1; transform: none; }
-.js .city { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0); transition: opacity .5s ease, transform .5s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(var(--i, 0) * 90ms + .2s); }
-.js .map-wrap.is-visible .city { opacity: 1; transform: none; animation: cityGlow 3s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 90ms + 2.6s); }
+.js .city { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0); transition: opacity .4s ease, transform .4s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(var(--i, 0) * 50ms + .2s); }
+.js .map-wrap.is-visible .city { opacity: 1; transform: none; animation: cityGlow 3s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 50ms + 1.7s); }
 @keyframes cityGlow { 0%, 100% { stroke-width: 1.2; } 50% { stroke-width: 4; stroke-opacity: .5; } }
 
 /* ---------- 04 インスタ ---------- */
