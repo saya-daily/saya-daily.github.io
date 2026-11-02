@@ -177,7 +177,7 @@ const cityInfo = {
   'Reims':             { ja: 'ランス', jaText: 'シャンパンの都。昔の王様が戴冠式をした大聖堂がある。', enText: 'The capital of Champagne, with the cathedral where French kings were crowned.' },
   'Rouen':             { ja: 'ルーアン', jaText: 'ジャンヌ・ダルクゆかりの街。モネが何度も描いた大聖堂がある。', enText: 'The city of Joan of Arc, and the cathedral Monet painted again and again.' },
   'Mont-Saint-Michel': { ja: 'モンサンミッシェル', jaText: '海に浮かぶ修道院。2025年の卒業旅行で行った、思い出の場所。', enText: 'An abbey rising from the sea. I visited on my graduation trip in 2025.' },
-  'Saint-Malo':        { ja: 'サン・マロ', jaText: '城壁に囲まれた海の街。昔は海賊の拠点やった。', enText: 'A walled city by the sea, once a base for corsairs.' },
+  'Saint-Malo':        { ja: 'サン・マロ', jaText: '城壁に囲まれた海の街。昔は海賊の拠点でした。', enText: 'A walled city by the sea, once a base for corsairs.' },
   'Rennes':            { ja: 'レンヌ', jaText: 'ブルターニュ地方の中心。木組みの家と、本場のガレット・クレープ。', enText: 'The heart of Brittany. Half-timbered houses and real galettes and crêpes.' },
   'Nantes':            { ja: 'ナント', jaText: '巨大な機械仕掛けのゾウに乗れる街。ジュール・ヴェルヌの生まれ故郷。', enText: 'Ride a giant mechanical elephant. Birthplace of Jules Verne.' },
   'Strasbourg':        { ja: 'ストラスブール', jaText: '運河沿いの「プティット・フランス」がかわいい。フランス最古級のクリスマスマーケット。', enText: 'Canals of "Petite France" and one of France\'s oldest Christmas markets.' },
@@ -212,7 +212,7 @@ function showCity(spot) {
   const info = cityInfo[name];
   const en = root.classList.contains('lang-en');
   citySpots.forEach((s) => s.classList.toggle('is-selected', s === spot));
-  cityStatus.textContent = info.visited ? 'Visité ✓' : (en ? 'Not yet' : 'Pas encore — まだ行ってへん');
+  cityStatus.textContent = info.visited ? 'Visité ✓' : (en ? 'Not yet' : 'Pas encore — まだ行っていません');
   cityName.textContent = name;
   if (!en) { const small = document.createElement('small'); small.textContent = info.ja; cityName.append(small); }
   cityText.textContent = info.visited && info.note ? info.note : (en ? info.enText : info.jaText);
