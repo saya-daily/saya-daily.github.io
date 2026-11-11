@@ -895,6 +895,8 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
 .cheer-btn:hover { color: var(--text); transform: translateY(-3px); }
 .cheer-btn [lang="en"] { font-family: var(--font-en); }
 .cheer-heart { color: var(--accent); animation: hintBreath 2.4s ease-in-out infinite; }
+.cheer-note { margin: 0; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+.cheer-note[lang="en"] { font-family: var(--font-en); }
 
 /* ---------- フッター ---------- */
 .footer {
