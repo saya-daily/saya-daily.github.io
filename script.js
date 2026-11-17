@@ -266,6 +266,36 @@ tripBtns.forEach((btn) => {
 // 言語を切り替えたら、カードの中身も切り替える
 langButtons.forEach((btn) => btn.addEventListener('click', () => { if (selectedCity) showCity(selectedCity); }));
 
+/* ---------- ⑨ タップしたところに、ゴールドの小さい雪が舞う ---------- */
+const tapSnow = document.querySelector('.tap-snow');
+if (!reduceMotion) {
+  document.addEventListener('pointerdown', (e) => {
+    for (let n = 0; n < 4; n++) {
+      const flake = document.createElement('span');
+      flake.className = 'snowflake';
+      flake.textContent = '❄';
+      flake.style.left = `${e.clientX}px`;
+      flake.style.top = `${e.clientY}px`;
+      flake.style.setProperty('--s', `${10 + Math.random() * 8}px`);         // 大きさ
+      flake.style.setProperty('--dx', `${(Math.random() - 0.5) * 70}px`);    // 左右にちらばる
+      flake.style.setProperty('--dy', `${20 + Math.random() * 40}px`);       // 下にふわっと落ちる
+      flake.style.setProperty('--r', `${(Math.random() - 0.5) * 180}deg`);   // くるっと回る
+      flake.addEventListener('animationend', () => flake.remove());
+      tapSnow.append(flake);
+    }
+  }, { passive: true });
+}
+
+/* ---------- ⑩ 写真が画面に入ったら、ふわっと寄る ---------- */
+const zoomPhotos = document.querySelectorAll('.road-card-bg, .ig-post img');
+zoomPhotos.forEach((img) => img.classList.add('zoom-in'));
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const zoomObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => entry.target.classList.toggle('is-zoomed', entry.isIntersecting));
+  }, { threshold: 0.4 });
+  zoomPhotos.forEach((img) => zoomObserver.observe(img));
+}
+
 /* ---------- スクロールしたときの処理を、まとめて1回だけ ---------- */
 // 画面の更新1回につき1回だけ動かす（何回も重なって走ると、カクカクするから）
 const readProgress = document.querySelector('.read-progress');
