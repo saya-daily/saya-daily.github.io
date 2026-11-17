@@ -48,6 +48,9 @@
 <!-- シャボン玉が浮かぶ場所（script.js が作る） -->
 <div class="bubbles" aria-hidden="true"></div>
 
+<!-- タップしたところに舞う雪（script.js が作る） -->
+<div class="tap-snow" aria-hidden="true"></div>
+
 <!-- どこまで読んだかの細い線 -->
 <div class="read-progress" aria-hidden="true"></div>
 
@@ -404,6 +407,21 @@
       my posts helped them take their first step.
     </p>
 
+    <!-- 選んだリール（インスタ公式の埋め込み）。横にスワイプして見られる -->
+    <div class="reels reveal">
+      <p class="reels-title" lang="ja">見てほしいリール</p>
+      <p class="reels-title" lang="en">Reels I'd love you to see</p>
+      <div class="reels-track">
+        <div class="reel">
+          <p class="reel-label" lang="ja">寒さも足も限界の1日</p>
+          <p class="reel-label" lang="en">A freezing, aching day</p>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/De0-mzIJGDe/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/reel/De0-mzIJGDe/" target="_blank" rel="noopener">Instagramで見る</a>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+
     <!-- アカウントごとに 投稿2つ＋ボタン（スマホは縦、パソコンは横に並ぶ） -->
     <div class="ig-accounts">
       <div class="ig-account reveal">
@@ -465,5 +483,7 @@
 
 </div>
 <script src="script.js" defer></script>
+<!-- インスタのリールを表示するための、インスタ公式のプログラム -->
+<script async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
