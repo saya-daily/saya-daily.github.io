@@ -354,6 +354,9 @@ html.lang-en .page [lang="ja"] { display: none; }
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* 上と下をだんだん透明にして、ふわふわの丸がまっすぐ切れて見えないようにする */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
 }
 .story-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
 /* 今のスライドの写真は、ゆっくり寄っていく（映画みたいに） */
@@ -372,10 +375,9 @@ html.lang-en .page [lang="ja"] { display: none; }
   content: "";
   position: absolute;
   inset: 0;
-  /* 上：文字のあるところだけベージュ／下：背景色にとけこませて、区切りが見えないように */
+  /* 文字のある上のほうだけ、ネイビーをうっすら重ねて読みやすく */
   background:
-    linear-gradient(to bottom, var(--bg), var(--story-veil-strong) 10%, var(--story-veil-strong) 22%, transparent 48%),
-    linear-gradient(to bottom, transparent 68%, var(--bg));
+    linear-gradient(to bottom, var(--story-veil-strong) 22%, transparent 48%);
 }
 
 .story-content { max-width: 560px; }
@@ -419,18 +421,6 @@ html.lang-en .page [lang="ja"] { display: none; }
 .story-count { top: 40px; right: max(24px, calc((100% - 1120px) / 2 + 24px)); }
 .story-count span { color: var(--text); }
 
-/* 上の細いバー（Instagramのストーリーみたいに、今何枚目かがわかる） */
-.story-bars {
-  position: absolute;
-  top: 20px;
-  left: max(24px, calc((100% - 1120px) / 2 + 24px));
-  right: max(24px, calc((100% - 1120px) / 2 + 24px));
-  z-index: 2;
-  display: flex;
-  gap: 4px;
-}
-.story-bars span { flex: 1; height: 2px; border-radius: 2px; background: var(--border); transition: background .4s ease; }
-.story-bars span.is-done { background: var(--accent); }
 
 /* 「タップしてね」の案内（最初だけ）。右下で、ふわふわ浮かぶ */
 .story-tap-hint {
@@ -642,11 +632,9 @@ html:not(.lang-en) .tap-label[lang="en"], html.lang-en .tap-label[lang="ja"] { d
 .js .road.reveal { opacity: 1; transform: none; }
 .js .road .road-line { transform: scaleY(0); transition: transform 2.4s cubic-bezier(.6, 0, .2, 1); }
 .js .road.is-visible .road-line { transform: scaleY(1); }
-.js .road .road-step { opacity: 0; transform: translateX(-16px); transition: opacity .9s ease, transform .9s ease; }
-.js .road.is-visible .road-step { opacity: 1; transform: none; }
-.js .road.is-visible .road-step:nth-of-type(1) { transition-delay: .2s; }
-.js .road.is-visible .road-step:nth-of-type(2) { transition-delay: 1s; }
-.js .road.is-visible .road-step:nth-of-type(3) { transition-delay: 1.8s; }
+/* いま → 想い → 夢 は、それぞれ画面に入ったときに上から順番に出てくる */
+.js .road .road-step.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+.js .road .road-step.reveal.is-visible { opacity: 1; transform: none; }
 
 /* ---- フランス25都市マップ ---- */
 .map-wrap { margin-top: 120px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; }

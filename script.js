@@ -24,12 +24,15 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
   reveals.forEach((el) => el.classList.add('is-visible'));
 } else {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+    // 同時に画面に入ったものは、上から順番に0.25秒ずつずらして出す
+    entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+      .forEach((entry, i) => {
+        if (i > 0) entry.target.style.transitionDelay = `${i * 0.25}s`;
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target); // 1回出たら、もう見張らない
-      }
-    });
+      });
   }, { threshold: 0.15 });
 
   reveals.forEach((el) => observer.observe(el));
@@ -127,17 +130,12 @@ if (!reduceMotion) {
 /* ---------- ⑦ ストーリーのスライド（タップで進む） ---------- */
 const stage = document.querySelector('.story-stage');
 const storySlides = [...document.querySelectorAll('.story-slide')];
-const barsBox = document.querySelector('.story-bars');
 const tapHint = document.querySelector('.story-tap-hint');
 let activeSlide = 0;
-
-// 上の細いバーを、スライドの枚数ぶん作る
-const bars = storySlides.map(() => barsBox.appendChild(document.createElement('span')));
 
 function showSlide(i) {
   activeSlide = (i + storySlides.length) % storySlides.length; // 最後の次は最初にもどる
   storySlides.forEach((slide, n) => slide.classList.toggle('is-active', n === activeSlide));
-  bars.forEach((bar, n) => bar.classList.toggle('is-done', n <= activeSlide));
 }
 
 // 「タップしてね」は、サイトを開くたびに出して、1回タップしたら消す
