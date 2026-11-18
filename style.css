@@ -860,9 +860,7 @@ html:not(.lang-en) .city-name [lang="en"], html.lang-en .city-name [lang="ja"] {
   animation: shine 5s ease-in-out 2s infinite;
 }
 @keyframes shine { 0%, 70% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
-.account-sub  { background: transparent; color: var(--text); }     /* さやのリアル：ふち線だけ */
 .account-main:hover { color: var(--bg); }
-.account-sub:hover  { color: var(--text); }
 
 /* 応援メッセージ（インスタのDMが開く） */
 .cheer { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
